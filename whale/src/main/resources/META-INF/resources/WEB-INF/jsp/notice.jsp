@@ -59,8 +59,7 @@
                                         <input type="text" id="searchKeyword" name="searchKeyword" value="" class="form-control bottommargin-xs leftmargin10-sm" placeholder="검색">
                                     </div>
                                     <div class="col-sm-3 center marginBottom10 lottebtn-box">
-                                        <!-- <input type="button" class="button button-border button-border-thin noleftpadding norightpadding btn-block nomargin" id="search-submit" name="search-submit" value="검색" onClick="getListHtml()"></button> -->
-                                        <input type="button" class="button button-border button-border-thin  btn-block nomargin lotte-search" id="search-submit" name="search-submit" value="검색" onClick="getListHtml()">
+                                       <input type="button" class="button button-border button-border-thin  btn-block nomargin lotte-search" id="search-submit" name="search-submit" value="검색" onClick="getListHtml()">
                                     </div>
                                 </div>
                             </div>
@@ -113,3 +112,5 @@
 
 
 </script>
+
+<!--<%@include file=푸터파일 %>-->

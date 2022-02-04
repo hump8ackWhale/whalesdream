@@ -1,0 +1,803 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+@import url(c:\Users\BN210121\Desktop\s\css\crop.css);
+/* total css */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 62.5%;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Noto Sans KR';
+}
+
+body {
+  position: relative;
+}
+
+body .moDalConTaIner {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+body .moDalConTaIner .moDalWarp {
+  margin: 0 auto;
+  max-width: 300px;
+  width: 100%;
+  height: 200px;
+  background: black;
+}
+
+body .moDalConTaIner .moDalWarp p {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.totalWrap {
+  max-width: 37.5rem;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.totalWrap.start .subIndex {
+  margin-top: 3.35rem;
+  height: auto;
+}
+
+.totalWrap.start .subIndex.middle {
+  margin-top: 1.3rem;
+  margin-bottom: 2.3rem;
+}
+
+.totalWrap.start .subIndex img {
+  width: 72%;
+}
+
+.totalWrap.start .submitBox2 {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.totalWrap.start .submitBox2 .textImg {
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 555;
+}
+
+.totalWrap.start .toTaleCount {
+  text-align: center;
+  margin-top: 1.1rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 22.15px;
+  color: #ababab;
+}
+
+.totalWrap.start form .perViewImgBox.start {
+  max-width: 352px;
+  width: 100%;
+}
+
+.totalWrap.ready .subIndex {
+  width: 100%;
+  height: auto !important;
+  font-size: 100%;
+  padding: 0 3.2em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.totalWrap.ready .subIndex.ready {
+  min-height: 150.500px;
+}
+
+.totalWrap.ready .subIndex.ready.con1 {
+  -webkit-animation-name: up;
+          animation-name: up;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  height: auto;
+}
+
+@-webkit-keyframes up {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  90% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    height: 0 !important;
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes up {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  90% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    height: 0 !important;
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.totalWrap.ready .subIndex.ready.con2 {
+  display: none;
+}
+
+.totalWrap.ready .subIndex.ready.con2.active {
+  display: block;
+}
+
+.totalWrap.ready .subIndex img {
+  display: block;
+}
+
+.totalWrap.ready .subIndex img.bubble1Img {
+  margin-right: auto;
+  margin-bottom: 0.35rem;
+  -webkit-animation-name: hide1;
+          animation-name: hide1;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: backwards;
+          animation-fill-mode: backwards;
+}
+
+.totalWrap.ready .subIndex img.bubble2Img {
+  margin-left: auto;
+  -webkit-animation-name: hide1;
+          animation-name: hide1;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+  -webkit-animation-fill-mode: backwards;
+          animation-fill-mode: backwards;
+}
+
+@-webkit-keyframes hide1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hide1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.totalWrap.ready .perViewImgBox {
+  text-align: center;
+}
+
+.totalWrap.ready .perViewImgBox img {
+  width: 85%;
+  height: 100%;
+}
+
+.totalWrap.ready form {
+  margin-top: 6px;
+  width: 100%;
+  padding-bottom: 12.2rem;
+}
+
+.totalWrap.ready form .submitBox2 {
+  display: block;
+  height: 56px;
+  position: relative;
+  width: 100%;
+}
+
+.totalWrap.ready form .submitBox2 img.textImg {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  margin: auto;
+  z-index: 73;
+  position: absolute;
+}
+
+.totalWrap.ready form .submitBox2 img.backgroundImg {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  margin: auto;
+  z-index: 72;
+  position: absolute;
+}
+
+.totalWrap.upload .cutButton {
+  height: 46px;
+  border: 3px solid #661BD1;
+  padding: 0.5rem 1rem;
+  line-height: 19px;
+  display: inline;
+  border-radius: 15px;
+  background: #661BD1;
+  color: #fff !important;
+  font-size: 1rem;
+  width: 20.6rem;
+}
+
+.totalWrap.upload .btn-upload {
+  visibility: hidden;
+}
+
+.totalWrap.loding .perViewImgBox {
+  max-width: 342px;
+}
+
+.totalWrap.result {
+  height: auto;
+  position: relative;
+}
+
+.totalWrap.result .subIndex {
+  margin-top: 1.195rem;
+}
+
+.totalWrap.result .subIndex .poTalNames {
+  font-size: 14px;
+}
+
+.totalWrap.result .resultImg {
+  width: 83.5%;
+  position: relative;
+  z-index: 50;
+}
+
+.totalWrap.result .resultImg2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: auto;
+  z-index: 51;
+  -webkit-transition: 1s;
+  transition: 1s;
+  opacity: 0;
+}
+
+.totalWrap.result .resultImg2.active {
+  opacity: 1;
+}
+
+.totalWrap.result form .perViewImgBox.result {
+  max-width: 375px;
+  width: 100%;
+  position: relative;
+}
+
+.totalWrap.result form .perViewImgBox.result .resultDarkLine {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 99;
+  width: 44.5%;
+}
+
+.totalWrap.result form .perViewImgBox.result .imageview {
+  width: 153px;
+  height: 166px;
+  position: absolute;
+  top: 73px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 49;
+  opacity: 1;
+  z-index: 50;
+}
+
+.totalWrap.result form .perViewImgBox.result .result-text {
+  opacity: 1;
+}
+
+.totalWrap .resultSection {
+  width: 100%;
+}
+
+.totalWrap .resultSection.con3 {
+  text-align: center;
+  margin-top: 56.39px;
+  cursor: pointer;
+}
+
+.totalWrap .resultSection.con3 .resultRePostUl {
+  margin-top: 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.totalWrap .resultSection.con3 .resultRePostUl .resultRePostLi {
+  margin-right: 9px;
+}
+
+.totalWrap .resultSection.con3 .resultRePostUl .resultRePostLi:last-child {
+  margin-right: 0;
+}
+
+.totalWrap .resultSection.con3 .resultRePost .repostMiddle img {
+  width: 67%;
+}
+
+.totalWrap .resultSection .resultMainTextbox {
+  text-align: center;
+}
+
+.totalWrap .resultSection .resultMainTextbox .hashTagBox .hashTagList {
+  color: #383838;
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.totalWrap .resultSection .resultMainTextbox .resultMainTextContent {
+  margin: 0 auto;
+  max-width: 30.5rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 2.56rem;
+  color: #636363;
+  margin-bottom: 3rem;
+  height: 7.9rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.totalWrap .resultSection .resultMainTextbox .resultMainTextContent p {
+  letter-spacing: -0.5px;
+  text-align: left;
+  line-height: 25px;
+  font-weight: 400;
+}
+
+.totalWrap .resultSection .resultMainTextbox .resultMainTextContent .more {
+  position: absolute;
+  bottom: 3px;
+  right: 0;
+  background: #fff;
+  color: #ababab;
+  cursor: pointer;
+  width: 70px;
+}
+
+.totalWrap .resultSection .resultRandomBox {
+  width: 100%;
+}
+
+.totalWrap .resultSection .resultRandomBox .resultRandomUl {
+  width: 100%;
+  text-align: center;
+}
+
+.totalWrap .resultSection .resultRandomBox .resultRandomUl .resultRandomLi {
+  margin-bottom: 2.346rem;
+}
+
+.totalWrap .resultSection .resultRandomBox .resultRandomUl .resultRandomLi:last-child {
+  max-width: 24.9rem;
+  margin: 0 auto;
+}
+
+.totalWrap .resultSection .resultRandomBox .resultRandomUl .resultRandomLi:last-child .resultRandomp {
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-style: normal;
+  line-height: 2.7rem;
+  word-break: keep-all;
+}
+
+.totalWrap .resultSection .resultRandomBox .resultRandomUl .resultRandomLi img.purple {
+  max-width: 24.6rem;
+  width: 100%;
+}
+
+.totalWrap .resultSection .resultRandomBox .resultRandomUl .resultRandomLi .resultRandomp {
+  font-weight: 800;
+  height: 41px;
+  font-style: normal;
+  font-size: 2.7rem;
+  line-height: 4.32rem;
+  color: #383838;
+}
+
+.totalWrap .resultSection .perViewImgBox2 {
+  max-width: 26.0rem;
+  margin: 3.0rem auto 0;
+  height: 26.0rem;
+  background: #000;
+  cursor: pointer;
+}
+
+.totalWrap .resultSection .perViewImgBox2 img {
+  width: 100%;
+  height: 100%;
+}
+
+.totalWrap .resultSection .resultAnother {
+  margin-top: 2.5rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.totalWrap .resultSection .resultAnother img {
+  max-width: 27.0rem;
+  width: 100%;
+  margin-bottom: 0.6rem;
+}
+
+.totalWrap .resultSection .resultAnother img:last-child {
+  margin-bottom: 0;
+}
+
+.totalWrap .resultSection .resultAnotherLast {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 9.4rem;
+}
+
+.totalWrap .resultSection .resultAnotherLast p.resultAnotherLastText {
+  cursor: pointer;
+  margin-top: 1.6rem;
+  color: #ababab;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 2.56px;
+  height: 24px;
+  text-decoration: underline;
+}
+
+.totalWrap .toTalHeader {
+  width: 100%;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.totalWrap .toTalHeader .logo {
+  margin-bottom: 1.6rem;
+  cursor: pointer;
+}
+
+.totalWrap .toTalHeader .logo img #logoImg {
+  width: 71px;
+  height: 33px;
+}
+
+.totalWrap .toTalHeader .subTitleBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: flex;
+  align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.totalWrap .toTalHeader .subTitleBox .totalFont {
+  color: #767676;
+  font-size: 1.2rem;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.totalWrap .toTalHeader .subTitleBox .totalFont em {
+  font-style: normal;
+}
+
+.totalWrap .toTalHeader .subTitleBox .totalFont.back {
+  cursor: pointer;
+}
+
+.totalWrap .loadingImgLast {
+  margin: 0 auto;
+  max-width: 26.0rem;
+  width: 100%;
+}
+
+.totalWrap .loadingImgLast img {
+  width: 100%;
+}
+
+/* total css 끝 */
+/*subindex 시작*/
+.subIndex {
+  text-align: center;
+  height: 46px;
+  margin-top: 2.195rem;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  color: #ababab;
+}
+
+.subIndex.result {
+  height: auto;
+  margin-bottom: 0.7rem;
+}
+
+.subIndex .poTalNames {
+  color: #636363;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+
+form .perViewImgBox {
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 217.969px;
+}
+
+form .perViewImgBox .removechile {
+  width: 217.969px;
+  height: 240.438px;
+  position: relative;
+}
+
+form .perViewImgBox .removechile .cropper-container.cropper-bg {
+  position: relative;
+  z-index: 100;
+}
+
+form .perViewImgBox .removechile img {
+  width: 100%;
+  height: 100%;
+}
+
+form .perViewImgBox .removechile .imageview {
+  z-index: -1;
+  width: 50px;
+  height: 50px;
+  top: 53px;
+  position: relative;
+}
+
+form .perViewImgBox .removechile .imageview.active {
+  width: 124px;
+  height: 124px;
+  top: 67px;
+  z-index: 0;
+}
+
+form .perViewImgBox .removechile .imageview2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 0;
+}
+
+form .perViewImgBox .removechile .imageview3 {
+  position: absolute;
+  width: 133px;
+  height: 136px;
+  top: 19px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 0;
+  opacity: 0;
+}
+
+form .perViewImgBox .resultImg {
+  width: 100%;
+}
+
+form .perViewImgBox #uploadFileForm {
+  display: none;
+}
+
+form .perViewImgBox .imageview {
+  width: 100%;
+}
+
+form .perViewImgBox.result {
+  width: 100%;
+  height: 393px;
+  position: relative;
+}
+
+form .perViewImgBox.result .result-text {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  z-index: 500;
+}
+
+form .perViewImgBox.result .result-text img {
+  width: 100%;
+}
+
+form .inputFormName {
+  margin-top: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+form .inputFormName input {
+  width: 16.757rem;
+  text-align: left;
+  font-size: 2.2rem;
+  color: #000;
+  height: 4.6rem;
+  border: 3px solid #661BD1;
+  border-radius: 15px;
+  padding: 17px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+form .inputFormName input::-webkit-input-placeholder {
+  text-align: center;
+  color: #ababab;
+}
+
+form .inputFormName input:-ms-input-placeholder {
+  text-align: center;
+  color: #ababab;
+}
+
+form .inputFormName input::-ms-input-placeholder {
+  text-align: center;
+  color: #ababab;
+}
+
+form .inputFormName input::placeholder {
+  text-align: center;
+  color: #ababab;
+}
+
+form .inputFormName input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+form .inputFormName input:focus:-ms-input-placeholder {
+  color: transparent;
+}
+
+form .inputFormName input:focus::-ms-input-placeholder {
+  color: transparent;
+}
+
+form .inputFormName input:focus::placeholder {
+  color: transparent;
+}
+
+form .submitBox {
+  width: 20.6rem;
+  height: 5.6rem;
+  margin: 2.7rem auto 0;
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+form .submitBox img.textImg {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  margin: auto;
+  z-index: 52;
+  position: absolute;
+}
+
+form .submitBox img.textImg.right {
+  top: 39%;
+  right: 0 !important;
+  -webkit-transform: translateX(0);
+  transform: translateX(-55px);
+}
+
+form .submitBox img.backgroundImg {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  margin: auto;
+  z-index: 50;
+  position: absolute;
+}
+
+form .submitBox img.faceBoox {
+  top: 50%;
+  width: 104px;
+  height: 104px;
+  left: 0%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  margin: auto;
+  z-index: 76;
+  position: absolute;
+}
+
+form .cutBox {
+  padding-top: 2.5rem;
+  display: block;
+  visibility: visible;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+form .cutBox #button {
+  font-size: 1.4rem;
+  color: #000;
+  font-weight: bold;
+}
+
+/*subindex 끝*/

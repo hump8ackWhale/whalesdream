@@ -11,59 +11,69 @@
     <!-- End layout styles -->
 
     <style>
-
-    .menu_bg { width: 100%; height: 2000px; position: fixed; top:0px; left:0px; overflow: hidden; display: none; }
-    .menu { position:absolute; top:0px; left:0px; width:100%; height: 100%; background-color:#DDD; }
-    .menu > div { padding: 2%; }
+    /* nav */
+      #nav {
+        position: fixed;
+        z-index: 10;
+        top : 60px;
+        right : -100%;
+        width : 75%;
+        max-width : 300px;
+        height : calc(100% - 60px);
+        padding : 50px 0;
+        transition: all 500ms ease;
+      }
+      #nav.act {
+        right : 0;
+      }
+      span {display:block;}
 
     </style>
   </head>
 
   <script>
-    var giMenuDuration = 700;
+//     var giMenuDuration = 700;
 
-    // 전체 메뉴를 오른쪽으로 슬라이드하여서 보여준다.
-    function ShowMenu(){
-    $('.menu_bg' ).css( { 'display' : 'block' } );
-    $('.menu' ).css( { 'left' : '-100%' } );
-    $('.menu' ).animate( { left: '0px' }, { duration: giMenuDuration } );
-    }
+// // 전체 메뉴를 오른쪽으로 슬라이드하여서 보여준다.
+// function ShowMenu(){
+// $('.menu_bg' ).css( { 'display' : 'block' } );
+// $('.menu' ).css( { 'left' : '-100%' } );
+// $('.menu' ).animate( { left: '0px' }, { duration: giMenuDuration } );
+// }
 
-    // 전체 메뉴를 왼쪽으로 슬라이드하여서 닫는다.
-    function HideMenu(){
-    $('.menu' ).animate( { left: '-100%' }, { duration: giMenuDuration, complete:function(){ $('.menu_bg' ).css( { 'display' : 'none' } ); } } );
-    }
+// // 전체 메뉴를 왼쪽으로 슬라이드하여서 닫는다.
+// function HideMenu(){
+// $('.menu' ).animate( { left: '-100%' }, { duration: giMenuDuration, complete:function(){ $('.menu_bg' ).css( { 'display' : 'none' } ); } } );
+// }
 
-    // 확장 메뉴를 보여주거나 닫는다.
-    function ShowSubMenu( strId ){
-    var lySubMenu = $( strId );
+// // 확장 메뉴를 보여주거나 닫는다.
+// function ShowSubMenu( strId ){
+// var lySubMenu = $( strId );
 
-    if( lySubMenu.first().is( ":hidden" ) ){
-    $( strId ).slideDown( 300 );
-    }
-    else{
-    $( strId ).slideUp( 300 );
-    }
-    }
+// if( lySubMenu.first().is( ":hidden" ) ){
+// $( strId ).slideDown( 300 );
+// }
+// else{
+// $( strId ).slideUp( 300 );
+// }
+// }
 
-    $( document ).ready( function()
-    {
-    $('.menu_2' ).hide();
-    } );
+// $( document ).ready( function()
+// {
+// $('.menu_2' ).hide();
+// } );
+
+ShowMenu = function(){
+  var nav = $('#nav');
+  nav.addClass('act');
+}
 
   </script>
   <body>
 
     <div class="totalWrap upload" id="totalWrap">
-
-
-      <div class="totalHeader">
-        <div class="logo" style="text-align: center;">
-          <img src="../../resources/assets/assets/images/logo.png" alt="" width="120px" height="60px">
-        </div>
-        <button onclick="ShowMenu();" class="" type="button">
-            <span class=""><img src="../../resources/assets/assets/images/ham.png" width="30px" height="30px"></span>
-        </button>
+      <!-- nav -->
+      <nav id="nav">
         <div class="menu_bg">
           <div class="menu">
             <ul>
@@ -74,12 +84,28 @@
             </ul>
           </div>
         </div>
+      </nav>
+      <!-- content -->
+      <div class="totalHeader">
+        <div class="logo" style="text-align: center;">
+          <img src="assets/css/logo.png" alt="" width="120px" height="60px">
+        </div>
+        <button onclick="ShowMenu();" class="" type="button" data-toggle="offcanvas">
+            <span class=""><img src="assets/css/ham.png" width="30px" height="30px"></span>
+        </button>
       </div>
       <div class="subIndex"> ~~~~~~~~~~ 모두 올해 다짐 어쩌구 ~~~~~~~~</div>
       <div class="inner" style="width:375px; height: 407px; text-align: center;">
         <div class="innerList" style="display:inline-block;">
-
+            올해다짐 목록~~~~~~~~~~~~~~~~
         </div>
       </div>
+
+      <footer>
+        <div style="width:auto; height: 50px; text-align: center;" >
+          <span> 제작 </span>
+          <span> 김웨일 & 여웨일 & 백웨일 & 하웨일</span>
+        </div>
+      </footer>
   </body>
 </html>

@@ -1,17 +1,15 @@
 package com.dev.whale.repository;
 
-import com.dev.whale.domain.User;
+import com.dev.whale.domain.model.User;
 
 import java.util.*;
 
 public class MainRepositoryImpl implements MainRepository {
 
-    private static Map<String, User> map = new HashMap<>();
-    private static int userNo = 2;
+    Map<String, User> map = new HashMap<>();
 
     @Override
     public User save(User user) {
-        user.setUserNo(userNo);
         map.put(user.getUserId(), user);
         return user;
     }
@@ -28,10 +26,5 @@ public class MainRepositoryImpl implements MainRepository {
 
     public void clearStore() {
         map.clear();
-    }
-
-    @Override
-    public List<User> getUserList() {
-        return null;
     }
 }

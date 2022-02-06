@@ -1,4 +1,4 @@
-package com.dev.whale.domain;
+package com.dev.whale.domain.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,12 +9,10 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Qna {
+public class Reply {
 
-    private int qnaNo;
-    private String title;
+    private int replyNo;
     private String content;
     private Date modifyDate;
-    private String lockYn;
     private String status;
 }

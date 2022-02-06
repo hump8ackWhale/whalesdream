@@ -1,11 +1,13 @@
 package com.dev.whale.service;
 
-import com.dev.whale.domain.User;
+import com.dev.whale.domain.model.User;
 import com.dev.whale.repository.MainRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class MainService {
 
     private final MainRepository mainRepository;
@@ -24,7 +26,7 @@ public class MainService {
 
     // 아이디 중복 검증
     private void validateUserId(User user) {
-        mainRepository.findById(user.getUserId())
+        Optional.ofNullable(mainRepository.findById(user.getUserId()))
                 .ifPresent(m -> {
                     throw new IllegalStateException("중복된 아이디입니다.");
                 });
@@ -38,9 +40,5 @@ public class MainService {
     // userId 조회
     public Optional<User> findUser(String userId) {
         return mainRepository.findById(userId);
-    }
-
-    public List<User> getUserList() {
-        return mainRepository.getUserList();
     }
 }

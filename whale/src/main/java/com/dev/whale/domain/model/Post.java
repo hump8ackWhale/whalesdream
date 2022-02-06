@@ -1,4 +1,4 @@
-package com.dev.whale.domain;
+package com.dev.whale.domain.model;
 
 import lombok.Getter;
 import lombok.Setter;

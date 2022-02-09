@@ -1,4 +1,4 @@
-package com.dev.whale.repository;
+package com.dev.whale.repository.main;
 
 import com.dev.whale.domain.model.User;
 
@@ -21,8 +21,8 @@ public class JpaMainRepository implements MainRepository {
     }
 
     @Override
-    public Optional<User> findById(String id) {
-        User user = em.find(User.class, id);
+    public Optional<User> findById(int userNo) {
+        User user = em.find(User.class, userNo);
         return Optional.ofNullable(user);
     }
 

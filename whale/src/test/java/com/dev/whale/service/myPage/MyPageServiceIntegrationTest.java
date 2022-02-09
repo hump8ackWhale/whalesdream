@@ -1,40 +1,30 @@
-package com.dev.whale.service;
+package com.dev.whale.service.myPage;
 
 import com.dev.whale.domain.model.User;
-import com.dev.whale.repository.MainRepository;
+import com.dev.whale.repository.main.MainRepository;
+import com.dev.whale.repository.myPage.MyPageRepository;
+import com.dev.whale.service.MainService;
+import com.dev.whale.service.MyPageService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.Date;
 
 @SpringBootTest
 @Transactional
-public class MainServiceIntegrationTest {
+public class MyPageServiceIntegrationTest {
 
-    @Autowired MainService mainService;
-    @Autowired MainRepository mainRepository;
-
-    @Test
-    public void findUserId() throws Exception {
-        List<User> list = mainService.findUserList();
-        System.out.print(list.get(0).getUserId());
-    }
+    @Autowired MyPageService myPageService;
+    @Autowired MyPageRepository myPageRepository;
 
     @Test
-    public void joinUser() throws Exception {
-        //Given
-        User user = new User();
-        user.setUserId("spring");
-        user.setUserName("hello");
-        user.setMail("testjoin@google.com");
-
-        //When
-        mainService.join(user); // 미친놈안됨
-
-        //Then
+    public void userInfo() throws  Exception {
+        User info = myPageService.userInfo(3);
+        System.out.print(info);
     }
+
 /*    @Test
     public void 중복_회원_예외() throws Exception {
         //Given

@@ -1,11 +1,9 @@
 package com.dev.whale.service;
 
 import com.dev.whale.domain.model.User;
-import com.dev.whale.repository.MainRepository;
+import com.dev.whale.repository.main.MainRepository;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Transactional
 public class MainService {
@@ -16,29 +14,20 @@ public class MainService {
         this.mainRepository = mainRepository;
     }
 
-    // È¸¿ø °¡ÀÔ
+    // íšŒì› ê°€ì…
     public String join(User user) {
-        // ¾ÆÀÌµğ Áßº¹ x
+        // ì•„ì´ë”” ì¤‘ë³µ x
         validateUserId(user);
         mainRepository.save(user);
         return user.getUserId();
     }
 
-    // ¾ÆÀÌµğ Áßº¹ °ËÁõ
+    // ì•„ì´ë”” ì¤‘ë³µ ê²€ì¦
     private void validateUserId(User user) {
-        Optional.ofNullable(mainRepository.findById(user.getUserId()))
+        mainRepository.findById(user.getUserNo())
                 .ifPresent(m -> {
-                    throw new IllegalStateException("Áßº¹µÈ ¾ÆÀÌµğÀÔ´Ï´Ù.");
+                    throw new IllegalStateException("ì¤‘ë³µëœ ì•„ì´ë””ì…ë‹ˆë‹¤.");
                 });
     }
 
-    // ÀüÃ¼ È¸¿ø Á¶È¸
-    public List<User> findUserList() {
-        return mainRepository.findAll();
-    }
-
-    // userId Á¶È¸
-    public Optional<User> findUser(String userId) {
-        return mainRepository.findById(userId);
-    }
 }

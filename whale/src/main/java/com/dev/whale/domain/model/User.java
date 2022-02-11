@@ -12,18 +12,9 @@ import java.util.Date;
 @ToString
 @Entity
 @Table(name = "TB_USER")
-@SequenceGenerator(
-        name = "USER_SEQ_GEN",
-        sequenceName = "USER_SEQ",
-        initialValue = 1,
-        allocationSize = 1
-)
 public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_NO")
-    private int userNo;
-
+    @Id
     @Column(name = "USER_ID")
     private String userId;
 

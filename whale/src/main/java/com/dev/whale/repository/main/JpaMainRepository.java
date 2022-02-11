@@ -21,14 +21,18 @@ public class JpaMainRepository implements MainRepository {
     }
 
     @Override
-    public Optional<User> findById(int userNo) {
-        User user = em.find(User.class, userNo);
+    public Optional<User> findById(String userId) {
+        User user = em.find(User.class, userId);
         return Optional.ofNullable(user);
     }
 
     @Override
-    public List<User> findAll() {
-        return em.createQuery("select u from User u", User.class)
-                .getResultList();
+    public User selectUser(User user) {
+        return em.find(User.class, user.getUserId());
+    }
+
+    @Override
+    public void insertUser(User user) {
+        em.persist(user);
     }
 }

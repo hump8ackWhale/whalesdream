@@ -10,7 +10,7 @@ public class BoardController {
 
     @GetMapping("/allThisYearPromise")
     public String allThisYearPromise() {
-        return "board/allThisYearPromise";
+        return "/board/allThisYearPromise";
     }
 
 

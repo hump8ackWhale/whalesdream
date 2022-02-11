@@ -18,8 +18,8 @@ public class MainController {
 
     @GetMapping("/main")
     public String userList(Model model) {
-        //List<User> userList = mainService.getUserLi();
-        //model.addAttribute("users", userList);
+        // List<User> userList = mainService.getUserList();
+        // model.addAttribute("users", userList);
 
         return "main/APIExamNaverLogin";
     }

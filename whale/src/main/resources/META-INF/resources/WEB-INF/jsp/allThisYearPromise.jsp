@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>Dream of Whale</title>
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../resources/assets/assets/common2.css">
     <link rel="stylesheet" href="../../resources/assets/assets/reset2.css">
@@ -86,14 +86,7 @@ ShowMenu = function(){
         </div>
       </nav>
       <!-- content -->
-      <div class="totalHeader">
-        <div class="logo" style="text-align: center;">
-          <img src="assets/css/logo.png" alt="" width="120px" height="60px">
-        </div>
-        <button onclick="ShowMenu();" class="" type="button" data-toggle="offcanvas">
-            <span class=""><img src="assets/css/ham.png" width="30px" height="30px"></span>
-        </button>
-      </div>
+      <jsp:include page="common/header.jsp" />
       <div class="subIndex"> ~~~~~~~~~~ 모두 올해 다짐 어쩌구 ~~~~~~~~</div>
       <div class="inner" style="width:375px; height: 407px; text-align: center;">
         <div class="innerList" style="display:inline-block;">

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Date;
 
 @Controller
 public class MainController {
@@ -19,20 +18,15 @@ public class MainController {
         this.mainService = mainService;
     }
 
-    @RequestMapping("/join")
-    public String joinUser(User user) {
-        user.setJoinDate(new Date());
-        user.setTermYn("N");
-        mainService.insertUser(user);
-
+    @RequestMapping("/login")
+    public String loginPage() {
         return "login";
     }
 
-    @RequestMapping("/login")
-    public String getUser(User user, Model model) {
-        User loginUser = mainService.selectUser(user);
-        model.addAttribute("user", loginUser);
+    @RequestMapping("/join")
+    public String joinUser(User user) {
+        mainService.join(user);
 
-        return "loginSuccess";
+        return "login";
     }
 }

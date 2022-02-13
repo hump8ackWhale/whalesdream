@@ -13,9 +13,6 @@
 
 <form action="/join" method="post">
     <div class="form-group">
-        <label>아이디</label>
-        <input name="id" type="text" class="form-control" />
-
         <label>이메일</label>
         <input name="email" type="email" class="form-control" />
 
@@ -27,5 +24,7 @@
     </div>
     <button type="submit" class="btn btn-primary">가입</button>
 </form>
+
+<a href="join.jsp">회원가입</a>
 </body>
 </html>

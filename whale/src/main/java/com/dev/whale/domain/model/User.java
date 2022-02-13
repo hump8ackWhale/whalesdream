@@ -2,18 +2,13 @@ package com.dev.whale.domain.model;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,24 +17,22 @@ public class User {
 
     @Id
     @Column(name = "ID", updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "USERNAME", unique = true, length = 50)
     @NotNull
     @NotBlank(message = "아이디를 입력해주세요.")
-    private String id;
+    private String username;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", length = 100)
     @NotNull
     @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
 
-    @Column(name = "USERNAME")
-    @NotNull
-    @NotBlank(message = "이름을 입력해주세요.")
-    @Size(min = 1, max = 10, message = "이름은 1 ~ 10자 이여야 합니다.")
-    private String username;
-
     @Column(name = "ENABLED")
     @NotNull
-    private int enabled;
+    private Boolean enabled = true;
 
     @Column(name = "EMAIL")
     @NotNull
@@ -65,4 +58,10 @@ public class User {
         this.joinDate = this.joinDate == null ? new Date() : new Date();
     }
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles = new ArrayList<>();
 }

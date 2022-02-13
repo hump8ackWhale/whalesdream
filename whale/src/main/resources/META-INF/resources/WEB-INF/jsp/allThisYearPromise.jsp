@@ -93,6 +93,7 @@ ShowMenu = function(){
             올해다짐 목록~~~~~~~~~~~~~~~~
         </div>
       </div>
+      <a href="testPage">servleletTestPage</a>
 
       <footer>
         <div style="width:auto; height: 50px; text-align: center;" >

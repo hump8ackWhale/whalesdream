@@ -3,7 +3,7 @@ package com.dev.whale.repository.main;
 import com.dev.whale.domain.model.User;
 
 import javax.persistence.EntityManager;
-import java.util.List;
+import javax.persistence.TypedQuery;
 import java.util.Optional;
 
 public class JpaMainRepository implements MainRepository {
@@ -15,24 +15,18 @@ public class JpaMainRepository implements MainRepository {
     }
 
     @Override
-    public User save(User user) {
+    public User join(User user) {
         em.persist(user);
         return user;
     }
 
     @Override
-    public Optional<User> findById(String userId) {
-        User user = em.find(User.class, userId);
+    public Optional<User> findByName(String userName) {
+        TypedQuery<User> query = em.createQuery("select u from User u where u.username = :username", User.class);
+
+        query.setParameter("username", userName);
+
+        User user = query.getSingleResult();
         return Optional.ofNullable(user);
-    }
-
-    @Override
-    public User selectUser(User user) {
-        return em.find(User.class, user.getUserId());
-    }
-
-    @Override
-    public void insertUser(User user) {
-        em.persist(user);
     }
 }

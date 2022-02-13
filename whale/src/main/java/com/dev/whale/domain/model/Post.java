@@ -1,15 +1,14 @@
 package com.dev.whale.domain.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
+import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Entity
 @Table(name = "TB_POST")
 @SequenceGenerator(
@@ -23,26 +22,40 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POST_NO")
+    @NotNull
     private int postNo;
 
-    @Column(name = "USER_NO")
-    private int userNo;
+    @Column(name = "ID")
+    @NotNull
+    private String id;
 
-    @Column(name = "TITLE")
+    @Column(name = "TITLE", length = 500)
+    @NotNull
+    @NotBlank(message = "제목을 입력해주세요.")
     private String title;
 
-    @Column(name = "CONTENT")
+    @Column(name = "CONTENT", length = 50000)
+    @NotNull
+    @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
-    @Column(name = "INSERT_DATE")
+    @Column(name = "INSERT_DATE", updatable = false)
+    @NotNull
     private Date insertDate;
 
-    @Column(name = "MODIFY_DATE")
+    @Column(name = "MODIFY_DATE", insertable = false)
     private Date modifyDate;
 
     @Column(name = "LOCK_YN")
-    private String lockYn;
+    @Nullable
+    private String lockYn = "N";
 
     @Column(name = "STATUS")
+    @NotNull
     private String status;
+
+    @PrePersist
+    public void prePersist() {
+        this.insertDate = this.insertDate == null ? new Date() : new Date();
+    }
 }

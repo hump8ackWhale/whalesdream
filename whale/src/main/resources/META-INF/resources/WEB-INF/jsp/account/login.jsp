@@ -14,7 +14,7 @@
 <form action="/login" method="post">
     <div class="form-group">
         <label>아이디</label>
-        <input name="userId" type="text" class="form-control" />
+        <input name="id" type="text" class="form-control" />
     </div>
     <button type="submit" class="btn btn-primary">로그인</button>
 </form>

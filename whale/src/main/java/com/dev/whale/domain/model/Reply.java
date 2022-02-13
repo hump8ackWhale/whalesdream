@@ -1,15 +1,13 @@
 package com.dev.whale.domain.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.sun.istack.NotNull;
+import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Entity
 @Table(name = "TB_REPLY")
 @SequenceGenerator(
@@ -23,20 +21,31 @@ public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REPLY_NO")
+    @NotNull
     private int replyNo;
 
     @Column(name = "QNA_NO")
+    @NotNull
     private int qnaNo;
 
-    @Column(name = "CONTENT")
+    @Column(name = "CONTENT", length = 5000)
+    @NotNull
+    @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
-    @Column(name = "INSERT_DATE")
+    @Column(name = "INSERT_DATE", updatable = false)
+    @NotNull
     private Date insertDate;
 
-    @Column(name = "MODIFY_DATE")
+    @Column(name = "MODIFY_DATE", insertable = false)
     private Date modifyDate;
 
     @Column(name = "STATUS")
+    @NotNull
     private String status;
+
+    @PrePersist
+    public void prePersist() {
+        this.insertDate = this.insertDate == null ? new Date() : new Date();
+    }
 }

@@ -14,9 +14,9 @@
     <h1>Login success</h1>
 
 <ul>
-    <li>ID   : ${user.userId}</li>
-    <li>MAIL : ${user.mail}</li>
-    <li>NAME : ${user.userName}</li>
+    <li>ID   : ${user.id}</li>
+    <li>MAIL : ${user.email}</li>
+    <li>NAME : ${user.username}</li>
     <li>JOIN DATE : <fmt:formatDate value="${user.joinDate}" pattern="yyyy-MM-dd"></fmt:formatDate> </li>
     <li>TERM : ${user.termYn}</li>
     <c:if test="${user.termYn eq 'Y'}">

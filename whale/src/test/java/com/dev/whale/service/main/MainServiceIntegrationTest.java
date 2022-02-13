@@ -8,9 +8,12 @@ import com.dev.whale.service.MyPageService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -19,34 +22,39 @@ public class MainServiceIntegrationTest {
     @Autowired
     MainService mainService;
     @Autowired MainRepository mainRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Test
     public void joinUser() throws Exception {
+
+        String pass = "12345";
+
         //Given
         User user = new User();
-        user.setUserId("spring");
-        user.setUserName("hello");
-        user.setMail("testjoin@google.com");
-        user.setJoinDate(new Date());
-        user.setTermYn("N");
+        user.setUsername("mjyeo");
+        user.setEmail("testjoin@google.com");
+        user.setPassword(pass);
 
         //When
         mainService.join(user);
-
+        //String encodePassword = mainRepository.findById(user.getId()).getPassword();
 
         //Then
     }
-/*    @Test
-    public void 중복_회원_예외() throws Exception {
+    @Test
+    public void passwordEncoder() throws Exception {
         //Given
-        Member member1 = new Member();
-        member1.setName("spring");
-        Member member2 = new Member();
-        member2.setName("spring");
+        String password = "12345";
+
         //When
-        memberService.join(member1);
-        IllegalStateException e = assertThrows(IllegalStateException.class,
-                () -> memberService.join(member2));//예외가 발생해야 한다.
-        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
-    }*/
+        String encodePassword = passwordEncoder.encode(password);
+       // System.out.print("암호화비밀번호 " + encodePassword);
+
+        //then
+        assertAll(
+                () -> assertNotEquals(password, encodePassword),
+                () -> assertTrue(passwordEncoder.matches(password, encodePassword))
+        );
+    }
 }

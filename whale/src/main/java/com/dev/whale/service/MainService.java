@@ -1,8 +1,10 @@
 package com.dev.whale.service;
 
+import com.dev.whale.domain.model.Role;
 import com.dev.whale.domain.model.User;
 import com.dev.whale.repository.main.MainRepository;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.transaction.Transactional;
 
@@ -15,29 +17,29 @@ public class MainService {
         this.mainRepository = mainRepository;
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     // 회원 가입
-    public String join(User user) {
+    public void join(User user) {
         // 아이디 중복 x
-        validateUserId(user);
-        mainRepository.save(user);
-        return user.getUserId();
+        validateDuplicateUser(user);
+
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+
+        Role role = new Role();
+        role.setId(1L);
+        user.getRoles().add(role);
+
+        mainRepository.join(user);
     }
 
     // 아이디 중복 검증
-    private void validateUserId(User user) {
-        mainRepository.findById(user.getUserId())
+    private void validateDuplicateUser(User user) {
+        mainRepository.findByName(user.getUsername())
                 .ifPresent(m -> {
                     throw new IllegalStateException("중복된 아이디입니다.");
                 });
     }
-
-    public User selectUser(User user) {
-        return mainRepository.selectUser(user);
-    }
-
-    public void insertUser(User user) {
-        validateUserId(user);
-        mainRepository.insertUser(user);
-    }
-
 }

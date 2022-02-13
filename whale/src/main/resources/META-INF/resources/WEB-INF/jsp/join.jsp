@@ -13,16 +13,18 @@
 
 <form action="/join" method="post">
     <div class="form-group">
-        <label>아이디</label>
-        <input name="userId" type="text" class="form-control" />
-
         <label>이메일</label>
-        <input name="mail" type="email" class="form-control" />
+        <input name="email" type="email" class="form-control" />
 
         <label>이름</label>
-        <input name="userName" type="text" class="form-control" />
+        <input name="username" type="text" class="form-control" />
+
+        <label>비밀번호</label>
+        <input name="password" type="password" class="form-control" />
     </div>
     <button type="submit" class="btn btn-primary">가입</button>
 </form>
+
+<a href="join.jsp">회원가입</a>
 </body>
 </html>

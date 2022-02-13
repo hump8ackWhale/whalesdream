@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +13,17 @@
 
 <h1>Login Form</h1>
 
-<form action="/login" method="post">
-    <div class="form-group">
-        <label>아이디</label>
-        <input name="userId" type="text" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">로그인</button>
+<form action="/doLogin" method="post">
+    <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+        <p>Your login attempt was not successful due to <br/>
+                ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+    </c:if>
+    <input type="text" class="form-control" name="username" placeholder="id">
+    <input type="password" class="form-control" name="password" placeholder="Password">
+    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+    <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
+
 </body>
 </html>

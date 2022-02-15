@@ -1,6 +1,5 @@
 package com.dev.whale;
 
-import com.dev.whale.controller.IndexController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

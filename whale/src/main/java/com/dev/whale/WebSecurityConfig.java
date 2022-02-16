@@ -43,19 +43,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                     .disable()
                 .authorizeRequests()
-                    .antMatchers("/login").permitAll() // 비로그인에도 접근 가능한 url
-                    //.anyRequest().authenticated() // 위의 url 외의 url은 로그인 필수
+                    .antMatchers("/", "/main/register").permitAll() // 비로그인에도 접근 가능한 url
+                    .anyRequest().authenticated() // 위의 url 외의 url은 로그인 필수
                     .and()
                 .formLogin()
-                    .loginPage("/login") // 로그인 필수 페이지로 갈 경우 해당 url로 이동
-                    .loginProcessingUrl("/doLogin")
-                    .successHandler(new UserLoginSuccessHandler())
+                    .loginPage("/main/login") // 로그인 필수 페이지로 갈 경우 해당 url로 이동
+                    //.successHandler(new UserLoginSuccessHandler())
                     .permitAll() // 로그인페이지는 모두 접근 가능
                     .and()
                 .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
-                    .invalidateHttpSession(true); // 세션 날리기
+                    //.logoutUrl("/logout")
+                    //.logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
+                    .invalidateHttpSession(true)  // 세션 날리기
+                    .permitAll();
     }
 
     @Autowired

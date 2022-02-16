@@ -5,10 +5,13 @@ import com.dev.whale.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping("/main")
 public class MainController {
 
     private final MainService mainService;
@@ -18,15 +21,20 @@ public class MainController {
         this.mainService = mainService;
     }
 
-    @RequestMapping("/login")
-    public String loginPage() {
-        return "login";
+    @GetMapping("/login")
+    public String login() {
+        return "main/login";
     }
 
-    @RequestMapping("/join")
-    public String joinUser(User user) {
+    @GetMapping("/register")
+    public String register() {
+        return "main/register";
+    }
+
+    @PostMapping("/register")
+    public String register(User user) {
         mainService.join(user);
 
-        return "login";
+        return "index";
     }
 }

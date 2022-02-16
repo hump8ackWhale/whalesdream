@@ -4,6 +4,7 @@ import com.dev.whale.domain.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.Optional;
 
 public class JpaMainRepository implements MainRepository {
@@ -22,11 +23,10 @@ public class JpaMainRepository implements MainRepository {
 
     @Override
     public Optional<User> findByName(String userName) {
-        TypedQuery<User> query = em.createQuery("select u from User u where u.username = :username", User.class);
+        List<User> query = em.createQuery("select u from User u where u.username = :username", User.class)
+                .setParameter("username", userName)
+                .getResultList();
 
-        query.setParameter("username", userName);
-
-        User user = query.getSingleResult();
-        return Optional.ofNullable(user);
+        return query.stream().findAny();
     }
 }

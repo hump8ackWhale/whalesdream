@@ -25,7 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] AUTH_WHITELIST = {
             "/assets/**",
             "/assets/images/**",
-            "/css/maps/**",
             "/css/**",
             "/fonts/Assistant/**",
             "/fonts/Rubik/**",

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:fragment="mainHead" xmlns:th="http://www.thymeleaf.org">
+    <link rel="stylesheet" th:href="@{/assets/common2.css}">
+    <link rel="stylesheet" th:href="@{/assets/reset2.css}">
+    <meta charset="UTF-8">
+    <title>Dream of Whale</title>
+    <style>
+    /* nav */
+      #nav {
+        position: fixed;
+        z-index: 10;
+        top : 60px;
+        right : -100%;
+        width : 75%;
+        max-width : 300px;
+        height : calc(100% - 60px);
+        padding : 50px 0;
+        transition: all 500ms ease;
+      }
+      #nav.act {
+        right : 0;
+      }
+      span {display:block;}
+    </style>
+</head>
+<body>
+
+</body>
+</html>

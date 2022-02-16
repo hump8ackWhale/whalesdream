@@ -23,7 +23,7 @@ public class MainController {
 
     @GetMapping("/login")
     public String login() {
-        return "main/login";
+        return "login/login";
     }
 
     @GetMapping("/register")

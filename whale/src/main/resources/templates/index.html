@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org/extras/spring-security" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Hello</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head th:replace="common/header :: mainHead">
 </head>
-<body>
-index 테스트
-포워딩 어떻게 하지?
+<body th:replace="login/login :: mainBody">
 
-    <a th:href="@{/main/login}" sec:authorize="!isAuthenticated()">Login</a>
-    <a th:href="@{/main/register}" sec:authorize="!isAuthenticated()">Sign Up</a>
+<!--    <a th:href="@{/main/login}" sec:authorize="!isAuthenticated()">Login</a>-->
+<!--    <a th:href="@{/main/register}" sec:authorize="!isAuthenticated()">Sign Up</a>-->
 
-    <form th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
-        <span sec:authentication="name">사용자</span>
-        <span sec:authentication="principal.authorities">권한</span>
-        <button type="submit">Logout</button>
-    </form>
+<!--    <form th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">-->
+<!--        <span sec:authentication="name">사용자</span>-->
+<!--        <span sec:authentication="principal.authorities">권한</span>-->
+<!--        <button type="submit">Logout</button>-->
+<!--    </form>-->
 
 </body>
 </html>

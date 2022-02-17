@@ -1,6 +1,5 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
-@import url(c:\Users\BN210121\Desktop\s\css\crop.css);
 /* total css */
 html,
 body {
@@ -27,7 +26,7 @@ body .moDalConTaIner {
 
 body .moDalConTaIner .moDalWarp {
   margin: 0 auto;
-  max-width: 300px;
+  max-width: 720px;
   width: 100%;
   height: 200px;
   background: black;
@@ -39,7 +38,7 @@ body .moDalConTaIner .moDalWarp p {
 }
 
 .totalWrap {
-  max-width: 37.5rem;
+  max-width: 72rem;
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -313,7 +312,7 @@ body .moDalConTaIner .moDalWarp p {
 }
 
 .totalWrap.result form .perViewImgBox.result {
-  max-width: 375px;
+  max-width: 720px;
   width: 100%;
   position: relative;
 }

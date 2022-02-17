@@ -687,7 +687,7 @@ form .inputFormName {
   text-align: center;
 }
 
-form .inputFormName input {
+form .inputFormName {
   width: 16.757rem;
   text-align: left;
   font-size: 2.2rem;
@@ -797,6 +797,32 @@ form .cutBox #button {
   font-size: 1.4rem;
   color: #000;
   font-weight: bold;
+}
+
+table {
+  width:100%;
+  table-layout: fixed;
+}
+
+.input-row {
+  display: block;
+  width: 100%;
+  height: calc(3.0625rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.panel_inner {
+  display: block;
+  width: 100%;
+  padding:24px;
 }
 
 /*subindex 끝*/

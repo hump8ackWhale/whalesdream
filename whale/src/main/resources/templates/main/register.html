@@ -6,12 +6,28 @@
     <title>Sign Up</title>
 </head>
 <body>
-  <form th:action="@{/main/register}" method="POST">
-    <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-    username : <input type="text" name="username"> <br>
-    password : <input type="password" name="password"> <br>
-      mail : <input type="email" name="email"> <br>
-    <button type="submit">Sign up</button>
-  </form>
+    <div class="totalWrap upload" id="totalWrap">
+        <!--header-->
+        <div th:replace="common/header :: headerDiv"></div>
+        <div class="panel_inner">
+          <form th:action="@{/main/register}" method="POST">
+              <table class="content-table">
+            <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+                  <tr>
+                      <td height="45px"><input class="input-row" type="text" name="username" placeholder="아이디"></td> <br>
+                  </tr>
+                  <tr>
+                      <td height="45px"><div class=""><input class="input-row" type="password" name="password" placeholder="패스워드"></div></td> <br>
+                  </tr>
+                  <tr>
+                      <td height="45px"><div class=""><input class="input-row" type="email" name="email" placeholder="이메일"></div></td> <br>
+                  </tr>
+            <button type="submit">Sign up</button>
+              </table>
+          </form>
+        </div>
+        <!--footer-->
+        <footer th:replace="common/footer :: footer"></footer>
+    </div>
 </body>
 </html>

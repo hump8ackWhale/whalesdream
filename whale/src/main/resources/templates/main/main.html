@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-메인 화면 이동
 
-<button class="logout-button"type="submit" sec:authorize="isAuthenticated()">로그아웃하기</button>
+<span sec:authentication="name">사용자</span>님 환영합니다!
+
+<form th:action="@{/account/logout}" method="POST" sec:authorize="isAuthenticated()">
+    <input type="submit" class="login-button" value="logout"/>
+</form>
 </html>

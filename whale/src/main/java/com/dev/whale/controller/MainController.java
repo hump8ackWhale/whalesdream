@@ -19,7 +19,7 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String register() {
+    public String loginSuccess() {
         return "main/main";
     }
 }

@@ -1,5 +1,8 @@
 package com.dev.whale.config;
 
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -13,35 +16,25 @@ import java.io.IOException;
 
 public class LoginFailureHandler implements AuthenticationFailureHandler {
 
-    private String loginUsername;
-    private String loginPassword;
-    private String loginRedirectUrl;
-    private String exceptionMsg;
-    private String defaultFailureUrl;
-
-    public LoginFailureHandler() {
-        this.loginUsername = "username";    // loginForm의 loginParameter
-        this.loginPassword = "password";    // loginForm의 passwordParameter
-        this.loginRedirectUrl = "loginRedirect";
-        this.exceptionMsg = "securityexceptionmsg";
-        this.defaultFailureUrl = "/";
-    }
+    private final String DEFAULT_FAILURE_URL = "/";
 
     /**
      * 인증에 실패할 경우 아래 매서드로 이동.
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        // Request 객체의 Attribute에 로그인 실패했을 때의 id, 비밀번호를 저장해두고 실패시 url의 페이지(로그인 페이지)에서 이를 접근하도록 함
-        String username = request.getParameter(loginUsername);
-        String password = request.getParameter(loginPassword);
-        String redirectUrl = request.getParameter(loginRedirectUrl);
 
-        request.setAttribute(loginUsername, username);
-        request.setAttribute(loginPassword, password);
-        request.setAttribute(loginRedirectUrl, redirectUrl);
-        request.setAttribute(exceptionMsg, exception.getMessage());
+        String errorMessage = null;
 
-        request.getRequestDispatcher(defaultFailureUrl).forward(request, response);
+        if (exception instanceof AuthenticationServiceException) {
+            errorMessage = "존재하지 않는 사용자입니다.";
+        }
+
+        if (exception instanceof BadCredentialsException || exception instanceof InternalAuthenticationServiceException) {
+            errorMessage = "아이디나 비밀번호가 맞지 않습니다.";
+        }
+
+        request.setAttribute("errorMessage", errorMessage);
+        request.getRequestDispatcher(DEFAULT_FAILURE_URL).forward(request, response);
     }
 }

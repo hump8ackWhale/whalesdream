@@ -20,6 +20,11 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    @PostMapping("/login")
+    public String login() {
+        return "account/login";
+    }
+
     @GetMapping("/register")
     public String register() {
         return "account/register";

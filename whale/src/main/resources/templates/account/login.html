@@ -31,13 +31,13 @@
                     <div class="input_div">
                         <input class="input_row" type="password" name="password" placeholder="패스워드">
                     </div><br>
-                    <div class="input_div"><button class="login-button"type="submit" sec:authorize="!isAuthenticated()">로그인하기</button></div>
+                    <div class="input_div"><button class="login-button" type="submit" sec:authorize="!isAuthenticated()">로그인하기</button></div>
 <!--                    <div th:if="${not #strings.isEmpty(securityexceptionmsg)}" style="color: #c21d17">
                         <p>Invalid username and password.</p>
                         <p>${securityexceptionmsg}</p>
                     </div>-->
                     <div th:if="${param.error}" style="color: #c21d17">
-                        Invalid username and password.
+                        <p class="error-message" th:text="${errorMessage}">User Name or Password invalid.</p>
                     </div>
                     <input type="hidden" name="loginRedirect" value="#{loginRedirect}">
                 </form>

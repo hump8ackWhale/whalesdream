@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+메인 화면 이동
+
+<button class="logout-button"type="submit" sec:authorize="isAuthenticated()">로그아웃하기</button>
+</html>

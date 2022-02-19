@@ -44,14 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                     .disable()
                 .authorizeRequests()
-                    .antMatchers("/", "/main/register").permitAll() // 비로그인에도 접근 가능한 url
+                    .antMatchers("/", "/account/**").permitAll() // 비로그인에도 접근 가능한 url
                     .anyRequest().authenticated() // 위의 url 외의 url은 로그인 필수
                     .and()
                 .formLogin()
-                    .loginPage("/main/login") // 로그인이 필요한 페이지를 접속할 경우 해당 url로 이동
-                    .defaultSuccessUrl("/") // 자의로 시도한 로그인이 성공할 경우 이동할 페이지
+                    .loginPage("/account/login") // 로그인이 필요한 페이지를 접속할 경우 해당 url로 이동
                     .successHandler(successHandler())
-                    .failureUrl("/login.html?error=true") // default라 지워도됨
                     .failureHandler(failureHandler())
                     .permitAll() // 로그인페이지는 모두 접근 가능
                     .and()

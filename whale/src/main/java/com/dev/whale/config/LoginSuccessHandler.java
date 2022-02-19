@@ -27,7 +27,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     public LoginSuccessHandler() {
         targetUrlParameter = "";
-        defaultUrl = "/";
+        defaultUrl = "/main/main";
         useReferer = false;
     }
 
@@ -62,8 +62,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
         clearAuthenticationAttribute(request);
-
-        int intRedirectStrategy = decideRedirectStrategy(request, response);
+        useDefaultUrl(request, response);
+/*        int intRedirectStrategy = decideRedirectStrategy(request, response);
         switch (intRedirectStrategy) {
             case 1:
                 useTargetUrl(request, response);
@@ -77,7 +77,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
             default:
                 useDefaultUrl(request, response);
                 break;
-        }
+        }*/
 
 
     }

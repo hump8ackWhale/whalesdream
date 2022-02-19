@@ -1,15 +1,14 @@
 package com.dev.whale.config;
 
+import com.dev.whale.repository.account.AccountRepository;
+import com.dev.whale.repository.account.JpaAccountRepository;
 import com.dev.whale.repository.main.JpaMainRepository;
 import com.dev.whale.repository.main.MainRepository;
 import com.dev.whale.repository.myPage.JpaMyPageRepository;
 import com.dev.whale.repository.myPage.MyPageRepository;
 import com.dev.whale.repository.post.JpaPostRepository;
 import com.dev.whale.repository.qna.JpaQnaRepository;
-import com.dev.whale.service.MainService;
-import com.dev.whale.service.MyPageService;
-import com.dev.whale.service.PostService;
-import com.dev.whale.service.QnaService;
+import com.dev.whale.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +23,11 @@ public class SpringConfig {
     @Autowired
     public SpringConfig(EntityManager em) {
         this.em = em;
+    }
+
+    @Bean
+    public AccountService accountService() {
+        return new AccountService(accountRepository());
     }
 
     @Bean
@@ -44,6 +48,11 @@ public class SpringConfig {
     @Bean
     public PostService postService() {
         return new PostService(postRepository());
+    }
+
+    @Bean
+    public AccountRepository accountRepository() {
+        return new JpaAccountRepository(em);
     }
 
     @Bean

@@ -1,4 +1,4 @@
-package com.dev.whale;
+package com.dev.whale.config;
 
 import com.dev.whale.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +11,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
@@ -46,8 +48,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest().authenticated() // 위의 url 외의 url은 로그인 필수
                     .and()
                 .formLogin()
-                    .loginPage("/main/login") // 로그인 필수 페이지로 갈 경우 해당 url로 이동
-                    //.successHandler(new UserLoginSuccessHandler())
+                    .loginPage("/main/login") // 로그인이 필요한 페이지를 접속할 경우 해당 url로 이동
+                    .defaultSuccessUrl("/") // 자의로 시도한 로그인이 성공할 경우 이동할 페이지
+                    .successHandler(successHandler())
+                    .failureUrl("/login.html?error=true") // default라 지워도됨
+                    .failureHandler(failureHandler())
                     .permitAll() // 로그인페이지는 모두 접근 가능
                     .and()
                 .logout()
@@ -74,5 +79,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return new LoginSuccessHandler();
+    }
+
+    @Bean
+    public AuthenticationFailureHandler failureHandler() {
+        return new LoginFailureHandler();
     }
 }

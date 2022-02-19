@@ -1,4 +1,4 @@
-package com.dev.whale;
+package com.dev.whale.config;
 
 import com.dev.whale.repository.main.JpaMainRepository;
 import com.dev.whale.repository.main.MainRepository;

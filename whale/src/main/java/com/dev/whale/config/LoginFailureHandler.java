@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class LoginFailureHandler implements AuthenticationFailureHandler {
 
-    private final String DEFAULT_FAILURE_URL = "/";
+    private final String DEFAULT_FAILURE_URL = "/account/login";
 
     /**
      * 인증에 실패할 경우 아래 매서드로 이동.

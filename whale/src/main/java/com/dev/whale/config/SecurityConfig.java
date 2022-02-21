@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest().authenticated() // 위의 url 외의 url은 로그인 필수
                     .and()
                 .formLogin()
-                    .loginPage("/account/login") // 로그인이 필요한 페이지를 접속할 경우 해당 url로 이동
+                    .loginPage("/") // 로그인이 필요한 페이지를 접속할 경우 해당 url로 이동
                     .successHandler(successHandler())
                     .failureHandler(failureHandler())
                     .permitAll() // 로그인페이지는 모두 접근 가능

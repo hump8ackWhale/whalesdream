@@ -30,7 +30,7 @@ public class AccountServiceIntegrationTest {
 
         //Given
         User user = new User();
-        user.setUsername("mjyeo");
+        user.setUsername("mjyeo12");
         user.setEmail("testjoin@google.com");
         user.setPassword(pass);
 
@@ -39,6 +39,8 @@ public class AccountServiceIntegrationTest {
         //String encodePassword = accountRepository.findById(user.getId()).getPassword();
 
         //Then
+        System.out.print("생성날짜 : " + user.getCreatedDate());
+        System.out.print("생성날짜 : " + user.getModifiedDate());
     }
     @Test
     public void passwordEncoder() throws Exception {

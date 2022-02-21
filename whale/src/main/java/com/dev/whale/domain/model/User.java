@@ -1,5 +1,6 @@
 package com.dev.whale.domain.model;
 
+import com.dev.whale.BaseTimeEntity;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "TB_USER")
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @Column(name = "ID", updatable = false)
@@ -39,24 +40,12 @@ public class User {
     @Email(message = "이메일 형식을 확인해주세요.")
     private String email;
 
-    @Column(name = "JOIN_DATE", updatable = false)
-    @NotNull
-    private Date joinDate;
-
     @Column(name = "TERM_DATE", insertable = false)
     private Date termDate;
-
-    @Column(name = "MODIFY_DATE", insertable = false)
-    private Date modifyDate;
 
     @Column(name = "TERM_YN")
     @NotNull
     private String termYn = "N";
-
-    @PrePersist
-    public void prePersist() {
-        this.joinDate = this.joinDate == null ? new Date() : new Date();
-    }
 
     @ManyToMany
     @JoinTable(

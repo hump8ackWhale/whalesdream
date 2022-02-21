@@ -1,5 +1,6 @@
 package com.dev.whale.domain.model;
 
+import com.dev.whale.BaseTimeEntity;
 import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 import lombok.Data;
@@ -17,17 +18,16 @@ import java.util.Date;
         initialValue = 1,
         allocationSize = 1
 )
-public class Post {
+public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POST_NO")
-    @NotNull
     private int postNo;
 
-    @Column(name = "ID")
+    @Column(name = "USERNAME")
     @NotNull
-    private String id;
+    private String username;
 
     @Column(name = "TITLE", length = 500)
     @NotNull
@@ -39,23 +39,11 @@ public class Post {
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
-    @Column(name = "INSERT_DATE", updatable = false)
-    @NotNull
-    private Date insertDate;
-
-    @Column(name = "MODIFY_DATE", insertable = false)
-    private Date modifyDate;
-
     @Column(name = "LOCK_YN")
     @Nullable
     private String lockYn = "N";
 
     @Column(name = "STATUS")
     @NotNull
-    private String status;
-
-    @PrePersist
-    public void prePersist() {
-        this.insertDate = this.insertDate == null ? new Date() : new Date();
-    }
+    private String status = "I";
 }

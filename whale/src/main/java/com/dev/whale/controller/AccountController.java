@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 @Controller
 @RequestMapping("/account")
@@ -20,9 +23,10 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping("/login")
-    public String login() {
-        return "account/login";
+    @PostMapping("/loginFail")
+    public String loginFail(HttpServletRequest request, HttpServletResponse response) {
+        String error = request.getParameter("errorMessage");
+        return "index";
     }
 
     @GetMapping("/register")

@@ -7,6 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
+import org.springframework.web.util.UrlPathHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
         String errorMessage = null;
 
+        System.out.print("login Error : " + exception.getMessage());
+
         if (exception instanceof AuthenticationServiceException) {
             errorMessage = "존재하지 않는 사용자입니다.";
         }
@@ -35,6 +39,6 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         }
 
         request.setAttribute("errorMessage", errorMessage);
-        request.getRequestDispatcher(DEFAULT_FAILURE_URL).forward(request, response);
+        request.getRequestDispatcher("/account/loginFail").forward(request, response);
     }
 }

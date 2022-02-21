@@ -1,5 +1,6 @@
 package com.dev.whale.domain.model;
 
+import com.dev.whale.BaseTimeEntity;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import java.util.Date;
         initialValue = 1,
         allocationSize = 1
 )
-public class Qna {
+public class Qna extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +28,9 @@ public class Qna {
     @NotNull
     private int qnaNo;
 
-    @Column(name = "ID")
+    @Column(name = "USERNAME")
     @NotNull
-    private String id;
+    private String username;
 
     @Column(name = "CATEGORY_NO")
     @NotNull
@@ -45,13 +46,6 @@ public class Qna {
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
-    @Column(name = "INSERT_DATE", updatable = false)
-    @NotNull
-    private Date insertDate;
-
-    @Column(name = "MODIFY_DATE", insertable = false)
-    private Date modifyDate;
-
     @Column(name = "LOCK_YN")
     @NotNull
     private String lockYn = "N";
@@ -59,9 +53,4 @@ public class Qna {
     @Column(name = "STATUS")
     @NotNull
     private String status;
-
-    @PrePersist
-    public void prePersist() {
-        this.insertDate = this.insertDate == null ? new Date() : new Date();
-    }
 }

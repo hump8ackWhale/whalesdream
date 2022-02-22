@@ -1,5 +1,6 @@
 package com.dev.whale.service.account;
 
+import com.dev.whale.controller.AccountController;
 import com.dev.whale.domain.model.User;
 import com.dev.whale.repository.account.AccountRepository;
 import com.dev.whale.service.AccountService;
@@ -16,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 public class AccountServiceIntegrationTest {
 
+    @Autowired
+    AccountController accountController;
     @Autowired
     AccountService accountService;
     @Autowired
@@ -56,5 +59,13 @@ public class AccountServiceIntegrationTest {
                 () -> assertNotEquals(password, encodePassword),
                 () -> assertTrue(passwordEncoder.matches(password, encodePassword))
         );
+    }
+
+    @Test
+    public void changePassword() {
+
+        //
+        accountController.pwFind("mjyeo@test.com", "mj-yeo");
+
     }
 }

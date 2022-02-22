@@ -1,5 +1,6 @@
 package com.dev.whale.controller;
 
+import com.dev.whale.domain.MailVO;
 import com.dev.whale.domain.model.User;
 import com.dev.whale.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -44,5 +48,30 @@ public class AccountController {
         accountService.join(user);
 
         return "index";
+    }
+
+    @GetMapping("/findPw")
+    public String changePw() {
+        return "account/findPassword";
+    }
+
+    // email, username 일치 여부
+    @GetMapping("/check/findPw")
+    public @ResponseBody Map<String, Boolean> pwFind(String userEmail, String userName) {
+        Map<String, Boolean> map = new HashMap<>();
+        boolean pwFindCheck = accountService.userNameCheck(userEmail, userName);
+
+        /*if (pwFindCheck) {
+            sendEmail(userEmail, userName);
+        }*/
+
+        map.put("check", pwFindCheck);
+        return map;
+    }
+
+    @PostMapping("/check/findPw/sendEmail")
+    public @ResponseBody void sendEmail(String userEmail, String userName) {
+        MailVO mail = accountService.changePasswordMail(userEmail, userName);
+        accountService.mailSend(mail);
     }
 }

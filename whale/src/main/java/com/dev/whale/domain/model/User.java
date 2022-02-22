@@ -21,22 +21,16 @@ public class User extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "USERNAME", unique = true, length = 50)
-    @NotNull
-    @NotBlank(message = "아이디를 입력해주세요.")
+    @Column(name = "USERNAME", unique = true, length = 50, updatable = false)
     private String username;
 
     @Column(name = "PASSWORD", length = 100)
-    @NotNull
-    @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
 
     @Column(name = "ENABLED")
-    @NotNull
     private Boolean enabled = true;
 
     @Column(name = "EMAIL")
-    @NotNull
     @Email(message = "이메일 형식을 확인해주세요.")
     private String email;
 
@@ -44,8 +38,10 @@ public class User extends BaseTimeEntity {
     private Date termDate;
 
     @Column(name = "TERM_YN")
-    @NotNull
     private String termYn = "N";
+
+    @Column(name = "ISSUE_YN")
+    private String issueYn = "N";
 
     @ManyToMany
     @JoinTable(

@@ -27,6 +27,14 @@ public class JpaAccountRepository implements AccountRepository {
                 .setParameter("username", userName)
                 .getResultList();
 
-        return query.stream().findAny();
+        return query.stream().findAny();    // 일치하는 값 1개 return
+    }
+
+    @Override
+    public int updateUserTempPassword(String str, Long id) {
+        return em.createQuery("update User u set u.password = :str, u.issueYn = 'Y' where u.id = :id ")
+                .setParameter("str", str)
+                .setParameter("id", id)
+                .executeUpdate();
     }
 }

@@ -18,7 +18,7 @@
                 You have been logged out.
             </div>
             <div class="panel_inner">
-                <form th:action="@{/account/login}" method="POST">
+                <form th:action="@{/}" method="post">
                     <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
                     <div class="input_div">
                         <input class="input_row" type="text" name="username" placeholder="아이디"> <br>
@@ -42,14 +42,14 @@
         <!-- loginfooter -->
         <ul class="etc_wrap">
             <li>
-               <a target ="_blank" href="">아이디 찾기</a>
+               <a href="">아이디 찾기</a>
             </li>
             <li>
-                <a target ="_blank" href="">비밀번호 변경</a>
+                <a th:href="@{/qna/qnaListView}" >비밀번호 변경</a>
             </li>
             <li>
                 <div>
-                <a target ="_blank" th:href="@{/account/register}" sec:authorize="!isAuthenticated()">회원가입</a>
+                <a th:href="@{/account/register}">회원가입</a>
                 </div>
             </li>
         </ul>

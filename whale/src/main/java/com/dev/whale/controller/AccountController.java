@@ -23,6 +23,11 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+//    @PostMapping("/loginFail")
+//    public String login() {
+//        return "index";
+//    }
+
     @PostMapping("/loginFail")
     public String loginFail(HttpServletRequest request, HttpServletResponse response) {
         String error = request.getParameter("errorMessage");

@@ -29,6 +29,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         targetUrlParameter = "";
         defaultUrl = "/main/main";
         useReferer = false;
+
     }
 
     public String getTargetUrlParameter() {

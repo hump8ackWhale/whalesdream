@@ -1,5 +1,9 @@
 package com.dev.whale.repository.qna;
 
-public interface QnaRepository {
+import com.dev.whale.domain.model.Qna;
 
+import java.util.List;
+
+public interface QnaRepository {
+    void insertQna(Qna qna);
 }

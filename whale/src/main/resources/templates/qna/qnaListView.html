@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="common/header :: mainHead">
+</head>
+<body th:fragment="mainBody" style="background-color:#661BD1;">
+    <div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
+        <!-- header -->
+        <div th:replace="common/header :: headerDiv">
+        </div>
+        <table class="table" id="datatable-default" style="cursor:pointer;">
+            <thead>
+            <tr>
+                <th>글번호</th>
+                <th>카테고리</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:replace="qna : ${qnaList}">
+                    <td th:text="${qna.qna_no}"></td>
+                    <td th:text="${qna.category_name}"></td>
+                    <td th:text="${qna.title}"></td>
+                    <td th:text="${qna.user_name}"></td>
+                    <td th:text="${qna.created_date}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">글쓰기</button>
+        <!-- footer -->
+        <footer th:replace="common/footer :: footer"></footer>
+    </div>
+    <script>
+		$(function(){
+			$("#datatable-default tbody tr").click(function(){
+				location.href="qnaDetailView?nno=" + $(this).children().eq(0).text();
+			});
+		});
+	</script>
+</body>
+</html>

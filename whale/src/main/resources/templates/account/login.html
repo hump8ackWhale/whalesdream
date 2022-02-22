@@ -31,7 +31,7 @@
                         <p>Invalid username and password.</p>
                         <p>${securityexceptionmsg}</p>
                     </div>-->
-                    <div th:if="${param.error}" style="color: #c21d17">
+                    <div th:if="${errorMessage}" style="color: #c21d17">
                         Invalid username and password.
                     </div>
                     <input type="hidden" name="loginRedirect" value="#{loginRedirect}">

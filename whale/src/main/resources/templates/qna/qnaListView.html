@@ -18,13 +18,20 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:replace="qna : ${qnaList}">
+                <tr>
+                    <td>테스트</td>
+                    <td>1</td>
+                    <td>제목 하드코딩</td>
+                    <td>김왜일</td>
+                    <td>2022-02-23</td>
+                </tr>
+<!--                <tr th:replace="qna : ${qnaList}">
                     <td th:text="${qna.qna_no}"></td>
                     <td th:text="${qna.category_name}"></td>
                     <td th:text="${qna.title}"></td>
                     <td th:text="${qna.user_name}"></td>
                     <td th:text="${qna.created_date}"></td>
-                </tr>
+                </tr>-->
             </tbody>
         </table>
         <button type="button" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">글쓰기</button>

@@ -836,7 +836,7 @@ form .cutBox #button {
     padding:0 20px;
 }
 
-.login_wrap {
+.login_wrap, .register_wrap {
     width: 553px;
     margin: 0 80px;
 }

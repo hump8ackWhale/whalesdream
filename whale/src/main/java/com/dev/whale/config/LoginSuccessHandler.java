@@ -27,7 +27,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     public LoginSuccessHandler() {
         targetUrlParameter = "";
-        defaultUrl = "/main/main";
+        defaultUrl = "/qna/qnaListView";
         useReferer = false;
 
     }

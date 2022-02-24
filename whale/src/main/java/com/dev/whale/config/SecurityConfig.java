@@ -1,6 +1,6 @@
 package com.dev.whale.config;
 
-import com.dev.whale.service.MainService;
+import com.dev.whale.config.auth.PrincipalDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +20,13 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private PrincipalDetailService principalDetailService;
+
+    @Autowired
+    public SecurityConfig(PrincipalDetailService principalDetailService) {
+        this.principalDetailService = principalDetailService;
+    }
+
     @Autowired
     private DataSource dataSource;
 
@@ -36,6 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(AUTH_WHITELIST);
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(principalDetailService).passwordEncoder(passwordEncoder());
     }
 
     @Override

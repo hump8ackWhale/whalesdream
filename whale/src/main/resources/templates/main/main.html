@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
@@ -7,4 +8,88 @@
 <form th:action="@{/account/logout}" method="POST" sec:authorize="isAuthenticated()">
     <input type="submit" class="login-button" value="logout"/>
 </form>
+</html>-->
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="common/header :: mainHead">
+    <script type="text/javascript">
+        $(function(){
+            console.log([[${username}]]);
+            $.ajax({
+                type: "GET",
+                url: "/post/myPost",
+                data: {
+                    "userName": [[${username}]]
+                },
+                success: function (res) {
+                    if (res['check']) {
+                        swal("발송 완료!", "입력하신 이메일로 임시비밀번호가 발송되었습니다.", "success")
+                            .then((OK) => {
+                                    if(OK) {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "/account/check/findPw/sendEmail",
+                                            data: {
+                                                "userEmail": userEmail,
+                                                "userName": userName
+                                            }
+                                        })
+                                        window.location.href = "/";
+                                    }
+                                }
+                            )
+                        $('#checkMsg').html('<p style="color:darkblue"></p>');
+                    } else {
+                        $('#checkMsg').html('<p style="color:red">일치하는 정보가 없습니다.</p>');
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body th:fragment="mainBody" style="background-color:#661BD1;">
+<div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
+    <!-- header -->
+    <div th:replace="common/header :: headerDiv">
+    </div>
+    <table class="table" id="datatable-default" style="cursor:pointer;">
+        <thead>
+        <tr>
+            <th>글번호</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>제목 하드코딩</td>
+            <td><span sec:authentication="name"/></td>
+            <td>2022-02-23</td>
+        </tr>
+        <!--                <tr th:replace="qna : ${qnaList}">
+                            <td th:text="${qna.qna_no}"></td>
+                            <td th:text="${qna.category_name}"></td>
+                            <td th:text="${qna.title}"></td>
+                            <td th:text="${qna.user_name}"></td>
+                            <td th:text="${qna.created_date}"></td>
+                        </tr>-->
+        </tbody>
+    </table>
+    <button type="button" th:onclick="|location.href='@{/post/postForm}'|">글쓰기</button>
+    <!-- footer -->
+    <footer th:replace="common/footer :: footer"></footer>
+</div>
+<script>
+    $(function(){
+        $("#datatable-default tbody tr").click(function(){
+            location.href="postDetailView?nno=" + $(this).children().eq(0).text();
+        });
+    });
+</script>
+</body>
 </html>

@@ -4,6 +4,8 @@ import com.dev.whale.domain.MailVO;
 import com.dev.whale.domain.model.User;
 import com.dev.whale.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,8 +52,15 @@ public class AccountController {
         return "index";
     }
 
+    @GetMapping("/logout")
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder
+                .getContext().getAuthentication());
+        return "redirect:/index";
+    }
+
     @GetMapping("/findPw")
-    public String changePw() {
+    public String findPw() {
         return "account/findPassword";
     }
 
@@ -60,10 +69,6 @@ public class AccountController {
     public @ResponseBody Map<String, Boolean> pwFind(String userEmail, String userName) {
         Map<String, Boolean> map = new HashMap<>();
         boolean pwFindCheck = accountService.userNameCheck(userEmail, userName);
-
-        /*if (pwFindCheck) {
-            sendEmail(userEmail, userName);
-        }*/
 
         map.put("check", pwFindCheck);
         return map;

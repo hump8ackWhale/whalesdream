@@ -23,11 +23,13 @@ public class JpaPostRepository implements PostRepository {
     }
 
     @Override
-    public List<Post> selectMyPost(String usernameParam) {
+    public List<Post> selectMyPostList(String usernameParam) {
         LocalDateTime date = LocalDateTime.now();
-// AND CURRENT_TIME BETWEEN p.createdDate AND ADDDATE(p.createdDate, 1)
-        List<Post> myPost = em.createQuery("SELECT p FROM Post p WHERE p.username = :usernameParam ", Post.class)
+
+//date + " BETWEEN p.createdDate AND ADD_MONTHS(p.createdDate, 1)
+        List<Post> myPost = em.createQuery("SELECT p FROM Post p WHERE p.username = :usernameParam")
                 .setParameter("usernameParam", usernameParam)
+                //.setParameter("date", date)
                 .getResultList();
 
         return myPost;

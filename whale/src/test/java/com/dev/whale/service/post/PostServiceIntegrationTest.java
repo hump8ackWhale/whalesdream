@@ -6,7 +6,6 @@ import com.dev.whale.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -51,7 +50,7 @@ public class PostServiceIntegrationTest {
     @Test
     public void selectMyPost() {
 
-        List<Post> myPost = postService.selectMyPost("mj-yeo");
+        List<Post> myPost = postService.selectMyPostList("mj-yeo");
 
         System.out.println("나의 올해다짐 리스트 :: " + myPost);
         System.out.println("나의 올해다짐 리스트 개수 :: " + myPost.size());

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Commit;
 
 import javax.transaction.Transactional;
 
@@ -27,13 +28,14 @@ public class AccountServiceIntegrationTest {
     PasswordEncoder passwordEncoder;
 
     @Test
+    @Commit
     public void joinUser() throws Exception {
 
         String pass = "12345";
 
         //Given
         User user = new User();
-        user.setUsername("mjyeo12");
+        user.setUsername("mjyeo");
         user.setEmail("testjoin@google.com");
         user.setPassword(pass);
 

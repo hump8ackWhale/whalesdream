@@ -80,16 +80,8 @@
                         </tr>-->
         </tbody>
     </table>
-    <button type="button" th:onclick="|location.href='@{/post/postForm}'|">글쓰기</button>
     <!-- footer -->
     <footer th:replace="common/footer :: footer"></footer>
 </div>
-<script>
-    $(function(){
-        $("#datatable-default tbody tr").click(function(){
-            location.href="postDetailView?nno=" + $(this).children().eq(0).text();
-        });
-    });
-</script>
 </body>
 </html>

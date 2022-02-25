@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="common/header :: mainHead">
+</head>
+<body th:fragment="mainBody" style="background-color:#661BD1;">
+<div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
+  <!-- header -->
+  <div th:replace="common/header :: headerDiv">
+  </div>
+  <div class="login_wrap">
+    <div class="panel_inner">
+      <form th:action="@{/post/savePost}" method="get">
+        <div class="input_div">
+          <textarea name="title" id="ptitle" rows="1" cols="55" placeholder="제목" maxlength="100" required></textarea> <br>
+        </div>
+        <div class="input_div">
+          <textarea name="content" id="pcontent" placeholder="내용" required></textarea>
+        </div><br>
+        <input type="hidden" name="username">
+        <div class="input_div"><button class="login-button"type="submit" >작성 완료!</button></div>
+      </form>
+    </div>
+  </div>
+  <!-- footer -->
+  <footer th:replace="common/footer :: footer"></footer>
+</div>
+</body>
+</html>

@@ -4,9 +4,13 @@ import com.dev.whale.BaseTimeEntity;
 import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -18,14 +22,16 @@ import java.util.Date;
         initialValue = 1,
         allocationSize = 1
 )
+@SQLDelete(sql = "UPDATE TB_POST SET status = 'D' WHERE POST_NO=?")
+@Where(clause = "status != 'D'")
 public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "POST_NO")
+    @Column(name = "POST_NO", updatable = false)
     private int postNo;
 
-    @Column(name = "USERNAME")
+    @Column(name = "USERNAME", updatable = false)
     @NotNull
     private String username;
 
@@ -41,9 +47,24 @@ public class Post extends BaseTimeEntity {
 
     @Column(name = "LOCK_YN")
     @Nullable
-    private String lockYn = "N";
+    private String lockYn = "Y";
 
     @Column(name = "STATUS")
     @NotNull
     private String status = "I";
+
+    @Column(name = "END_DATE", updatable = false)
+    @NotNull
+    private LocalDateTime endDate;
+
+    @PrePersist
+    public void endDateSetting() {
+        this.endDate = this.getCreatedDate().plusMonths(1);
+    }
+
+    @PreRemove
+    public void deletePost() {
+        this.status = "D";
+    }
+
 }

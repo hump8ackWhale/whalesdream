@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="common/header :: mainHead">
+</head>
+<body th:fragment="mainBody" style="background-color:#661BD1;">
+<div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
+  <!-- header -->
+  <div th:replace="common/header :: headerDiv">
+  </div>
+  <table class="table" id="datatable-default" style="cursor:pointer;">
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>내용</th>
+        <th>작성자</th>
+        <th>작성일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="myPost : ${myPostList}">
+        <td>
+          <span th:text="${myPost.postNo}"></span>
+        </td>
+        <td>
+          <span th:text="${myPost.title}"></span>
+        </td>
+        <td>
+          <span th:text="${myPost.content}"></span>
+        </td>
+        <td>
+          <span th:text="${myPost.username}"></span>
+        </td>
+        <td>
+          <span th:text="${#temporals.format(myPost.createdDate, 'yyyy-MM-dd')}"></span>
+        </td>
+        <td>
+          <span th:text="${#temporals.format(myPost.endDate, 'yyyy-MM-dd')}"></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 전년도 12/26 ~ 올해 12/1 까지 조건 걸고 button hidden/not 처리-->
+  <button>글쓰기</button>
+
+  <!-- footer -->
+  <footer th:replace="common/footer :: footer"></footer>
+</div>
+<script>
+  $(function(){
+    $("#datatable-default tbody tr").click(function(){
+      location.href="detailPost?pno=" + $(this).children().eq(0).text();
+    });
+  });
+</script>
+</body>
+</html>

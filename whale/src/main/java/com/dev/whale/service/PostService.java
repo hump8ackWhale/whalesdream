@@ -15,12 +15,25 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public void insertPost(Post post) {
-        postRepository.insertPost(post);
+    public void save(Post post) {
+        postRepository.save(post);
     }
 
     public List<Post> selectMyPostList(String usernameParam) {
         return postRepository.selectMyPostList(usernameParam);
     }
 
+    public List<Post> selectAllPostList() {
+        return postRepository.selectAllPostList();
+    }
+
+    public void update(Post post) {
+        postRepository.update(post);
+    }
+
+    public Post findById(int postNo) {
+        return postRepository.findById(postNo);
+    }
+
+    public void deleteById(int postNo) { postRepository.deleteById(postNo); }
 }

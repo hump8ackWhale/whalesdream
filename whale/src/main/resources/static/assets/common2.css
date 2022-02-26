@@ -848,7 +848,7 @@ form .cutBox #button {
     border: solid 1px #ced4da;
     color: #fff;
     background-color : #661BD1;
-    border-radius:4px;
+    border-radius:5px;
     font-size: 1.5rem;
 }
 
@@ -873,5 +873,68 @@ ul {
  display: inline-block;
  text-decoration: none;
 }
+
+
+/* post_List */
+
+.body_wrap{
+  margin:20px 0;
+}
+.que:first-child{
+    border-top: 1px solid black;
+  }
+
+.que{
+  width:85%;
+  position: relative;
+  cursor: pointer;
+  font-size: 14px;
+  padding-left: 10px;
+}
+
+.que::before{
+  display: inline-block;
+  font-size: 14px;
+  color: #006633;
+  margin-right: 5px;
+}
+
+.que.on>span{
+  font-weight: bold;
+  color: #006633;
+}
+
+.detail_wrap {
+  display: none;
+  overflow: hidden;
+  font-size: 14px;
+  background-color: #f4f4f2;
+  padding:27px 0;
+}
+
+.detail_wrap::before {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+  margin-right: 5px;
+}
+.nm_btn {
+  background-color: #661BD1;
+  border-color: #661BD1;
+  padding: 0.375rem 0.75rem;
+  color:#fff;
+  border-radius: 0.1875rem;
+  border: 1px solid transparent;
+  text-align: center;
+}
+
+.panel_btn {
+  margin:20px;
+  padding:10px 10px;
+}
+.Accordion_wrap {
+  padding:10x;
+
 
 /*subindex 끝*/

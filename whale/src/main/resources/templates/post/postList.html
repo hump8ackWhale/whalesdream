@@ -7,37 +7,25 @@
   <!-- header -->
   <div th:replace="common/header :: headerDiv">
   </div>
-  <table class="table" id="datatable-default" style="cursor:pointer;">
-    <thead>
-      <tr>
-        <th>번호</th>
-        <th>제목</th>
-        <th>내용</th>
-        <th>작성자</th>
-        <th>작성일</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="myPost : ${allPostList}">
-        <td>
-          <span th:text="${allPostList.postNo}"></span>
-        </td>
-        <td>
-          <span th:text="${allPostList.title}"></span>
-        </td>
-        <td>
-          <span th:text="${allPostList.content}"></span>
-        </td>
-        <td>
-          <span th:text="${allPostList.username}"></span>
-        </td>
-        <td>
-          <span th:text="${#temporals.format(allPostList.createdDate, 'yyyy-MM-dd')}"></span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <button type="button" th:onclick="|location.href='@{/post/postForm}'|">글쓰기</button>
+  <div class="body_wrap">
+    <div class="Accordion_wrap"  th:each="myPost : ${myPostList}" th:if="${not #strings.isEmpty(myPostList)}">
+      <div id="list_wrap">
+        <div style="float:left; width:15%; border-right: 1px solid #dddddd; margin:0px 15px;">
+          <span th:text="${#temporals.format(myPost.createdDate, 'yyyy-MM-dd')}"></span>
+        </div>
+        <div class="que">
+          <span th:text="${myPost.title}"></span>
+        </div>
+        <div class="detail_wrap">
+          <span> 테스트 테스트 테스트 이거 투두리스트처럼 만들 수 있으면 좋을텐데 detail 조회까지 해와야함 테스트 테스트 테스트 이거 투두리스트처럼 만들 수 있으면 좋을텐데 detail 조회까지 해와야함</span>
+        </div>
+      </div>
+    </div>
+    <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(myPostList)}">
+      <span style="text-align:center;">조회된 데이터가 없습니다.</span>
+    </div>
+  </div>
+
   <!-- footer -->
   <footer th:replace="common/footer :: footer"></footer>
 </div>

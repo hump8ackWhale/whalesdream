@@ -23,11 +23,11 @@
           <span th:text="${myPost.title}"></span>
         </div>
         <div class="detail_wrap">
-          <span> 테스트 테스트 테스트 이거 투두리스트처럼 만들 수 있으면 좋을텐데 detail 조회까지 해와야함 테스트 테스트 테스트 이거 투두리스트처럼 만들 수 있으면 좋을텐데 detail 조회까지 해와야함</span>
+          <span th:text="${myPost.content}"></span>
         </div>
       </div>
     </div>
-    <div class="Accordion_wrap" th:unless="${#strings.isEmpty(myPostList)}">
+    <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(myPostList)}">
       <span style="text-align:center;">조회된 데이터가 없습니다.</span>
     </div>
 

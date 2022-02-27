@@ -6,7 +6,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +22,9 @@ public class User extends BaseTimeEntity {
 
     @Column(name = "USERNAME", unique = true, length = 50, updatable = false)
     private String username;
+
+    @Column(name = "NICKNAME", length = 50)
+    private String nickname;
 
     @Column(name = "PASSWORD", length = 100)
     private String password;

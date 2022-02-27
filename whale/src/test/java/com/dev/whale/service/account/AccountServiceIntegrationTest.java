@@ -67,7 +67,7 @@ public class AccountServiceIntegrationTest {
     public void changePassword() {
 
         //
-        accountController.pwFind("mjyeo@test.com", "mj-yeo");
+        accountController.findPw("mjyeo@test.com", "mj-yeo");
 
     }
 }

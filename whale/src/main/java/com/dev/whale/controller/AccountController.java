@@ -59,14 +59,25 @@ public class AccountController {
         return "redirect:/index";
     }
 
+    @GetMapping("/goPwPage")
+    public void goPwPage(String username) {
+        String issueYn = accountService.selectIssueYn(username);
+
+        if (issueYn.equals("N")) {
+            goFindPw();
+        } else {
+            goChangePw();
+        }
+    }
+
     @GetMapping("/findPw")
-    public String findPw() {
+    public String goFindPw() {
         return "account/findPassword";
     }
 
     // email, username 일치 여부
     @GetMapping("/check/findPw")
-    public @ResponseBody Map<String, Boolean> pwFind(String userEmail, String userName) {
+    public @ResponseBody Map<String, Boolean> findPw(String userEmail, String userName) {
         Map<String, Boolean> map = new HashMap<>();
         boolean pwFindCheck = accountService.userNameCheck(userEmail, userName);
 
@@ -75,8 +86,20 @@ public class AccountController {
     }
 
     @PostMapping("/check/findPw/sendEmail")
-    public @ResponseBody void sendEmail(String userEmail, String userName) {
+    public @ResponseBody String sendEmail(String userEmail, String userName) {
         MailVO mail = accountService.changePasswordMail(userEmail, userName);
         accountService.mailSend(mail);
+
+        return "index";
+    }
+
+    @GetMapping("/goChangePw")
+    public String goChangePw() {
+        return "account/changePassword";
+    }
+
+    @GetMapping("/changePw")
+    public void changePw(String username, String orgPw, String newPw) {
+        accountService.changePw(username, orgPw, newPw);
     }
 }

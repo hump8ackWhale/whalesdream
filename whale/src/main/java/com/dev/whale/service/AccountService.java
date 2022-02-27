@@ -112,4 +112,14 @@ public class AccountService {
 
         mailSender.send(message);
     }
+
+    // 임시 비밀번호 발급 여부
+    public String selectIssueYn(String username) {
+        return accountRepository.findByName(username).get().getIssueYn();
+    }
+
+    // 비밀번호 변경
+    public void changePw(String username, String orgPw, String newPw) {
+        accountRepository.changePw(username, orgPw, newPw);
+    }
 }

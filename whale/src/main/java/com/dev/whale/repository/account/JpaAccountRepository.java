@@ -37,4 +37,9 @@ public class JpaAccountRepository implements AccountRepository {
                 .setParameter("id", id)
                 .executeUpdate();
     }
+
+    @Override
+    public void changePw(String username, String orgPw, String newPw) {
+
+    }
 }

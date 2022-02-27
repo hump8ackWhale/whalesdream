@@ -22,9 +22,9 @@ public class JpaPostRepository implements PostRepository {
     @Override
     public List<Post> selectMyPostList(String usernameParam) {
         LocalDateTime date = LocalDateTime.now();
-        String query = "select p from Post p where p.username = :usernameParam " +
-                          "and p.createdDate <= :date and :date < p.endDate " +
-                           "or YEAR(p.createdDate) < YEAR(:date)" +
+        String query = "select p from Post p where (p.createdDate <= :date and :date < p.endDate) " +
+                          "or YEAR(p.createdDate) < YEAR(:date) " +
+                           "and p.username = :usernameParam " +
                      "order by p.createdDate desc";
 
         List<Post> myPost = em.createQuery(query)
@@ -38,9 +38,9 @@ public class JpaPostRepository implements PostRepository {
     @Override
     public List<Post> selectAllPostList() {
         LocalDateTime date = LocalDateTime.now();
-        String query = "select p from Post p where p.createdDate <= :date and :date < p.endDate " +
-                          "and p.lockYn = 'N' " +
-                           "or YEAR(p.createdDate) < YEAR(:date) " +
+        String query = "select p from Post p where (p.createdDate <= :date and :date < p.endDate) " +
+                          "and (p.lockYn = 'N') " +
+                           "or (YEAR(p.createdDate) < YEAR(:date)) " +
                      "order by p.createdDate desc";
 
         List<Post> allPost = em.createQuery(query)
@@ -57,7 +57,15 @@ public class JpaPostRepository implements PostRepository {
 
     @Override
     public void update(Post post) {
-        //return em.createQuery("update Post p set p.")
+
+        Post findPost = findById(post.getPostNo());
+
+        findPost.setTitle(post.getTitle());
+        findPost.setContent(post.getContent());
+        findPost.setLockYn(post.getLockYn());
+        if (findPost.getStatus().equals("I")) {
+            findPost.setStatus("U");
+        }
     }
 
     @Override

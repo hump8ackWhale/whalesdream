@@ -71,6 +71,7 @@ public class PostServiceIntegrationTest {
         // Given
         Post post = new Post();
 
+        post.setPostNo(44);
         // when
         postService.update(post);
     }

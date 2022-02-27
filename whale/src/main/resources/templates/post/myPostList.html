@@ -14,20 +14,20 @@
       <button class="nm_btn" style="float:right;" th:onclick="|location.href='@{/post/postForm}'|">작성하기</button>
     </div>
 
-    <div class="Accordion_wrap"  th:each="allPost : ${allPostList}" th:if="${not #strings.isEmpty(allPostList)}">
+    <div class="Accordion_wrap"  th:each="myPost : ${myPostList}" th:if="${not #strings.isEmpty(myPostList)}">
       <div id="list_wrap">
         <div style="float:left; width:15%; border-right: 1px solid #dddddd; margin:0px 15px;">
-          <span th:text="${#temporals.format(allPost.createdDate, 'yyyy-MM-dd')}"></span>
+          <span th:text="${#temporals.format(myPost.createdDate, 'yyyy-MM-dd')}"></span>
         </div>
         <div class="que">
-          <span th:text="${allPost.title}"></span>
+          <span th:text="${myPost.title}"></span>
         </div>
         <div class="detail_wrap">
           <span> 테스트 테스트 테스트 이거 투두리스트처럼 만들 수 있으면 좋을텐데 detail 조회까지 해와야함 테스트 테스트 테스트 이거 투두리스트처럼 만들 수 있으면 좋을텐데 detail 조회까지 해와야함</span>
         </div>
       </div>
     </div>
-    <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(allPostList)}">
+    <div class="Accordion_wrap" th:unless="${#strings.isEmpty(myPostList)}">
       <span style="text-align:center;">조회된 데이터가 없습니다.</span>
     </div>
 

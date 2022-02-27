@@ -1,5 +1,7 @@
 package com.dev.whale.config;
 
+import com.dev.whale.config.auth.PrincipalDetail;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -63,7 +65,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
         clearAuthenticationAttribute(request);
-        useDefaultUrl(request, response);
+        useDefaultUrl(request, response, authentication);
 /*        int intRedirectStrategy = decideRedirectStrategy(request, response);
         switch (intRedirectStrategy) {
             case 1:
@@ -155,7 +157,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
-    private void useDefaultUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void useDefaultUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+        // 임시 발급 여부 Y 면 비밀번호 변경 화면으로 REDIRECT
+        if (((PrincipalDetail) ((UsernamePasswordAuthenticationToken) authentication).getPrincipal()).getUser().getIssueYn().equals("Y")) {
+            defaultUrl = "/account/goChangePw";
+        }
         redirectStrategy.sendRedirect(request, response, defaultUrl);
     }
 }

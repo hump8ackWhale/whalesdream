@@ -1,7 +1,6 @@
 package com.dev.whale.repository.account;
 
 import com.dev.whale.domain.model.User;
-import com.dev.whale.repository.main.MainRepository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -39,7 +38,10 @@ public class JpaAccountRepository implements AccountRepository {
     }
 
     @Override
-    public void changePw(String username, String orgPw, String newPw) {
-
+    public void changePw(String username, String encodeNewPw) {
+        Optional<User> user = findByName(username);
+        user.get().setPassword(encodeNewPw);    // 실패 , optional 값 수정하는 방법 알아봐야함
+        em.persist(user);
     }
+
 }

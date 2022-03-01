@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="Accordion_wrap" th:unless="${#strings.isEmpty(allPostList)}">
+    <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(allPostList)}">
       <span style="text-align:center;">조회된 데이터가 없습니다.</span>
     </div>
   </div>

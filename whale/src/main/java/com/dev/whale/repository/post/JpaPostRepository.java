@@ -66,6 +66,8 @@ public class JpaPostRepository implements PostRepository {
         if (findPost.getStatus().equals("I")) {
             findPost.setStatus("U");
         }
+
+        em.persist(findPost);
     }
 
     @Override

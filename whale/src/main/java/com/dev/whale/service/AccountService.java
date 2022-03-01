@@ -118,8 +118,19 @@ public class AccountService {
         return accountRepository.findByName(username).get().getIssueYn();
     }
 
-    // 비밀번호 변경
-    public void changePw(String username, String orgPw, String newPw) {
-        accountRepository.changePw(username, orgPw, newPw);
+    // 암호화된 비밀번호 조회
+    public Boolean changePw(String username, String orgPw, String newPw) {
+
+        String checkOrgPw = accountRepository.findByName(username).get().getPassword();
+
+        // 저장된 암호화 비밀번호와 입력한 임시 비밀번호가 다르다면 false
+        if (passwordEncoder.matches(orgPw, checkOrgPw)) {
+
+            String encodeNewPw = passwordEncoder.encode(newPw);
+            accountRepository.changePw(username, encodeNewPw);
+            return true;
+        }
+
+        return false;
     }
 }

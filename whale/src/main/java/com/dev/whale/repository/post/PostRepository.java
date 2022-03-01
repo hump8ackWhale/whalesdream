@@ -15,7 +15,7 @@ public interface PostRepository {
     // 모두 올해다짐 리스트 조회
     List<Post> selectAllPostList();
 
-    // 올해다짐 상세보기
+    // 올해다짐 find
     Post findById(int postNo);
 
     // 나의 올해다짐 수정

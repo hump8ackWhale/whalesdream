@@ -21,10 +21,10 @@
                 <form th:action="@{/}" method="post">
                     <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
                     <div class="input_div">
-                        <input class="input_row" type="text" name="username" placeholder="아이디"> <br>
+                        <input class="input_row large_row" type="text" name="username" placeholder="아이디"> <br>
                     </div>
                     <div class="input_div">
-                        <input class="input_row" type="password" name="password" placeholder="패스워드">
+                        <input class="input_row large_row" type="password" name="password" placeholder="패스워드">
                     </div><br>
                     <div class="input_div"><button class="login-button"type="submit">로그인하기</button></div>
 <!--                    <div th:if="${not #strings.isEmpty(securityexceptionmsg)}" style="color: #c21d17">

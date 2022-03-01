@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="common/header :: mainHead"></head>
+<body style="background-color:#661BD1;">
+<div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
+    <!-- header -->
+    <div th:replace="common/header :: headerDiv"></div>
+
+    <!-- body-->
+    <div class="body_wrap">
+
+        <h2>내정보</h2>
+        <hr>
+        <div class="input_div">
+            <input class="input_row large_row" type="text" name="username" placeholder="아이디" th:value="${username}" disabled> <br>
+        </div>
+        <div class="input_div">
+            <input class="input_row large_row" type="text" name="nickname" placeholder="닉네임" th:value="${nickname}"> <br>
+        </div>
+        <div class="input_div">
+            <input class="input_row large_row" type="text" name="email" placeholder="이메일" th:value="${email}" disabled> <br>
+        </div>
+        <button>회원탈퇴</button>
+
+        <!-- footer -->
+        <footer th:replace="common/footer :: footer"></footer>
+
+    </div>
+
+</div>
+
+</body>
+</html>

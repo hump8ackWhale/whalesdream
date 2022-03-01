@@ -29,7 +29,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     public LoginSuccessHandler() {
         targetUrlParameter = "";
-        defaultUrl = "/post/myPostList";
+        defaultUrl = "/myInfo/myForm";
         useReferer = false;
 
     }

@@ -1,17 +1,5 @@
-<!--
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
-<span sec:authentication="name">사용자</span>님 환영합니다!
-
-<form th:action="@{/account/logout}" method="POST" sec:authorize="isAuthenticated()">
-    <input type="submit" class="login-button" value="logout"/>
-</form>
-</html>-->
-<!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="https://www.thymeleaf.org">
 <head th:replace="common/header :: mainHead">
 </head>
 <body th:fragment="mainBody" style="background-color:#661BD1;">
@@ -42,4 +30,3 @@
 </div>
 </body>
 </html>
-<!--<td><span sec:authentication="name"/></td>-->

@@ -1,27 +1,26 @@
 package com.dev.whale.service.myPage;
 
 import com.dev.whale.domain.model.User;
-import com.dev.whale.repository.main.MainRepository;
-import com.dev.whale.repository.myPage.MyPageRepository;
-import com.dev.whale.service.MainService;
-import com.dev.whale.service.MyPageService;
+import com.dev.whale.repository.myPage.MyInfoRepository;
+import com.dev.whale.service.MyInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
-import java.util.Date;
 
 @SpringBootTest
 @Transactional
-public class MyPageServiceIntegrationTest {
+public class MyInfoServiceIntegrationTest {
 
-    @Autowired MyPageService myPageService;
-    @Autowired MyPageRepository myPageRepository;
+    @Autowired
+    MyInfoService myInfoService;
+    @Autowired
+    MyInfoRepository myInfoRepository;
 
     @Test
     public void userInfo() throws  Exception {
-        User info = myPageService.userInfo(3);
+        User info = myInfoService.selectUserInfo("mjyeo");
         System.out.print(info);
     }
 

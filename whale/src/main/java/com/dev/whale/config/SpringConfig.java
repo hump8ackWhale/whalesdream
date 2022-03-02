@@ -4,8 +4,8 @@ import com.dev.whale.repository.account.AccountRepository;
 import com.dev.whale.repository.account.JpaAccountRepository;
 import com.dev.whale.repository.main.JpaMainRepository;
 import com.dev.whale.repository.main.MainRepository;
-import com.dev.whale.repository.myPage.JpaMyPageRepository;
-import com.dev.whale.repository.myPage.MyPageRepository;
+import com.dev.whale.repository.myPage.JpaMyInfoRepository;
+import com.dev.whale.repository.myPage.MyInfoRepository;
 import com.dev.whale.repository.post.JpaPostRepository;
 import com.dev.whale.repository.qna.JpaQnaRepository;
 import com.dev.whale.service.*;
@@ -36,8 +36,8 @@ public class SpringConfig {
     }
 
     @Bean
-    public MyPageService myPageService() {
-        return new MyPageService(myPageRepository());
+    public MyInfoService myInfoService() {
+        return new MyInfoService(myInfoRepository());
     }
 
     @Bean
@@ -61,8 +61,8 @@ public class SpringConfig {
     }
 
     @Bean
-    public MyPageRepository myPageRepository() {
-        return new JpaMyPageRepository(em);
+    public MyInfoRepository myInfoRepository() {
+        return new JpaMyInfoRepository(em);
     }
 
     @Bean

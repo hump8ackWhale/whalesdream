@@ -159,7 +159,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private void useDefaultUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         // 임시 발급 여부 Y 면 비밀번호 변경 화면으로 REDIRECT
-        if (((PrincipalDetail) ((UsernamePasswordAuthenticationToken) authentication).getPrincipal()).getUser().getIssueYn().equals("Y")) {
+        if (((PrincipalDetail) (authentication).getPrincipal()).getUser().getIssueYn().equals("Y")) {
             defaultUrl = "/account/goChangePw";
         }
         redirectStrategy.sendRedirect(request, response, defaultUrl);

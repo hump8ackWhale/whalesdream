@@ -12,13 +12,13 @@
         <h2>내정보</h2>
         <hr>
         <div class="input_div">
-            <input class="input_row large_row" type="text" name="username" placeholder="아이디" th:value="${username}" disabled> <br>
+            <input class="input_row large_row" type="text" name="username" placeholder="아이디" th:value="${myInfo.username}" disabled> <br>
         </div>
         <div class="input_div">
-            <input class="input_row large_row" type="text" name="nickname" placeholder="닉네임" th:value="${nickname}"> <br>
+            <input class="input_row large_row" type="text" name="nickname" placeholder="닉네임" th:value="${myInfo.nickname}"> <br>
         </div>
         <div class="input_div">
-            <input class="input_row large_row" type="text" name="email" placeholder="이메일" th:value="${email}" disabled> <br>
+            <input class="input_row large_row" type="text" name="email" placeholder="이메일" th:value="${myInfo.email}" disabled> <br>
         </div>
         <button>회원탈퇴</button>
 

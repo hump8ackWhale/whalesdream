@@ -31,4 +31,16 @@ public class myInfoController {
         model.addAttribute("myInfo", myInfo);
         return "myInfo/myForm";
     }
+
+    /**
+    * @package  : com.dev.whale.controller
+    * @author   : kimzoo2
+    * @date     : 2022-03-03 오후 6:29
+    * @version  : 1.0.0
+    * @modified :
+    **/
+    @GetMapping("/leaveAccount")
+    public String leaveAccount(){
+        return "myInfo/leaveAccount";
+    }
 }

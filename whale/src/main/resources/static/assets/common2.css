@@ -22,7 +22,6 @@ a {
     cursor: pointer;
 }
 
-
 .totalWrap {
   max-width: 72rem;
   width: 100%;
@@ -43,6 +42,9 @@ a {
   background-color : #fff;
 }
 
+.center_btn{
+  float:center;
+}
 /* input css */
 .middle_row {
     width: 80%;

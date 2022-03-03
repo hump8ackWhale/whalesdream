@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<nav th:fragment="navigation" id="nav" xmlns:th="http://www.thymeleaf.org">
+<nav th:fragment="navigation" id="nav" >
     <div class="menu_bg">
         <div class="menu">
             <ul>
-                <li><a href="/myInfo/myForm">메뉴1</a></li>
-                <li><a href="#">메뉴2</a></li>
-                <li><a href="#">메뉴3</a></li>
-                <li><a href="#">메뉴4</a></li>
+                <li><a th:href="@{/myInfo/myForm}">내정보</a></li>
+                <li><a th:href="@{/post/myPostList}">나의 올해다짐</a></li>
+                <li><a th:href="@{/post/allPostList}">모두 올해다짐</a></li>
+                <li><a th:href="@{/qna/qnaListView}">QNA</a></li>
+                <li><a th:href="@{/account/logout}">로그아웃</a></li>
             </ul>
         </div>
     </div>

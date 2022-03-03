@@ -21,6 +21,11 @@ public class JpaAccountRepository implements AccountRepository {
     }
 
     @Override
+    public User findById(Long id) {
+        return em.find(User.class, id);
+    }
+
+    @Override
     public Optional<User> findByName(String userName) {
         List<User> query = em.createQuery("select u from User u where u.username = :username", User.class)
                 .setParameter("username", userName)
@@ -38,9 +43,22 @@ public class JpaAccountRepository implements AccountRepository {
     }
 
     @Override
-    public void changePw(String username, String encodeNewPw) {
-        Optional<User> user = findByName(username);
-        user.get().setPassword(encodeNewPw);    // 실패 , optional 값 수정하는 방법 알아봐야함
+    public void changePw(Long id, String encodeNewPw) {
+        User user = em.find(User.class, id);
+
+        user.setPassword(encodeNewPw);
+        user.setIssueYn("N");
+
+        em.persist(user);
+    }
+
+    @Override
+    public void updateTerm(Long id) {
+        User user = em.find(User.class, id);
+
+        user.setTermYn("Y");
+        user.setEnabled(false);
+
         em.persist(user);
     }
 

@@ -17,6 +17,7 @@
                 </div>
             </div>
             <form role="form">
+                <input type="hidden" id="userNo" th:value="${userNo}">
                 <div class="form-group">
                     <label for="recentPwd">현재 비밀번호</label>
                     <input type="password" class="input_row inline_div middle_row" id="recentPwd">
@@ -31,7 +32,7 @@
             </div>
             <div>
                 <button class="nm_btn center_btn" id="leaveAcnt">회원탈퇴</button>
-                <button class="nm_btn center_btn">취소</button>
+                <button class="nm_btn center_btn" onclick="history.back()">취소</button>
             </div>
         </div>
         <!-- footer -->
@@ -83,7 +84,7 @@ $(function(){
         recentPwd  = $("#recentPwd").val();
 
         // 비밀번호 미입력 시 오류를 발생시킨다.
-        if(confirmPwd.length <= 0 || recentPwd.length <= 0){
+        if(confirmPwd.length <= 0 || recentPwd.length <= 0) {
             alert("비밀번호를 다시 입력해주세요.");
             return false;
         }
@@ -94,14 +95,19 @@ $(function(){
         // 3. 정상 처리 후 로그아웃
         if(confirmMsg.length == 0){
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "/account/leaveAcnt",
                 data: {
                     "password": confirmPwd,
-                    "username": username
+                    "id": $("#userNo").val()
                 },
-                success: function (res) {
+                success: function () {
                     window.location.href = "/";
+                },
+                error: function () {
+                    alert("잘못된 비밀번호입니다.");
+                    $("#confirmPwd").empty();
+                    $("#recentPwd").empty()
                 }
             });
         }else{

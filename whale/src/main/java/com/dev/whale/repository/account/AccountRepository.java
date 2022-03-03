@@ -10,6 +10,8 @@ public interface AccountRepository {
     // 회원가입
     User join(User user);
 
+    User findById(Long id);
+
     // 사용자 조회
     Optional<User> findByName(String userName);
 
@@ -18,6 +20,8 @@ public interface AccountRepository {
     int updateUserTempPassword(String str, Long id);
 
     // 비밀번호 변경
-    void changePw(String username, String encodeNewPw);
+    void changePw(Long id, String encodeNewPw);
 
+    // 회원 탈퇴(term_yn = y)
+    void updateTerm(Long id);
 }

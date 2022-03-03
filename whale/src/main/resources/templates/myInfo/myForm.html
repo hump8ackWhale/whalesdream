@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="common/header :: mainHead"></head>
 <body style="background-color:#661BD1;">
@@ -11,17 +12,22 @@
 
         <h2>내정보</h2>
         <hr>
-        <div class="input_div">
-            <input class="input_row large_row" type="text" name="username" placeholder="아이디" th:value="${myInfo.username}" disabled> <br>
+        <div>
+            <input type="hidden" id="id" th:value="${myInfo.id}"> <br>
         </div>
         <div class="input_div">
-            <input class="input_row large_row" type="text" name="nickname" placeholder="닉네임" th:value="${myInfo.nickname}"> <br>
+            <input class="input_row large_row" type="text" style="border:0 solid black" name="username" placeholder="아이디" th:value="${myInfo.username}" disabled> <br>
         </div>
         <div class="input_div">
-            <input class="input_row large_row" type="text" name="email" placeholder="이메일" th:value="${myInfo.email}" disabled> <br>
+            <input class="input_row large_row" type="text" style="border:0 solid black" id="nickname" name="nickname" placeholder="닉네임" th:value="${myInfo.nickname}" disabled>
+            <button class="nm_btn" id="editForm">수정</button>
         </div>
-        <button class="nm_btn" th:onclick="|location.href='@{/myInfo/leaveAccount}'|">회원탈퇴</button>
+        <div class="input_div">
+            <input class="input_row large_row" type="text" style="border:0 solid black" name="email" placeholder="이메일" th:value="${myInfo.email}" disabled> <br>
+        </div>
 
+        <button class="nm_btn" id="editInfo">수정완료</button>
+        <button class="nm_btn" id="leaveAccount" th:onclick="|location.href='@{/myInfo/leaveAccount(id=${myInfo.id})}'|">회원탈퇴</button>
         <!-- footer -->
         <footer th:replace="common/footer :: footer"></footer>
 
@@ -31,5 +37,60 @@
 
 </div>
 
+<script type="text/javascript">
+
+$(function() {
+
+    $(document).ready(function(){
+        $("#editInfo").hide();
+    });
+
+    let el = $("#nickname");
+    let orgVal = el.val();
+
+    $("#editForm").click(function () {
+        el.removeAttr("style");
+        el.attr("disabled", false);
+
+        $("#editForm").hide();
+        $("#editInfo").show();
+    });
+
+    $("#editInfo").click(function () {
+        let id = $("#id").val();
+        let newVal = el.val();
+
+        if (orgVal != newVal) {
+            $.ajax({
+                type: "GET",
+                url: "/myInfo/update",
+                data: {
+                    "orgVal": orgVal,
+                    "newVal": newVal,
+                    "id": id
+                },
+                success: function () {
+                    el.attr({
+                        style: "border:0 solid black"
+                    });
+                    el.attr("disabled", true);
+
+                    $("#editForm").show();
+                    $("#editInfo").hide();
+                }
+            });
+        } else {
+            el.attr({
+                style: "border:0 solid black"
+            });
+            el.attr("disabled", true);
+
+            $("#editForm").show();
+            $("#editInfo").hide();
+        }
+    });
+});
+
+</script>
 </body>
 </html>

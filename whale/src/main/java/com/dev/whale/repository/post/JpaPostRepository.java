@@ -58,7 +58,7 @@ public class JpaPostRepository implements PostRepository {
     @Override
     public void update(Post post) {
 
-        Post findPost = findById(post.getPostNo());
+        Post findPost = em.find(Post.class, post.getPostNo());
 
         findPost.setTitle(post.getTitle());
         findPost.setContent(post.getContent());

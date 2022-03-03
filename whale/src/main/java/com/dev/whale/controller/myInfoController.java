@@ -1,17 +1,16 @@
 package com.dev.whale.controller;
 
 import com.dev.whale.domain.model.User;
-import com.dev.whale.service.AccountService;
 import com.dev.whale.service.MyInfoService;
-import com.dev.whale.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/myInfo")
@@ -26,10 +25,23 @@ public class myInfoController {
 
     @GetMapping("/myForm")
     public String myInfo(Model model) {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User myInfo = myInfoService.selectUserInfo(auth.getName());
+
         model.addAttribute("myInfo", myInfo);
+
         return "myInfo/myForm";
+    }
+
+    @GetMapping("/update")
+    public String update(Model model, String orgVal, String newVal, Long id) {
+
+        User myInfo = myInfoService.updateUserInfo(newVal, id);
+
+        model.addAttribute("myInfo", myInfo);
+
+        return "redirect:/";
     }
 
     /**
@@ -39,8 +51,11 @@ public class myInfoController {
     * @version  : 1.0.0
     * @modified :
     **/
-    @GetMapping("/leaveAccount")
-    public String leaveAccount(){
+    @RequestMapping("/leaveAccount")
+    public String leaveAccount(HttpServletRequest request, Model model) {
+        String id = request.getParameter("id");
+        model.addAttribute("userNo", id);
+
         return "myInfo/leaveAccount";
     }
 }

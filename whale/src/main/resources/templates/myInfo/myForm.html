@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="common/header :: mainHead"></head>
 <body style="background-color:#661BD1;">
@@ -10,24 +9,29 @@
     <!-- body-->
     <div class="body_wrap">
 
-        <h2>내정보</h2>
-        <hr>
-        <div>
-            <input type="hidden" id="id" th:value="${myInfo.id}"> <br>
+        <div class="find_wrap">
+            <h2>내정보</h2>
+            <hr>
+            <form th:action="@{/myInfo/dlrjanjfkrhgody}" method="get">
+                <input type="hidden" id="userNo" th:value="${userNo}">
+                <div class="input_div">
+                    <label for="userName">아이디</label>
+                    <input class="input_row inline_div middle_row" id="userName" type="text" name="username" th:value="${myInfo.username}" disabled> <br>
+                </div>
+                <div class="input_div">
+                    <label for="nickName">닉네임</label>
+                    <input class="input_row inline_div middle_row" id="nickName" type="text" name="nickname" placeholder="닉네임" th:value="${myInfo.nickname}">
+                    <button class="nm_btn" type="submit" id="modifyNickname">수정</button><br>
+                </div>
+                <div class="input_div">
+                    <label for="email">이메일</label>
+                    <input class="input_row inline_div middle_row" id="email" type="text" name="email" th:value="${myInfo.email}" disabled> <br>
+                </div>
+            </form>
+            <div style="text-align: center;">
+                <button class="nm_btn center_btn" th:onclick="|location.href='@{/myInfo/leaveAccount}'|">회원탈퇴</button>
+            </div>
         </div>
-        <div class="input_div">
-            <input class="input_row large_row" type="text" style="border:0 solid black" name="username" placeholder="아이디" th:value="${myInfo.username}" disabled> <br>
-        </div>
-        <div class="input_div">
-            <input class="input_row large_row" type="text" style="border:0 solid black" id="nickname" name="nickname" placeholder="닉네임" th:value="${myInfo.nickname}" disabled>
-            <button class="nm_btn" id="editForm">수정</button>
-        </div>
-        <div class="input_div">
-            <input class="input_row large_row" type="text" style="border:0 solid black" name="email" placeholder="이메일" th:value="${myInfo.email}" disabled> <br>
-        </div>
-
-        <button class="nm_btn" id="editInfo">수정완료</button>
-        <button class="nm_btn" id="leaveAccount" th:onclick="|location.href='@{/myInfo/leaveAccount(id=${myInfo.id})}'|">회원탈퇴</button>
         <!-- footer -->
         <footer th:replace="common/footer :: footer"></footer>
 
@@ -36,59 +40,18 @@
     </div>
 
 </div>
+<script>
+$(function(){
+    $(".modifyNickname").on("click", function(){
 
-<script type="text/javascript">
+        let nickname = $(".nickName").val(); // nickname
 
-$(function() {
-
-    $(document).ready(function(){
-        $("#editInfo").hide();
-    });
-
-    let el = $("#nickname");
-    let orgVal = el.val();
-
-    $("#editForm").click(function () {
-        el.removeAttr("style");
-        el.attr("disabled", false);
-
-        $("#editForm").hide();
-        $("#editInfo").show();
-    });
-
-    $("#editInfo").click(function () {
-        let id = $("#id").val();
-        let newVal = el.val();
-
-        if (orgVal != newVal) {
-            $.ajax({
-                type: "GET",
-                url: "/myInfo/update",
-                data: {
-                    "orgVal": orgVal,
-                    "newVal": newVal,
-                    "id": id
-                },
-                success: function () {
-                    el.attr({
-                        style: "border:0 solid black"
-                    });
-                    el.attr("disabled", true);
-
-                    $("#editForm").show();
-                    $("#editInfo").hide();
-                }
-            });
-        } else {
-            el.attr({
-                style: "border:0 solid black"
-            });
-            el.attr("disabled", true);
-
-            $("#editForm").show();
-            $("#editInfo").hide();
+        if(nickname.length <= 0){
+            alert("닉네임을 입력해주세요.");
+            return false;
         }
     });
+
 });
 
 </script>

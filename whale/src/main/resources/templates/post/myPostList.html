@@ -37,13 +37,29 @@
   <footer th:replace="common/footer :: footer"></footer>
 </div>
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
+$(function(){
+
+  /*
+  * 제목 클릭 시, 본문 내용이 보여진다.
+  * 다른 본문 내용을 클릭하는 경우 이미 열린 본문 내용을 닫는다.
+  */
   $(".que").click(function() {
-    $(this).next(".detail_wrap").stop().slideToggle(300);
-    $(this).toggleClass('on').siblings().removeClass('on');
-    $(this).next(".detail_wrap").siblings(".detail_wrap").slideUp(300); // 1개씩 펼치기
+
+    if ($(this).hasClass('on')) {
+        slideUp();
+    } else {
+        slideUp();
+        $(this).addClass('on').next().slideDown();
+    }
+
+    function slideUp() {
+        $(".que").removeClass('on').next().slideUp();
+    };
+
   });
+
+});
 </script>
 </body>
 </html>

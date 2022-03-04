@@ -30,7 +30,7 @@
             <div>
                 <span id="confirmMsg"></span>
             </div>
-            <div>
+            <div style="text-align: center;">
                 <button class="nm_btn center_btn" id="leaveAcnt">회원탈퇴</button>
                 <button class="nm_btn center_btn" onclick="history.back()">취소</button>
             </div>
@@ -42,9 +42,8 @@
     </div>
 
 </div>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
 
+<script type="text/javascript">
 $(function(){
 
     let confirmPwd =  "";
@@ -57,12 +56,12 @@ $(function(){
     function confirmFunction() {
         confirmPwd = $("#confirmPwd").val();
         recentPwd  = $("#recentPwd").val();
+        confirmMsg = "";
 
         if(confirmPwd != recentPwd){
             confirmMsg = "비밀번호가 일치하지 않습니다.";
-        }else{
-            confirmMsg = "";
         }
+
         // 일치여부 메세지를 출력한다.
         $("#confirmMsg").text(confirmMsg);
     };
@@ -79,9 +78,6 @@ $(function(){
     * 비밀번호가 일치하는 경우 회원탈퇴를 진행한다.
     */
     $("#leaveAcnt").on("click", function(){
-
-        confirmPwd = $("#confirmPwd").val();
-        recentPwd  = $("#recentPwd").val();
 
         // 비밀번호 미입력 시 오류를 발생시킨다.
         if(confirmPwd.length <= 0 || recentPwd.length <= 0) {

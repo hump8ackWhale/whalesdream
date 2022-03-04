@@ -34,6 +34,26 @@
     $("#datatable-default tbody tr").click(function(){
       location.href="detailPost?pno=" + $(this).children().eq(0).text();
     });
+
+    /*
+    * 제목 클릭 시, 본문 내용이 보여진다.
+    * 다른 본문 내용을 클릭하는 경우 이미 열린 본문 내용을 닫는다.
+    */
+    $(".que").click(function() {
+
+      if ($(this).hasClass('on')) {
+          slideUp();
+      } else {
+          slideUp();
+          $(this).addClass('on').next().slideDown();
+      }
+
+      function slideUp() {
+          $(".que").removeClass('on').next().slideUp();
+      };
+
+    });
+
   });
 </script>
 </body>

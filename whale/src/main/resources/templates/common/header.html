@@ -3,39 +3,42 @@
 <head th:fragment="mainHead">
     <link rel="stylesheet" th:href="@{/assets/common2.css}">
     <link rel="stylesheet" th:href="@{/assets/reset2.css}">
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Dream of Whale</title>
-    <style>
-    /* nav */
-      #nav {
-        position: fixed;
-        z-index: 10;
-        top : 60px;
-        right : -100%;
-        width : 75%;
-        max-width : 300px;
-        height : calc(100% - 60px);
-        padding : 50px 0;
-        transition: all 500ms ease;
-      }
-      #nav.act {
-        right : 0;
-      }
-      span {display:block;}
-    </style>
 </head>
 <body>
 <div th:fragment="headerDiv">
-    <nav th:replace="common/nav :: navigation"></nav>
+
     <!-- content -->
     <div class="totalHeader">
-        <div class="logo" style="text-align: center; margin-top:40px; margin-bottom:40px;">
+        <button type="button" data-bs-target="#offcanvasRight" aria-controls="menuBar" style="float: right; margin:5px 5px;">
+            <span class=""><img th:src="@{/assets/images/menu_bar.png}" width="30px" height="30px"></span>
+        </button>
+        <div class="logo" style="text-align: center; padding-top:40px; margin-bottom:40px;">
             <img th:src="@{/assets/images/whale_black_sprite.png}" alt="" width="50px" height="50px">
         </div>
-        <button onclick="ShowMenu();" class="" type="button" data-toggle="offcanvas" style="float: right;">
-            <span class=""><img th:src="@{/assets/images/ham.png}" width="30px" height="30px"></span>
-        </button>
     </div>
+
+    <!-- navigation -->
+    <div class="menu_bg" id="offcanvasRight" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">메뉴메뉴</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul>
+                <li><a th:href="@{/myInfo/myForm}">내정보</a></li>
+                <li><a th:href="@{/post/myPostList}">나의 올해다짐</a></li>
+                <li><a th:href="@{/post/allPostList}">모두 올해다짐</a></li>
+                <li><a th:href="@{/qna/qnaListView}">QNA</a></li>
+                <li><a th:href="@{/account/logout}">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+
 </div>
+<script>
+
+</script>
 </body>
 </html>

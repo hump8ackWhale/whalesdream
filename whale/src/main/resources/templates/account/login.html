@@ -26,15 +26,15 @@
                     <div class="input_div">
                         <input class="input_row large_row" type="password" name="password" placeholder="패스워드">
                     </div><br>
-                    <div class="input_div"><button class="login-button"type="submit">로그인하기</button></div>
+                    <div id="errorMsg" class="input_div errorMsg">
+                        <span th:if="${errorMessage}">Invalid username and password.</span>
+                    </div>
+                    <div class="input_div"><button class="login-button" id="nm_login" type="submit">로그인하기</button></div>
 <!--                    <div th:if="${not #strings.isEmpty(securityexceptionmsg)}" style="color: #c21d17">
                         <p>Invalid username and password.</p>
                         <p>${securityexceptionmsg}</p>
                     </div>-->
-                    <div class="input_div"><button class="login-button" type="submit" style="background-color : #19ce60;">네이버로하기</button></div>
-                    <div th:if="${errorMessage}" style="color: #c21d17">
-                        Invalid username and password.
-                    </div>
+                    <div class="input_div"><button class="login-button" id="naver_login" type="button" style="background-color : #19ce60;">네이버로하기</button></div>
                     <input type="hidden" name="loginRedirect" value="#{loginRedirect}">
                 </form>
             </div>
@@ -55,5 +55,36 @@
         <!-- footer -->
         <footer th:replace="common/footer :: footer"></footer>
     </div>
+
+<script type="text/javascript">
+$(function(){
+
+    let errorMsg = "";
+
+    /*
+    * 로그인 버튼 클릭 시 validation을 체크한다.
+    */
+    $("#nm_login").on("click", function(){
+
+        $("#errorMsg").empty(); // msg 초기화
+
+        let username = $('input[name=username]').val(); // 유저 ID
+        let password = $('input[name=password]').val(); // password
+
+        if(username.length <= 0){
+            errorMsg = "아이디를 입력해주세요.";
+            $("#errorMsg").text(errorMsg);
+            return false;
+        };
+
+        if(password.length <= 0){
+            errorMsg = "패스워드를 입력해주세요.";
+            $("#errorMsg").text(errorMsg);
+            return false;
+        }
+
+    });
+});
+</script>
 </body>
 </html>

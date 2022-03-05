@@ -9,20 +9,9 @@
 <body>
 <div th:fragment="headerDiv">
 
-    <!-- content -->
-    <div class="totalHeader">
-        <button type="button" data-bs-target="#offcanvasRight" aria-controls="menuBar" style="float: right; margin:5px 5px;">
-            <span class=""><img th:src="@{/assets/images/menu_bar.png}" width="30px" height="30px"></span>
-        </button>
-        <div class="logo" style="text-align: center; padding-top:40px; margin-bottom:40px;">
-            <img th:src="@{/assets/images/whale_black_sprite.png}" alt="" width="50px" height="50px">
-        </div>
-    </div>
-
-    <!-- navigation -->
-    <div class="menu_bg" id="offcanvasRight" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+    <div class="menu_bg" id="nav">
         <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">메뉴메뉴</h5>
+            <span id="offcanvasRightLabel" th:if="${session.nickname}" th:text="${session.nickname}">세션 비어있음</span>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -36,9 +25,17 @@
         </div>
     </div>
 
-</div>
-<script>
+    <!-- content -->
+    <div class="totalHeader">
+        <button type="button" id="menu_btn" style="float: right; margin:5px 5px;">
+            <span class=""><img th:src="@{/assets/images/menu_bar.png}" width="30px" height="30px"></span>
+        </button>
+        <div class="logo" style="text-align: center; padding-top:40px; margin-bottom:40px;">
+            <img th:src="@{/assets/images/whale_black_sprite.png}" alt="" width="50px" height="50px">
+        </div>
+    </div>
 
-</script>
+
+</div>
 </body>
 </html>

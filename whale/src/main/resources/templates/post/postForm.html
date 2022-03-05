@@ -3,26 +3,49 @@
 <head th:replace="common/header :: mainHead">
 </head>
 <body th:fragment="mainBody" style="background-color:#661BD1;">
-<div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
+<div class="totalWrap upload" id="totalWrap">
   <!-- header -->
   <div th:replace="common/header :: headerDiv">
   </div>
   <div class="login_wrap">
     <div class="panel_inner">
-      <form th:action="@{/post/savePost}" method="get">
+      <form th:action="@{/post/savePost}" method="GET">
         <div class="input_div">
-          <textarea name="title" id="ptitle" rows="1" cols="55" placeholder="제목" maxlength="100" required></textarea> <br>
+          <input class="input_row large_row" id="ptitle" type="text" name="ptitle" placeholder="제목" required> <br>
         </div>
         <div class="input_div">
           <textarea name="content" id="pcontent" placeholder="내용" required></textarea>
         </div><br>
         <input type="hidden" name="username">
-        <div class="input_div"><button class="login-button"type="submit" >작성 완료!</button></div>
+        <div class="input_div"><button class="login-button"type="submit" id="postBtn">작성 완료!</button></div>
       </form>
     </div>
   </div>
   <!-- footer -->
   <footer th:replace="common/footer :: footer"></footer>
+<script>
+$(function() {
+
+  /*
+  * 나의 다짐 작성 전 validation을 체크한다.
+  */
+  $("#postBtn").on("click", function() {
+    let title   = $("#ptitle").val();
+    let content = $("#pcontent").val();
+
+    if(title.length <= 5){
+      alert("제목을 5자 이상 입력해주세요");
+      return false;
+    }
+    if(content.length <= 0){
+       alert("내용을 입력해주세요");
+       return false;
+    }
+
+  });
+
+});
+</script>
 </div>
 </body>
 </html>

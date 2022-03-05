@@ -61,16 +61,6 @@ public class PostController {
         return "post/allPostList";
     }
 
-    @GetMapping("/detailPost/{pno}")
-    public String detail(@PathVariable("pno") int postNo, Model model) {
-
-        Post detailPost = postService.findById(postNo);
-
-        model.addAttribute("detailPost", detailPost);
-
-        return "post/detailPost";
-    }
-
     @GetMapping("/editPost/{pno}")
     public String edit(@PathVariable("pno") int postNo, Model model) {
 

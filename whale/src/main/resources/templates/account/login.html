@@ -38,23 +38,24 @@
                     <input type="hidden" name="loginRedirect" value="#{loginRedirect}">
                 </form>
             </div>
+            <!-- loginfooter -->
+            <ul class="etc_wrap">
+                <li>
+                    <a th:href="@{/account/findPw}">아이디/비밀번호 변경</a>
+                </li>
+                <li>
+                    <div>
+                        <a th:href="@{/account/register}">회원가입</a>
+                    </div>
+                </li>
+            </ul>
+
         </div>
 
-        <!-- loginfooter -->
-        <ul class="etc_wrap">
-            <li>
-               <a th:href="@{/account/findPw}">아이디/비밀번호 변경</a>
-            </li>
-            <li>
-                <div>
-                <a th:href="@{/account/register}">회원가입</a>
-                </div>
-            </li>
-        </ul>
+    <footer th:replace="common/footer :: footer"></footer>
 
-        <!-- footer -->
-        <footer th:replace="common/footer :: footer"></footer>
     </div>
+    <!-- footer -->
 
 <script type="text/javascript">
 $(function(){

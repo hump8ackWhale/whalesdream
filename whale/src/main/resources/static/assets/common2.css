@@ -11,6 +11,7 @@ body {
 }
 
 body {
+  //background: linear-gradient(to top, transparent, white 70%), url("images/bg.png");
   position: relative;
 }
 
@@ -45,6 +46,7 @@ a {
   right:0px;
   font-size: 14px;
   background-color: #ffc637;
+  border-left: solid 1px #eeeeee;
   color:#fff;
   margin-left: auto;
   padding:0;
@@ -94,7 +96,7 @@ a {
 
 .input_div {
     width: 100%;
-    padding:5px 20px;
+    padding:5px 20px 5px 0px;
 }
 
 .inline_div {
@@ -123,10 +125,6 @@ ul {
 ul>li {
     font-size : 14px;
     padding:7px 0px;
-}
-
-ul>li>a {
-    color:#fff;
 }
 
 /* login_findIdRegister */
@@ -212,6 +210,13 @@ ul>li>a {
 
 .errorMsg {
     color: #c21d17;
+}
+
+#footer {
+    position : fixed;
+    bottom: 0px;
+    width: 100%;
+    max-width: 72rem;
 }
 
 /*subindex 끝*/

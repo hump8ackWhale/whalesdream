@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -26,8 +27,6 @@ public class AccountService {
 
     @Autowired
     private JavaMailSender mailSender;
-
-    private static final String FROM_ADDRESS = "이메일 주소를 입력하세요.";
 
     // 회원 가입
     public void join(User user) {
@@ -52,9 +51,34 @@ public class AccountService {
                 });
     }
 
-    // 해당 파라미터의 사용자가 있는지 CHECK
-    public boolean userNameCheck(String userEmail, String userName) {
-        Optional<User> user = accountRepository.findByName(userName);
+    // 해당 userEmail의 사용자가 있는지 CHECK
+    public Boolean findByEmail(String userEmail) {
+        Optional<User> user = accountRepository.findByEmail(userEmail);
+
+        if (user.isPresent()) {
+            MailVO mail = usernameMail(user);
+            mailSend(mail);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // 메일 내용 세팅
+    public MailVO usernameMail(Optional<User> user) {
+        MailVO mail = new MailVO();
+
+        mail.setAddress(user.get().getEmail());
+        mail.setTitle("Whale Of Dream 계정 안내 이메일 입니다.");
+        mail.setMessage("안녕하세요. Whale Of Dream 아이디 안내 관련 이메일 입니다.\n"
+                + "가입하신 계정의 아이디는 " + user.get().getUsername() + " 입니다.");
+
+        return mail;
+    }
+
+    // 해당 userEmail, userName의 사용자가 있는지 CHECK
+    public boolean usernameCheck(String userEmail, String username) {
+        Optional<User> user = accountRepository.findByName(username);
 
         if (user.isPresent() && user.get().getEmail().equals(userEmail)) {
             return true;
@@ -69,8 +93,8 @@ public class AccountService {
         MailVO mail = new MailVO();
 
         mail.setAddress(userEmail);
-        mail.setTitle(userName + "님의 Whale Of Dream 임시 비밀번호 안내 이메일 입니다.");
-        mail.setMessage("안녕하세요. Whale Of Dream 임시 비밀번호 안내 관련 이메일 입니다."
+        mail.setTitle(userName + "님의 Whale Of Dream 계정 비밀번호 안내 이메일 입니다.");
+        mail.setMessage("안녕하세요. Whale Of Dream 임시 비밀번호 안내 관련 이메일 입니다.\n"
                         + "[" +userName + "]" +"님의 임시 비밀번호는 " + str + " 입니다.");
 
         updateTempPassword(str, userName);

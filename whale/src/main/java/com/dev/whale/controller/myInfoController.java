@@ -35,7 +35,7 @@ public class myInfoController {
     }
 
     @GetMapping("/update")
-    public String update(Model model, String orgVal, String newVal, Long id) {
+    public String update(Model model, String newVal, Long id) {
 
         User myInfo = myInfoService.updateUserInfo(newVal, id);
 
@@ -53,7 +53,9 @@ public class myInfoController {
     **/
     @RequestMapping("/leaveAccount")
     public String leaveAccount(HttpServletRequest request, Model model) {
+
         String id = request.getParameter("id");
+
         model.addAttribute("userNo", id);
 
         return "myInfo/leaveAccount";

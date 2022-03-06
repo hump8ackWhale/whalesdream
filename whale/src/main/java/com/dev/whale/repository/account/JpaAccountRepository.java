@@ -15,9 +15,21 @@ public class JpaAccountRepository implements AccountRepository {
     }
 
     @Override
-    public User join(User user) {
-        em.persist(user);
-        return user;
+    public Optional<User> findByName(String username) {
+        List<User> query = em.createQuery("select u from User u where u.username = :username and u.enabled = true", User.class)
+                .setParameter("username", username)
+                .getResultList();
+
+        return query.stream().findAny();
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        List<User> query = em.createQuery("select u from User u where u.email = :email and u.enabled = true")
+                .setParameter("email", email)
+                .getResultList();
+
+        return query.stream().findAny();
     }
 
     @Override
@@ -26,12 +38,9 @@ public class JpaAccountRepository implements AccountRepository {
     }
 
     @Override
-    public Optional<User> findByName(String userName) {
-        List<User> query = em.createQuery("select u from User u where u.username = :username", User.class)
-                .setParameter("username", userName)
-                .getResultList();
-
-        return query.stream().findAny();    // 일치하는 값 1개 return
+    public User join(User user) {
+        em.persist(user);
+        return user;
     }
 
     @Override

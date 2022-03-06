@@ -54,18 +54,22 @@ public class AccountController {
     }
 
     @GetMapping("/check/findUsername")
-    public @ResponseBody String findByEmail(String userEmail) {
-        accountService.findByEmail(userEmail);
+    public @ResponseBody Map<String, Boolean> findByEmail(String userEmail) {
+        Map<String, Boolean> map = new HashMap<>();
 
-        return "index";
+        boolean findName = accountService.findByEmail(userEmail);
+
+        map.put("check", findName);
+        return map;
     }
 
     @GetMapping("/check/findPw")
     public @ResponseBody Map<String, Boolean> findPw(String userEmail, String userName) {
         Map<String, Boolean> map = new HashMap<>();
-        boolean findCheck = accountService.usernameCheck(userEmail, userName);
 
-        map.put("check", findCheck);
+        boolean findPw = accountService.usernameCheck(userEmail, userName);
+
+        map.put("check", findPw);
         return map;
     }
 

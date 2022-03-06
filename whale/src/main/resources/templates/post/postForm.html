@@ -8,17 +8,20 @@
   <div th:replace="common/header :: headerDiv">
   </div>
   <div class="login_wrap">
-    <div class="panel_inner">
-      <form th:action="@{/post/savePost}" method="GET">
-        <div class="input_div">
-          <input class="input_row large_row" id="ptitle" type="text" name="ptitle" placeholder="제목" required> <br>
-        </div>
-        <div class="input_div">
-          <textarea name="content" id="pcontent" placeholder="내용" required></textarea>
-        </div><br>
-        <input type="hidden" name="username">
-        <div class="input_div"><button class="login-button"type="submit" id="postBtn">작성 완료!</button></div>
-      </form>
+
+    <div id="list_wrap">
+      <div class="panel_inner">
+        <form th:action="@{/post/savePost}" method="GET">
+          <div class="input_div">
+            <input class="input_row large_row" id="ptitle" type="text" name="ptitle" placeholder="제목" required> <br>
+          </div>
+          <div class="input_div">
+            <textarea name="content" id="pcontent" placeholder="내용" required></textarea>
+          </div><br>
+          <input type="hidden" name="username">
+          <div class="input_div"><button class="login-button"type="submit" id="postBtn">작성 완료!</button></div>
+        </form>
+      </div>
     </div>
   </div>
   <!-- footer -->

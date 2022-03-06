@@ -8,8 +8,14 @@
   <div th:replace="common/header :: headerDiv">
   </div>
   <div class="body_wrap">
-    <div class="Accordion_wrap"  th:each="allPost : ${allPostList}" th:if="${not #strings.isEmpty(allPostList)}">
-      <div id="list_wrap">
+
+    <!-- btn div -->
+    <div class="panel_btn"></div>
+
+    <!-- content start-->
+    <div id="list_wrap">
+      <div class="Accordion_wrap"  th:each="allPost : ${allPostList}" th:if="${not #strings.isEmpty(allPostList)}">
+
         <div style="float:left; width:15%; border-right: 1px solid #dddddd; margin:0px 15px;">
           <span th:text="${#temporals.format(allPost.createdDate, 'yyyy-MM-dd')}"></span>
         </div>
@@ -20,11 +26,13 @@
           <span th:text="${allPost.content}"></span>
         </div>
       </div>
-    </div>
-    <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(allPostList)}">
-      <span style="text-align:center;">조회된 데이터가 없습니다.</span>
-    </div>
-  </div>
+
+      <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(allPostList)}">
+        <span style="text-align:center;">조회된 데이터가 없습니다.</span>
+      </div>
+
+   <!-- content end-->
+   </div>
 
   <!-- footer -->
   <footer th:replace="common/footer :: footer"></footer>

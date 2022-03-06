@@ -10,12 +10,15 @@
   <!-- body-->
   <div class="body_wrap">
 
+    <!-- btn div -->
     <div class="panel_btn">
       <button class="nm_btn" style="float:right;" th:onclick="|location.href='@{/post/postForm}'|">작성하기</button>
     </div>
 
-    <div class="Accordion_wrap"  th:each="myPost : ${myPostList}" th:if="${not #strings.isEmpty(myPostList)}">
-      <div id="list_wrap">
+    <!-- content start-->
+    <div id="list_wrap">
+
+      <div class="Accordion_wrap"  th:each="myPost : ${myPostList}" th:if="${not #strings.isEmpty(myPostList)}">
         <div style="float:left; width:15%; border-right: 1px solid #dddddd; margin:0px 15px;">
           <span th:text="${#temporals.format(myPost.createdDate, 'yyyy-MM-dd')}"></span>
         </div>
@@ -26,9 +29,11 @@
           <span th:text="${myPost.content}"></span>
         </div>
       </div>
-    </div>
-    <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(myPostList)}">
-      <span style="text-align:center;">조회된 데이터가 없습니다.</span>
+
+      <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(myPostList)}">
+        <span style="text-align:center;">조회된 데이터가 없습니다.</span>
+      </div>
+    <!-- content end-->
     </div>
 
   </div>

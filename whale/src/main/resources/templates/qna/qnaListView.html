@@ -5,36 +5,36 @@
 <body th:fragment="mainBody" style="background-color:#661BD1;">
     <div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
         <!-- header -->
-        <div th:replace="common/header :: headerDiv">
-        </div>
-        <table class="table" id="datatable-default" style="cursor:pointer;">
-            <thead>
-            <tr>
-                <th>글번호</th>
-                <th>카테고리</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div th:replace="common/header :: headerDiv"></div>
+
+        <!-- content start-->
+        <div id="list_wrap">
+            <table class="table" id="datatable-default" style="cursor:pointer;">
+                <thead>
                 <tr>
-                    <td>테스트</td>
-                    <td>1</td>
-                    <td>제목 하드코딩</td>
-                    <td>김왜일</td>
-                    <td>2022-02-23</td>
+                    <th>글번호</th>
+                    <th>카테고리</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
                 </tr>
-<!--                <tr th:replace="qna : ${qnaList}">
-                    <td th:text="${qna.qna_no}"></td>
-                    <td th:text="${qna.category_name}"></td>
-                    <td th:text="${qna.title}"></td>
-                    <td th:text="${qna.user_name}"></td>
-                    <td th:text="${qna.created_date}"></td>
-                </tr>-->
-            </tbody>
-        </table>
-        <button type="button" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">글쓰기</button>
+                </thead>
+                <tbody>
+                   <tr th:if="${not #strings.isEmpty(qnaList)}" th:each="qna : ${qnaList}">
+                        <td th:text="${qna.qna_no}"></td>
+                        <td th:text="${qna.category_name}"></td>
+                        <td th:text="${qna.title}"></td>
+                        <td th:text="${qna.user_name}"></td>
+                        <td th:text="${qna.created_date}"></td>
+                    </tr>
+                    <tr th:unless="${not #strings.isEmpty(qnaList)}">
+                        조회된 데이터가 없습니다.
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">글쓰기</button>
+        </div>
+
         <!-- footer -->
         <footer th:replace="common/footer :: footer"></footer>
     </div>

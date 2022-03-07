@@ -3,6 +3,7 @@ package com.dev.whale.repository.qna;
 import com.dev.whale.domain.model.Qna;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class JpaQnaRepository implements QnaRepository {
 
@@ -14,5 +15,18 @@ public class JpaQnaRepository implements QnaRepository {
 
     @Override
     public void insertQna(Qna qna) { em.persist(qna);}
+
+    @Override
+    public List<Qna> selectMyQnaList(String usernameParam) {
+
+        String query = "select q from Qna q where q.username = :usernameParam " +
+                "order by q.createdDate desc";
+
+        List<Qna> myQna = em.createQuery(query)
+                .setParameter("usernameParam", usernameParam)
+                .getResultList();
+
+        return myQna;
+    }
 
 }

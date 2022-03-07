@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="common/header :: mainHead">
+</head>
+<body th:fragment="mainBody" style="background-color:#661BD1;">
+<div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
+    <!-- header -->
+    <div th:replace="common/header :: headerDiv"></div>
+    <!-- content start-->
+    <div id="list_wrap">
+
+    </div>
+    <button type="button" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">수정하기</button>
+    <!-- footer -->
+    <footer th:replace="common/footer :: footer"></footer>
+</div>
+
+</body>
+</html>

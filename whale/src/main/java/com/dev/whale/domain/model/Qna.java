@@ -36,6 +36,10 @@ public class Qna extends BaseTimeEntity {
     @NotNull
     private int categoryNo;
 
+    @Column(name = "CATEGORY_NAME")
+    @NotNull
+    private String category_name;
+
     @Column(name = "TITLE", length = 500)
     @NotNull
     @NotBlank(message = "제목을 입력해주세요.")
@@ -53,4 +57,9 @@ public class Qna extends BaseTimeEntity {
     @Column(name = "STATUS")
     @NotNull
     private String status;
+
+    @Column(name = "REPLY_YN")
+    @NotNull
+    private String reply_yn;
+
 }

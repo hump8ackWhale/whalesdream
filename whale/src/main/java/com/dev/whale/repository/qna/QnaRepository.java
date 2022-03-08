@@ -9,4 +9,6 @@ public interface QnaRepository {
 
     // 나의 QNA 리스트 조회
     List<Qna> selectMyQnaList(String usernameParam);
+
+    Qna selectMyQnaDetailView(Integer nno);
 }

@@ -6,11 +6,24 @@
 <div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
     <!-- header -->
     <div th:replace="common/header :: headerDiv"></div>
+
     <!-- content start-->
     <div id="list_wrap">
-
+        <div class="input_row"><span th:text="${qnaDetail.title}"></span></div>
+        <div class="input_row"><span th:text="${qnaDetail.category_name}"></span></div>
+        <div class="content">
+            <p name="content" th:text="${qnaDetail.content}" placeholder="내용" required></p>
+        </div>
     </div>
     <button type="button" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">수정하기</button>
+    <div>
+        <!-- admin 이름-->
+        <div></div>
+        <!-- admin 댓글-->
+        <div><textarea cols="150" rows="10" name="comment" style="resize:none"></textarea></div>
+        <!-- 답변달기 -->
+        <button></button>
+    </div>
     <!-- footer -->
     <footer th:replace="common/footer :: footer"></footer>
 </div>

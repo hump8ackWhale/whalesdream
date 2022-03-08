@@ -1,6 +1,7 @@
 package com.dev.whale.repository.qna;
 
 import com.dev.whale.domain.model.Qna;
+import com.dev.whale.domain.model.User;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -19,14 +20,27 @@ public class JpaQnaRepository implements QnaRepository {
     @Override
     public List<Qna> selectMyQnaList(String usernameParam) {
 
-        String query = "select q from Qna q where q.username = :usernameParam " +
-                "order by q.createdDate desc";
+        String query = "select q, c.category_name, " +
+                       "       decode((select count(*) from Reply r where q.qna_no = r.qna_no), 0, 'N', 'Y') as reply_yn " +
+                       "from   Qna q, Category c" +
+                       "where  q.username = :usernameParam " +
+                       "and    q.category_no = c.category_no" +
+                       "order  by q.createdDate desc";
 
         List<Qna> myQna = em.createQuery(query)
                 .setParameter("usernameParam", usernameParam)
                 .getResultList();
 
         return myQna;
+    }
+
+    @Override
+    public Qna selectMyQnaDetailView(Integer nno) {
+
+        return em.createQuery("select q, c.category_name from Qna q, Category c where q.qna_no = :nno and q.category_no = c.category_no", Qna.class)
+                .setParameter("nno", nno)
+                .getSingleResult();
+
     }
 
 }

@@ -96,6 +96,11 @@ a {
 
 .input_div {
     width: 100%;
+    padding:5px 20px;
+}
+
+.register_div {
+    width: 100%;
     padding:5px 20px 5px 0px;
 }
 

@@ -32,4 +32,14 @@ public class QnaController {
 
         return "qna/qnaListView";
     }
+
+    @GetMapping("/qnaDetailView")
+    public String qnaListView(Model model, Integer nno){
+
+        Qna qnaDetail = QnaService.selectMyQnaDetailView(nno);
+
+        model.addAttribute("qnaDetail", qnaDetail);
+
+        return "qna/qnaDetailView";
+    }
 }

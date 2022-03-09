@@ -52,11 +52,21 @@ public class JpaQnaRepository implements QnaRepository {
     @Override
     public Qna selectMyQnaDetailView(Integer nno) {
 
-       // return em.createQuery("select q, c.category_name from Qna q, Category c where q.qna_no = :nno and q.category_no = c.category_no", Qna.class)
-          return em.createQuery("select q from Qna q where q.qnaNo = :nno", Qna.class)
-                .setParameter("nno", nno)
-                .getSingleResult();
+        String query = "select q, c.categoryName " +
+                "from  Qna q, Category c "         +
+                "where q.qnaNo = :nno "            +
+                "and   q.categoryNo = c.categoryNo";
 
+        List<Object[]> myQna = em.createQuery(query)
+                .setParameter("nno", nno)
+                .getResultList();
+
+        Qna qnaObject = new Qna(); // 하 모르겠다 왜 안 됨
+        for (Object[] resultRecord : myQna) {
+            qnaObject           = (Qna) resultRecord[0];
+            qnaObject.setCategoryName((String) resultRecord[1]);
+        }
+        return qnaObject;
     }
 
     @Override

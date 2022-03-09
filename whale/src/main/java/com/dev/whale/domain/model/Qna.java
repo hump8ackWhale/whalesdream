@@ -3,13 +3,9 @@ package com.dev.whale.domain.model;
 import com.dev.whale.BaseTimeEntity;
 import com.sun.istack.NotNull;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
 
 @Data
 @Entity
@@ -35,11 +31,7 @@ public class Qna extends BaseTimeEntity {
     @Column(name = "CATEGORY_NO")
     @NotNull
     private int categoryNo;
-
-    @Column(name = "CATEGORY_NAME")
-    @NotNull
-    private String category_name;
-
+    
     @Column(name = "TITLE", length = 500)
     @NotNull
     @NotBlank(message = "제목을 입력해주세요.")
@@ -58,8 +50,7 @@ public class Qna extends BaseTimeEntity {
     @NotNull
     private String status;
 
-    @Column(name = "REPLY_YN")
-    @NotNull
-    private String reply_yn;
+    @Transient
+    private String categoryName;
 
 }

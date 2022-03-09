@@ -27,7 +27,7 @@ public class QnaServiceIntegrationTest {
         qna.setCategoryNo(1);
         qna.setTitle("Q&A TITLE TEST");
         qna.setContent("TEST Q&A");
-        qnaService.interQna(qna);
+        qnaService.insertQna(qna);
 
         System.out.print("작성일 : " + qna.getCreatedDate());
     }

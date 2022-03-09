@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="common/header :: mainHead">
+</head>
+<body th:fragment="mainBody" style="background-color:#661BD1;">
+<div class="totalWrap upload" id="totalWrap">
+  <!-- header -->
+  <div th:replace="common/header :: headerDiv">
+  </div>
+  <div class="body_wrap">
+
+    <div id="list_wrap">
+      <div class="panel_inner">
+        <form th:action="@{/qna/insertQna}" method="GET">
+          <input type="hidden" id="id" name="username" th:value="${#authentication.name}" >
+          <div class="input_div">
+            <input class="input_row large_row" id="qna_title" type="text" name="title" placeholder="제목" required> <br>
+          </div>
+          <div class="input_div">
+            <select th:name="category">
+              <option value="선택">선택</option>
+              <option th:each="category : ${categoryList}" th:value="${category.categoryNo}" th:utext="${category.categoryName}"></option>
+            </select>
+          </div>
+          <div class="input_div">
+            <textarea name="content" id="qna_content" placeholder="내용" required></textarea>
+          </div><br>
+          <div class="input_div"><button class="login-button"type="submit" id="postBtn">작성하기</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- footer -->
+  <footer th:replace="common/footer :: footer"></footer>
+  <script>
+  </script>
+</div>
+</body>
+</html>

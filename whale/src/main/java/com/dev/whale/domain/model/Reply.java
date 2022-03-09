@@ -29,6 +29,10 @@ public class Reply extends BaseTimeEntity {
     @NotNull
     private int qnaNo;
 
+    @Column(name = "USERNAME")
+    @NotNull
+    private String username;
+
     @Column(name = "CONTENT", length = 5000)
     @NotNull
     @NotBlank(message = "내용을 입력해주세요.")

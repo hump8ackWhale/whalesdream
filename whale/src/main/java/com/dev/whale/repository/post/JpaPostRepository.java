@@ -1,6 +1,8 @@
 package com.dev.whale.repository.post;
 
 import com.dev.whale.domain.model.Post;
+import com.dev.whale.domain.model.User;
+import org.springframework.data.domain.PageRequest;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
@@ -20,34 +22,44 @@ public class JpaPostRepository implements PostRepository {
     }
 
     @Override
-    public List<Post> selectMyPostList(String usernameParam) {
+    public List<Post> selectMyPostList(int lastPostId, PageRequest pageRequest, User user) {
         LocalDateTime date = LocalDateTime.now();
         String query = "select p from Post p where (p.createdDate <= :date and :date < p.endDate) " +
-                          "or YEAR(p.createdDate) < YEAR(:date) " +
-                           "and p.username = :usernameParam " +
-                     "order by p.createdDate desc";
+                           "or YEAR(p.createdDate) < YEAR(:date) " +
+                        "and p.postNo = :lastPostId " +
+                        "and p.username = :username " +
+                    "order by p.createdDate desc";
 
-        List<Post> myPost = em.createQuery(query)
-                .setParameter("usernameParam", usernameParam)
+        List<Post> postList = em.createQuery(query)
+                .setFirstResult(pageRequest.getPageNumber())
+                .setMaxResults(pageRequest.getPageSize())
+                .setParameter("lastPostId", lastPostId)
+                .setParameter("username", user.getUsername())
                 .setParameter("date", date)
                 .getResultList();
 
-        return myPost;
+        return postList;
     }
 
     @Override
-    public List<Post> selectAllPostList() {
+    public List<Post> selectAllPostList(int lastPostId, PageRequest pageRequest) {
         LocalDateTime date = LocalDateTime.now();
-        String query = "select p from Post p where (p.createdDate <= :date and :date < p.endDate) " +
+        String query = "select p from Post p join User u " +
+                        "on u.username = p.username " +
+                        "where u.enabled = true " +
+                        "and (p.createdDate <= :date and :date < p.endDate) " +
                           "and (p.lockYn = 'N') " +
                            "or (YEAR(p.createdDate) < YEAR(:date)) " +
                      "order by p.createdDate desc";
 
-        List<Post> allPost = em.createQuery(query)
+        List<Post> allPostList = em.createQuery(query)
+                .setFirstResult(pageRequest.getPageNumber())
+                .setMaxResults(pageRequest.getPageSize())
+                .setParameter("lastPostId", lastPostId)
                 .setParameter("date", date)
                 .getResultList();
 
-        return allPost;
+        return allPostList;
     }
 
     @Override

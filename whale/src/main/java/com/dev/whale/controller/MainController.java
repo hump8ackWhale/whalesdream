@@ -1,6 +1,7 @@
 package com.dev.whale.controller;
 
 import com.dev.whale.domain.model.Post;
+import com.dev.whale.service.AccountService;
 import com.dev.whale.service.MainService;
 import com.dev.whale.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,13 @@ public class MainController {
 
     private final PostService postService;
 
+    private final AccountService accountService;
+
     @Autowired
-    public MainController(MainService mainService, PostService postService) {
+    public MainController(MainService mainService, PostService postService, AccountService accountService) {
         this.mainService = mainService;
         this.postService = postService;
+        this.accountService = accountService;
     }
 
     @GetMapping("/main")
@@ -33,7 +37,9 @@ public class MainController {
 
         if (userDetails != null) {
 
-            List<Post> myPostList = postService.selectMyPostList(userDetails.getUsername());
+            int lastPostId = 41;
+            int size = 2;
+            List<Post> myPostList = postService.selectMyPostList(lastPostId, size, 41L);
 
             if (myPostList.size() > 0) {
                 model.addAttribute("myPostList", myPostList);

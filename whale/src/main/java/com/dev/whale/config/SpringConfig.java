@@ -47,7 +47,7 @@ public class SpringConfig {
 
     @Bean
     public PostService postService() {
-        return new PostService(postRepository());
+        return new PostService(postRepository(), accountRepository());
     }
 
     @Bean

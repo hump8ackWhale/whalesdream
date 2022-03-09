@@ -51,18 +51,18 @@ public class PostServiceIntegrationTest {
     @Test
     public void selectMyPost() {
 
-        List<Post> myPost = postService.selectMyPostList("mjyeo");
+        //List<Post> myPost = postService.selectMyPostList("mjyeo");
 
-        System.out.println("나의 올해다짐 리스트 :: " + myPost);
-        System.out.println("나의 올해다짐 리스트 개수 :: " + myPost.size());
+ /*       System.out.println("나의 올해다짐 리스트 :: " + myPost);
+        System.out.println("나의 올해다짐 리스트 개수 :: " + myPost.size());*/
     }
 
     @Test
     public void selectAllPost() {
 
-        List<Post> allPost = postService.selectAllPostList();
+/*        List<Post> allPost = postService.selectAllPostList();
 
-        System.out.println("올해다짐 리스트 :: " + allPost);
+        System.out.println("올해다짐 리스트 :: " + allPost);*/
     }
 
     @Test

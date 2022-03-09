@@ -8,9 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @Controller
@@ -30,17 +29,16 @@ public class PostController {
     }
 
     @GetMapping("/savePost")
-    public String save(Post post, HttpServletRequest request, HttpServletResponse response) {
-        post.setUsername("mjyeo");  // usernameParam하드코딩
+    public String save(@RequestParam Post post) {
         postService.save(post);
 
         return "redirect:/post/myPostList";
     }
 
     @GetMapping("/myPostList")
-    public String myPostList(Model model, String usernameParam, HttpServletRequest request, HttpServletResponse response) {
+    public String myPostPagingList(Model model, @RequestParam int lastPostId, @RequestParam int size, @RequestParam Long userId) {
 
-        List<Post> myPostList = postService.selectMyPostList(usernameParam);
+        List<Post> myPostList = postService.selectMyPostList(lastPostId, size, userId);
 
         if (myPostList.size() > 0) {
             model.addAttribute("myPostList", myPostList);
@@ -50,9 +48,9 @@ public class PostController {
     }
 
     @GetMapping("/allPostList")
-    public String allPostList(Model model) {
+    public String allPostList(Model model, @RequestParam int lastPostId, @RequestParam int size) {
 
-        List<Post> allPostList = postService.selectAllPostList();
+        List<Post> allPostList = postService.selectAllPostList(lastPostId, size);
 
         if (allPostList.size() > 0) {
             model.addAttribute("allPostList", allPostList);

@@ -4,14 +4,14 @@ import com.dev.whale.BaseTimeEntity;
 import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 import lombok.Data;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @Entity
@@ -31,8 +31,8 @@ public class Post extends BaseTimeEntity {
     @Column(name = "POST_NO", updatable = false)
     private int postNo;
 
-    @Column(name = "USERNAME", updatable = false)
-    @NotNull
+    @Column(name = "USERNAME")
+    @Nullable
     private String username;
 
     @Column(name = "TITLE", length = 500)
@@ -65,6 +65,12 @@ public class Post extends BaseTimeEntity {
     @PreRemove
     public void deletePost() {
         this.status = "D";
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder
+                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

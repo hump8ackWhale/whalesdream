@@ -1,7 +1,6 @@
 package com.dev.whale.domain.model;
 
 import com.dev.whale.BaseTimeEntity;
-import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,6 +8,9 @@ import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 @Data
 @Entity
@@ -51,4 +53,11 @@ public class User extends BaseTimeEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return ToStringBuilder
+                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
 }

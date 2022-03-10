@@ -42,10 +42,12 @@ public class AccountController {
         return "index";
     }
 
-    @GetMapping("/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response) {
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder
                 .getContext().getAuthentication());
+
+        return "index";
     }
 
     @GetMapping("/findPw")

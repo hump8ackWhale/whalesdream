@@ -66,8 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll() // 로그인페이지는 모두 접근 가능
                     .and()
                 .logout()
-                    //.logoutUrl("/account/logout")
-                    //.logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소
+                    .logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소
                     .invalidateHttpSession(true)  // 세션 날리기
                     .deleteCookies("JSESSIONID")
                     .permitAll();

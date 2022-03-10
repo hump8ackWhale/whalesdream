@@ -7,9 +7,6 @@
     <!-- header -->
     <div th:replace="common/header :: headerDiv">
     </div>
-    <form th:action="@{/account/logout}" method="POST">
-        <input type="submit" value="Logout"/>
-    </form>
     <div class="Accordion_wrap" th:if="${not #strings.isEmpty(myPostList)}" th:each="myPost : ${myPostList}">
         <div id="list_wrap">
             <div style="float:left; width:15%; border-right: 1px solid #dddddd; margin:0px 15px;">
@@ -26,7 +23,6 @@
     <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(myPostList)}">
         <span style="text-align:center;">조회된 데이터가 없습니다.</span>
     </div>
-    <a th:href="@{/myInfo/myForm}">내정보</a><!--테스트용 지워야함 -->
     <!-- footer -->
     <footer th:replace="common/footer :: footer"></footer>
 </div>

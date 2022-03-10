@@ -28,7 +28,10 @@
                 <li><a th:href="@{/post/allPostList}">모두 올해다짐</a></li>
                 <li><a th:href="@{/qna/qnaListView}">QNA</a></li>
                 <li></li>
-                <li><a th:href="@{/account/logout}">로그아웃</a></li>
+                <li><a th:href="@{/account/logout}">로그아웃</a></li> <!-- 원래 소스 -->
+                <form th:action="@{/account/logout}" method="POST"> <!-- 추가 소스 -->
+                    <input type="submit" value="로그아웃"/>
+                </form> <!-- a 태그처럼,,, -->
             </ul>
         </div>
     </div>

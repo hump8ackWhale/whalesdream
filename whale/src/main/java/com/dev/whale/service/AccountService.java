@@ -36,9 +36,10 @@ public class AccountService {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
-        Role role = new Role();
+        /*Role role = new Role();
         role.setId(1L);
         user.getRoles().add(role);
+*/
 
         accountRepository.join(user);
     }

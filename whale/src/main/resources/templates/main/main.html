@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/header :: mainHead">
 </head>
 <body th:fragment="mainBody" style="background-color:#661BD1;">
@@ -23,6 +24,10 @@
     <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(myPostList)}">
         <span style="text-align:center;">조회된 데이터가 없습니다.</span>
     </div>
+    <b>Authenticated user role:</b>
+    <div sec:authentication="principal.role.roleId"></div><!--role_id-->
+    <div sec:authentication="principal.role.role"></div><!--role_name-->
+
     <!-- footer -->
     <footer th:replace="common/footer :: footer"></footer>
 </div>

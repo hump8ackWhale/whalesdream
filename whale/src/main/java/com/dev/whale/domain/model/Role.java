@@ -1,28 +1,24 @@
 package com.dev.whale.domain.model;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import java.util.Date;
-import java.util.List;
 
-@Data
+@Getter
 @Entity
 @Table(name = "TB_ROLE")
 public class Role {
 
     @Id
-    @Column(name = "ID", updatable = false)
+    @Column(name = "ROLE_ID", updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int roleId;
 
-    @Column(name = "NAME", length = 50)
+    @Column(name = "ROLE", length = 50)
     @NotNull
-    private String name;
+    private String role;
 
-    @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+/*    @ManyToMany(mappedBy = "roles")
+    private List<User> users;*/
 }

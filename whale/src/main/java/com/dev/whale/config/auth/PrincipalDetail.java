@@ -1,5 +1,6 @@
 package com.dev.whale.config.auth;
 
+import com.dev.whale.domain.model.Role;
 import com.dev.whale.domain.model.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -59,5 +60,9 @@ public class PrincipalDetail implements UserDetails {
             return "ROLE_USER";
         });
         return collectors;
+    }
+
+    public Role getRole() {
+        return user.getRole();
     }
 }

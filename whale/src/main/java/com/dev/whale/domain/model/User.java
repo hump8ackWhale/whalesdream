@@ -5,9 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -47,12 +45,16 @@ public class User extends BaseTimeEntity {
     @Column(name = "ISSUE_YN")
     private String issueYn = "N";
 
-    @ManyToMany
+    @ManyToOne
+    @JoinColumn(name = "ROLE_ID")
+    private Role role;
+
+/*    @ManyToMany
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>();*/
 
     @Override
     public String toString() {

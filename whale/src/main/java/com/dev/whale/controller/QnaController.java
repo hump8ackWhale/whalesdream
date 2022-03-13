@@ -2,6 +2,7 @@ package com.dev.whale.controller;
 
 import com.dev.whale.domain.model.Category;
 import com.dev.whale.domain.model.Qna;
+import com.dev.whale.domain.model.Reply;
 import com.dev.whale.service.QnaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -24,9 +26,7 @@ public class QnaController {
     }
 
     @GetMapping("/qnaListView")
-    public String qnaListView(Model model, @RequestParam String username){
-
-        System.out.println(username);
+    public String qnaListView(@RequestParam String username, Model model){
 
         List<Qna> qnaList = QnaService.selectMyQnaList(username);
 
@@ -44,8 +44,10 @@ public class QnaController {
 
         Qna qnaDetail = QnaService.selectMyQnaDetailView(nno);
 
-        model.addAttribute("qnaDetail", qnaDetail);
+        List<Reply> replyList = QnaService.selectQnaReply(nno);
 
+        model.addAttribute("replyList", replyList);
+        model.addAttribute("qnaDetail", qnaDetail);
 
         return "qna/qnaDetailView";
     }
@@ -61,10 +63,21 @@ public class QnaController {
     }
 
     @GetMapping("/insertQna")
-    public String insertQna(Qna qna){
+    public String insertQna(RedirectAttributes redirect, Qna qna){
 
         QnaService.insertQna(qna);
 
+        redirect.addAttribute("username", qna.getUsername());
         return "redirect:/qna/qnaListView";
+    }
+
+    @GetMapping("/insertReply")
+    public String insertReply(RedirectAttributes redirect, Reply reply){
+
+        System.out.println(reply);
+        QnaService.insertReply(reply);
+
+        redirect.addAttribute("nno", reply.getQnaNo());
+        return "redirect:/qna/qnaDetailView";
     }
 }

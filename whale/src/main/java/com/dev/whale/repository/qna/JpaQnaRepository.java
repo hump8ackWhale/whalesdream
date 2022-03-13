@@ -2,6 +2,7 @@ package com.dev.whale.repository.qna;
 
 import com.dev.whale.domain.model.Category;
 import com.dev.whale.domain.model.Qna;
+import com.dev.whale.domain.model.Reply;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ public class JpaQnaRepository implements QnaRepository {
 
     @Override
     public void insertQna(Qna qna) { em.persist(qna);}
+
+    @Override
+    public void insertReply(Reply reply) { em.persist(reply);}
 
     @Override
     public List<Qna> selectMyQnaList(String usernameParam) {
@@ -77,6 +81,20 @@ public class JpaQnaRepository implements QnaRepository {
         List<Category> category = em.createQuery(query).getResultList();
 
         return category;
+    }
+
+    @Override
+    public List<Reply> selectQnaReply(Integer nno) {
+
+        String query = "select r from Reply r " +
+                       "where r.qnaNo = :nno " +
+                       "and   r.status = 'I' ";
+
+        List<Reply> Reply = em.createQuery(query)
+                            .setParameter("nno", nno)
+                            .getResultList();
+
+        return Reply;
     }
 
 }

@@ -17,15 +17,15 @@
             <input class="input_row large_row" id="qna_title" type="text" name="title" placeholder="제목" required> <br>
           </div>
           <div class="input_div">
-            <select th:name="category">
+            <select th:name="categoryNo">
               <option value="선택">선택</option>
               <option th:each="category : ${categoryList}" th:value="${category.categoryNo}" th:utext="${category.categoryName}"></option>
             </select>
           </div>
           <div class="input_div">
-            <textarea name="content" id="qna_content" placeholder="내용" required></textarea>
+            <textarea name="content" cols="82" rows="20" id="qna_content" placeholder="10자 이상 작성해주세요." style="resize:none; border: 1px solid #ced4da; border-radius:0.25rem;" required></textarea>
           </div><br>
-          <div class="input_div"><button class="login-button"type="submit" id="postBtn">작성하기</button></div>
+          <div class="input_div"><button class="login-button" type="submit" id="postBtn">작성하기</button></div>
         </form>
       </div>
     </div>

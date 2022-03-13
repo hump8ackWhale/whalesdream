@@ -2,6 +2,7 @@ package com.dev.whale.service;
 
 import com.dev.whale.domain.model.Category;
 import com.dev.whale.domain.model.Qna;
+import com.dev.whale.domain.model.Reply;
 import com.dev.whale.repository.qna.QnaRepository;
 
 import javax.transaction.Transactional;
@@ -23,7 +24,14 @@ public class QnaService {
     // 큐앤에이 카테고리 리스트 조회
     public List<Category> selectCategory() {return qnaRepository.selectCategory();}
 
+    // 큐앤에이 등록
     public void insertQna(Qna qna){ qnaRepository.insertQna(qna); }
+
+    // 큐앤에이 코멘트 조회
+    public List<Reply> selectQnaReply(Integer nno) {return qnaRepository.selectQnaReply(nno); }
+
+    // 큐앤에이 댓글 등록
+    public void insertReply(Reply reply){ qnaRepository.insertReply(reply); }
 
 
 }

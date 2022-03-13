@@ -13,6 +13,7 @@ body {
 body {
   //background: linear-gradient(to top, transparent, white 70%), url("images/bg.png");
   position: relative;
+  font-size:12px;
 }
 
 div {
@@ -21,6 +22,10 @@ div {
 
 a {
     cursor: pointer;
+}
+
+td {
+    padding:5px 0px;
 }
 
 .totalWrap {
@@ -95,7 +100,7 @@ a {
 }
 
 .input_div {
-    width: 100%;
+    width: 95%;
     padding:5px 20px;
 }
 
@@ -145,10 +150,10 @@ ul>li {
 }
 
 .etc_wrap text {
- font-color:#888;
- font-size: 14px;
- display: inline-block;
- text-decoration: none;
+    font-color:#888;
+    font-size: 14px;
+    display: inline-block;
+    text-decoration: none;
 }
 
 
@@ -197,7 +202,7 @@ ul>li {
   padding:27px 0px 27px 10px;
 }
 
-.nm_btn {
+.bl_btn {
   background-color: #661BD1;
   border-color: #661BD1;
   padding: 0.8rem 1.5rem;
@@ -205,6 +210,24 @@ ul>li {
   border-radius: 0.3rem;
   border: 1px solid transparent;
   text-align: center;
+}
+
+.bl_btn:hover {
+    background-color: #540dba;
+}
+
+.nm_btn {
+    background-color: #fff;
+    padding: 0.8rem 1.5rem;
+    color:#000;
+    border-radius: 0.3rem;
+    border: 1px solid #e4e4e4;
+    text-align: center;
+}
+
+.nm_btn:hover {
+    border: 1px solid #eee;
+    background-color: #e4e4e4;
 }
 
 .panel_btn {
@@ -222,6 +245,18 @@ ul>li {
     bottom: 0px;
     width: 100%;
     max-width: 72rem;
+}
+
+.qnaComment {
+    margin:10px 0px;
+}
+.clearfix::before,
+.clearfix::after {
+    content: " ";
+    display: block;
+}
+.clearfix::after {
+  clear: both;
 }
 
 /*subindex 끝*/

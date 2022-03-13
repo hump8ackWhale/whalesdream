@@ -48,7 +48,7 @@ public class Qna extends BaseTimeEntity {
 
     @Column(name = "STATUS")
     @NotNull
-    private String status;
+    private String status = "I";
 
     @Transient
     private String categoryName;

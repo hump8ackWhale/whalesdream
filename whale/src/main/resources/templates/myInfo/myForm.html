@@ -32,12 +32,11 @@
 
         <div style="text-align: center;">
             <button class="nm_btn" id="editInfo">수정완료</button>
-            <button class="nm_btn center_btn" id="leaveAccount" th:onclick="|location.href='@{/myInfo/leaveAccount(id=${myInfo.id})}'|">회원탈퇴</button>
+            <button class="bl_btn center_btn" id="leaveAccount" th:onclick="|location.href='@{/myInfo/leaveAccount(id=${myInfo.id})}'|">회원탈퇴</button>
         </div>
 
     <!-- footer -->
     <footer th:replace="common/footer :: footer"></footer>
-
 
         <!-- body end -->
     </div>

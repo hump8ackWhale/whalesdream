@@ -4,39 +4,45 @@
 </head>
 <body th:fragment="mainBody" style="background-color:#661BD1;">
     <div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
+
         <!-- header -->
         <div th:replace="common/header :: headerDiv"></div>
 
-        <!-- content start-->
-        <div id="list_wrap">
-            <table class="table" id="datatable-default" style="cursor:pointer;">
-                <thead>
-                <tr>
-                    <th>글번호</th>
-                    <th>카테고리</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일</th>
-                </tr>
-                </thead>
-                <tbody>
-                   <tr th:if="${not #strings.isEmpty(qnaList)}" th:each="qna : ${qnaList}">
-                        <td th:text="${qna.qnaNo}"></td>
-                        <td th:text="${qna.categoryName}"></td>
-                        <td th:text="${qna.title}"></td>
-                        <td th:text="${qna.username}"></td>
-                        <td th:text="${#temporals.format(qna.createdDate, 'yyyy-MM-dd')}"></td>
+        <div class="body_wrap">
+
+            <!-- content start-->
+            <div id="list_wrap">
+                <table class="table" id="datatable-default" style="cursor:pointer; width:100%; padding:20px; 10px;">
+                    <thead>
+                    <tr style="padding:5px 0px;">
+                        <th style="width:7%;"></th>
+                        <th style="width:10%;">카테고리</th>
+                        <th style="width:60%;">제목</th>
+                        <th style="width:10%;">작성자</th>
+                        <th style="width:13%;">작성일</th>
                     </tr>
-                    <tr th:unless="${not #strings.isEmpty(qnaList)}">
-                        <td colspan="5">조회된 데이터가 없습니다.</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button type="button" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">글쓰기</button>
+                    </thead>
+                    <tbody>
+                       <tr th:if="${not #strings.isEmpty(qnaList)}" th:each="qna : ${qnaList}">
+                            <td th:text="${qna.qnaNo}" style="text-align: center;"></td>
+                            <td th:text="${qna.categoryName}" style="text-align: center;"></td>
+                            <td th:text="${qna.title}"></td>
+                            <td th:text="${qna.username}" style="text-align: center;"></td>
+                            <td th:text="${#temporals.format(qna.createdDate, 'yyyy-MM-dd')}" style="text-align: center;"></td>
+                        </tr>
+                        <tr th:unless="${not #strings.isEmpty(qnaList)}">
+                            <td colspan="5">조회된 데이터가 없습니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="nm_btn" style="float:right;" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">글쓰기</button>
+
+
+            <!-- footer -->
+            <footer th:replace="common/footer :: footer"></footer>
         </div>
 
-        <!-- footer -->
-        <footer th:replace="common/footer :: footer"></footer>
     </div>
     <script>
 		$(function(){

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="common/header :: mainHead">
 </head>
 <body th:fragment="mainBody" style="background-color:#661BD1;">
@@ -7,26 +7,61 @@
     <!-- header -->
     <div th:replace="common/header :: headerDiv"></div>
 
-    <!-- content start-->
-    <div id="list_wrap">
-        <div class="input_row"><span th:text="${qnaDetail.title}"></span></div>
-        <div class="input_row"><span th:text="${qnaDetail.categoryName}"></span></div>
-        <div class="content">
-            <p name="content" th:text="${qnaDetail.content}" placeholder="내용" required></p>
+    <div class="body_wrap">
+
+        <!-- content start-->
+        <div id="list_wrap">
+            <div class="input_div">
+                <h2 th:text="${qnaDetail.title}"></h2>
+            </div>
+            <div class="input_div">
+                <span th:text="${qnaDetail.categoryName}"></span>
+                <span th:text="${#temporals.format(qnaDetail.createdDate, 'yyyy-MM-dd')}"></span>
+            </div>
+            <div class="content input_div">
+                <p name="content" th:text="${qnaDetail.content}" placeholder="내용" required></p>
+            </div>
+
+            <div class="qnaComment">
+                <div th:each="reply : ${replyList}" class="input_div">
+                    <!-- admin 이름-->
+                    <div id="comment_admin" style="float: left; width:15%;">
+                        <span th:text="${reply.username}"></span><br>
+                        <span th:text="${#temporals.format(reply.createdDate, 'yyyy-MM-dd')}"></span>
+                    </div>
+                    <!-- admin 댓글 보여주기 -->
+                    <div id="comment_content" th:text="${reply.content}" style="width:85%;"></div><br>
+                </div>
+
+                <!-- admin 답변달기 roleId : 1(ROLE_USER) 21(ROLE_ADMIN)  -->
+                <!--<div sec:authorize= "hasRole('role_admin')">-->
+                <div>
+                    <form th:action="@{/qna/insertReply}" method="GET">
+                        <div class="input_div">
+                            <input type="hidden" name="qnaNo" th:value="${qnaDetail.qnaNo}" >
+                            <input type="hidden" name="username" th:value="${#authentication.name}" >
+                            <textarea cols="90" rows="10" name="content" style="resize:none; border: 1px solid #ced4da;"></textarea>
+                        </div>
+                        <div class="input_div clearfix">
+                            <button type="submit" class="bl_btn" style="float: right;">등록</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
+
+        <!-- btn -->
+        <div class="panel_btn">
+            <button class="nm_btn" style="float:right;" type="button" th:onclick="javascript:history.back();">목록</button>
+            <button class="nm_btn" style="float:right; margin-right:5px;" type="button">삭제</button>
+            <button class="nm_btn" style="float:right; margin-right:5px;" type="button" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">수정</button>
+        </div>
+
+        <!-- footer -->
+        <footer th:replace="common/footer :: footer"></footer>
+
     </div>
-    <button type="button" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">수정하기</button>
-    <button type="button">삭제하기</button>
-    <div>
-        <!-- admin 이름-->
-        <div></div>
-        <!-- admin 댓글-->
-        <div><textarea cols="150" rows="10" name="comment" style="resize:none"></textarea></div>
-        <!-- 답변달기 -->
-        <button></button>
-    </div>
-    <!-- footer -->
-    <footer th:replace="common/footer :: footer"></footer>
 </div>
 
 </body>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,23 +91,38 @@ public class AccountController {
     }
 
     @GetMapping("/changePw")
-    public @ResponseBody Boolean changePw(HttpServletRequest request, HttpServletResponse response, Long id, String orgPw, String newPw) {
+    public String changePw(HttpServletRequest request, Long id, String orgPw, String newPw) {
         boolean result = accountService.changePw(id, orgPw, newPw);
 
         // 비밀번호 수정 후 다시 로그인하게 할 경우 세션 비워줘야함
         if (result) {
-            new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder
-                    .getContext().getAuthentication());
+            // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            // Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials());
+            // SecurityContextHolder.getContext().setAuthentication(newAuth); => 참고용, 회원의 권한 등의 정보를 로그아웃 없이 갱신
+
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.invalidate();
+            }
+
+            SecurityContextHolder.clearContext();
+
+            return "index";
         }
 
-        return result;
+        return "redirect:/";
     }
 
     @GetMapping("/leaveAcnt")
-    public @ResponseBody String updateTerm(HttpServletRequest request, String password, Long id) {
+    public String updateTerm(HttpServletRequest request, String password, Long id) {
         boolean result = accountService.checkPw(password, id);
 
         if (result) {
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.invalidate();
+            }
+
             SecurityContextHolder.clearContext();
         }
 

@@ -28,7 +28,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     public LoginSuccessHandler() {
         targetUrlParameter = "";
-        defaultUrl = "/post/myPostList";
+        defaultUrl = "/main/main";
         useReferer = false;
 
     }
@@ -160,6 +160,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         // 임시 비밀번호 발급 여부 Y 면 비밀번호 변경 화면으로 REDIRECT
         if (((PrincipalDetail) (authentication).getPrincipal()).getUser().getIssueYn().equals("Y")) {
             defaultUrl = "/account/goChangePw?id=" + ((PrincipalDetail) (authentication).getPrincipal()).getUser().getId();
+        } else {
+            defaultUrl = "/main/main";
         }
         redirectStrategy.sendRedirect(request, response, defaultUrl);
     }

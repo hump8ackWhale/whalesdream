@@ -18,10 +18,6 @@ $("#myPost_nav").click(function(){
     location.href="/post/myPostList?username=" +username;
 });
 
-$("#qna_nav").click(function(){
-    location.href="/qna/qnaListView?username=" +username;
-});
-
 $("#logout_nav").click(function(){
 
     $.ajax({

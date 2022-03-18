@@ -5,7 +5,6 @@ import com.dev.whale.domain.model.Qna;
 import com.dev.whale.domain.model.Reply;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 
 public class JpaQnaRepository implements QnaRepository {
@@ -15,13 +14,28 @@ public class JpaQnaRepository implements QnaRepository {
     public JpaQnaRepository(EntityManager em) {this.em = em;}
 
     @Override
-    public void insertQna(Qna qna) { em.persist(qna);}
+    public Qna insertQna(Qna qna) { em.persist(qna);
+        return qna;
+    }
+
+    @Override
+    public void update(Qna qna) {
+
+        Qna findQna = em.find(Qna.class, qna.getQnaNo());
+
+        findQna.setTitle(qna.getTitle());
+        findQna.setContent(qna.getContent());
+        if (findQna.getStatus().equals("I")) {
+            findQna.setStatus("U");
+        }
+        em.persist(findQna); // 영속성 context
+    }
 
     @Override
     public void insertReply(Reply reply) { em.persist(reply);}
 
     @Override
-    public List<Qna> selectMyQnaList(String usernameParam) {
+    public List<Qna> selectMyQnaList() {
 //
 //        String query = "select q, c.category_name, " +
 //                       "       decode((select count(*) from Reply r where q.qna_no = r.qna_no), 0, 'N', 'Y') as reply_yn " +
@@ -31,47 +45,18 @@ public class JpaQnaRepository implements QnaRepository {
 //                       "and    q.status = 'I'"                +
 //                       "order  by q.createdDate desc"; 스칼라서브쿼리... 안 되네 다른 방식으로^^..
 
-        String query = "select q, c.categoryName from Qna q, Category c "   +
-                       "where  q.username = :usernameParam "   +
-                       "and    q.status = 'I' "                +
-                       "and    q.categoryNo = c.categoryNo "   +
+        String query = "select q from Qna q "   +
+                       "join   fetch q.category "   +
                        "order  by q.createdDate desc";
 
-        List<Object[]> myQna = em.createQuery(query)
-                .setParameter("usernameParam", usernameParam)
+        List<Qna> qnaList = em.createQuery(query)
                 .getResultList();
-
-        List<Qna> qnaList = new ArrayList<>();
-
-        for (Object[] resultRecord : myQna) {
-            Qna qna           = (Qna) resultRecord[0];
-            qna.setCategoryName((String) resultRecord[1]);
-
-            qnaList.add(qna);
-        }
 
         return qnaList;
     }
 
     @Override
-    public Qna selectMyQnaDetailView(Integer nno) {
-
-        String query = "select q, c.categoryName " +
-                "from  Qna q, Category c "         +
-                "where q.qnaNo = :nno "            +
-                "and   q.categoryNo = c.categoryNo";
-
-        List<Object[]> myQna = em.createQuery(query)
-                .setParameter("nno", nno)
-                .getResultList();
-
-        Qna qnaObject = new Qna(); // 하 모르겠다 왜 안 됨
-        for (Object[] resultRecord : myQna) {
-            qnaObject           = (Qna) resultRecord[0];
-            qnaObject.setCategoryName((String) resultRecord[1]);
-        }
-        return qnaObject;
-    }
+    public Qna findById(int qnaNo) {return em.find(Qna.class, qnaNo);}
 
     @Override
     public List<Category> selectCategory() {
@@ -87,8 +72,7 @@ public class JpaQnaRepository implements QnaRepository {
     public List<Reply> selectQnaReply(Integer nno) {
 
         String query = "select r from Reply r " +
-                       "where r.qnaNo = :nno " +
-                       "and   r.status = 'I' ";
+                       "where r.qnaNo = :nno " ;
 
         List<Reply> Reply = em.createQuery(query)
                             .setParameter("nno", nno)
@@ -97,4 +81,14 @@ public class JpaQnaRepository implements QnaRepository {
         return Reply;
     }
 
+    @Override
+    public void deleteById(Qna qna) {
+        Qna transientQna = em.find(Qna.class, qna.getQnaNo());
+        em.remove(transientQna);}
+
+    @Override
+    public void delete(Reply reply) {
+        Reply transientReply = em.find(Reply.class, reply.getReplyNo());
+        em.remove(transientReply);
+    }
 }

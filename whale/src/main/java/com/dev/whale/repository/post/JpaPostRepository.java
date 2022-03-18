@@ -63,9 +63,7 @@ public class JpaPostRepository implements PostRepository {
     }
 
     @Override
-    public Post findById(int postNo) {
-        return em.find(Post.class, postNo);
-    }
+    public Post findById(int postNo) {return em.find(Post.class, postNo);}
 
     @Override
     public void update(Post post) {
@@ -83,7 +81,5 @@ public class JpaPostRepository implements PostRepository {
     }
 
     @Override
-    public void deleteById(int postNo) {
-        em.remove(postNo);
-    }
+    public void deleteById(int postNo) {em.remove(postNo);}
 }

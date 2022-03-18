@@ -8,38 +8,38 @@
 </head>
 <body>
 <div th:fragment="headerDiv">
-
-    <div class="menu_bg" id="nav">
-        <div class="offcanvas-header" style="padding:5px 0px;">
-            <button type="button" id="btn-close" class="text-reset" style="float: right; margin:0px 10px;">
-                <span><img th:src="@{/assets/images/close.png}" width="10px" height="10px"></span>
-            </button>
-        </div>
-        <div class="nav_loginUser" style="text-align:center; padding:5px 0px; font-size:12px;">
-            <span sec:authentication="principal.user.nickname" style="display:inline-block;"></span>
-            <spna style="display:none" sec:authentication="principal.user.username" id="username_nav"></spna>
-            <span style="font-weight:bold;">님
-            <img th:src="@{/assets/images/starfish.png}" width="10px" height="10px">
-             </span>
-        </div>
-        <div class="offcanvas-body" style="padding:20px">
-            <ul>
-                <li><a id="myInfo_nav" th:href="@{/myInfo/myForm}">내정보</a></li>
-                <li><a id="myPost_nav">나의 올해다짐</a></li>
-                <li><a id="allPost_nav" th:href="@{/post/allPostList}">모두 올해다짐</a></li>
-                <li><a id="qna_nav">QNA</a></li>
-                <li></li>
-                <li><a id="logout_nav">로그아웃</a></li> <!-- 원래 소스 -->
-            </ul>
+    <div class="level2">
+        <div class="menu_bg" id="nav">
+            <div class="offcanvas-header" style="padding:5px 0px;">
+                <button type="button" id="btn-close" class="text-reset" style="float: right; margin:0px 10px;">
+                    <span><img th:src="@{/assets/images/close.png}" width="10px" height="10px"></span>
+                </button>
+            </div>
+            <div class="nav_loginUser" style="text-align:center; padding:5px 0px; font-size:12px;">
+                <span sec:authentication="principal.user.nickname" style="display:inline-block;"></span>
+                <spna style="display:none" sec:authentication="principal.user.username" id="username_nav"></spna>
+                <span style="font-weight:bold;">님
+                <img th:src="@{/assets/images/starfish.png}" width="10px" height="10px">
+                 </span>
+            </div>
+            <div class="offcanvas-body" style="padding:20px">
+                <ul class="nav_ul">
+                    <li><a id="myInfo_nav" th:href="@{/myInfo/myForm}">내정보</a></li>
+                    <li><a id="myPost_nav">나의 올해다짐</a></li>
+                    <li><a id="allPost_nav" th:href="@{/post/allPostList}">모두 올해다짐</a></li>
+                    <li><a id="qna_nav" th:href="@{/qna/qnaListView}">QNA</a></li>
+                    <li></li>
+                    <li><a id="logout_nav">로그아웃</a></li> <!-- 원래 소스 -->
+                </ul>
+            </div>
         </div>
     </div>
-
     <!-- content -->
     <div class="totalHeader">
-        <button type="button" id="menu_btn" style="float: right; margin:5px 5px;">
+        <button type="button" id="menu_btn" style="float: left; margin:5px 5px;">
             <span class=""><img th:src="@{/assets/images/menu_bar.png}" width="30px" height="30px"></span>
         </button>
-        <div class="logo" style="text-align: center; padding-top:40px; margin-bottom:40px;">
+        <div class="logo" style="text-align: center; padding-top:100px; margin-bottom:40px;">
             <img th:src="@{/assets/images/whale_black_sprite.png}" alt="" width="50px" height="50px">
         </div>
     </div>

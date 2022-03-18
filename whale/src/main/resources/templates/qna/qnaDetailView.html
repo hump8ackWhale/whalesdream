@@ -3,66 +3,104 @@
 <head th:replace="common/header :: mainHead">
 </head>
 <body th:fragment="mainBody" style="background-color:#661BD1;">
-<div class="totalWrap upload" id="totalWrap" style="background-color: #fff;">
+<div class="totalWrap upload" id="totalWrap">
     <!-- header -->
     <div th:replace="common/header :: headerDiv"></div>
 
     <div class="body_wrap">
 
         <!-- content start-->
-        <div id="list_wrap">
-            <div class="input_div">
-                <h2 th:text="${qnaDetail.title}"></h2>
-            </div>
-            <div class="input_div">
-                <span th:text="${qnaDetail.categoryName}"></span>
-                <span th:text="${#temporals.format(qnaDetail.createdDate, 'yyyy-MM-dd')}"></span>
-            </div>
-            <div class="content input_div">
-                <p name="content" th:text="${qnaDetail.content}" placeholder="내용" required></p>
-            </div>
+        <div id="content_wrap">
+            <div id="list_wrap">
+                <div class="input_div">
+                    <h2 th:text="${qnaDetail.title}"></h2>
+                </div>
+                <div class="input_div">
+                    <span th:each="category : ${qnaDetail.category}" th:text="${category.categoryName}"></span>
+                    <span th:text="${#temporals.format(qnaDetail.createdDate, 'yyyy-MM-dd')}"></span>
+                </div>
+                <div class="content input_div">
+                    <p name="content" th:with="content=${qnaDetail.content}" th:text="${#strings.replace(content, T(System).getProperty('line.separator'), '&lt;br /&gt;')}" placeholder="내용" required />
+                </div>
 
-            <div class="qnaComment">
-                <div th:each="reply : ${replyList}" class="input_div">
-                    <!-- admin 이름-->
-                    <div id="comment_admin" style="float: left; width:15%;">
-                        <span th:text="${reply.username}"></span><br>
-                        <span th:text="${#temporals.format(reply.createdDate, 'yyyy-MM-dd')}"></span>
+                <div class="qnaComment">
+                    <ul>
+                        <li>
+                            <div th:each="reply : ${replyList}" class="input_div clearfix">
+                                <!-- admin 이름-->
+                                <div id="comment_admin" style="width:15%; display:inline-flex; flex-wrap: wrap;">
+                                    <span th:text="${reply.username}"></span>
+                                    <span th:text="${#temporals.format(reply.createdDate, 'yyyy-MM-dd')}"></span>
+                                </div>
+                                <!-- admin 댓글 보여주기 -->
+                                <div id="comment_content" style="width:75%; display:inline-flex;">
+                                    <p style="width:100%; white-space: normal;">
+                                        <span th:utext="${reply.content}"></span>
+                                    </p>
+                                </div>
+                                <div style="width:5%; display:inline-flex; justify-content: flex-end;" class="clearfix">
+                                    <input type="hidden" name="replyNo" th:value="${reply.replyNo}">
+                                    <a href="javascript:void(0);" onclick="delRp(this);" style="padding-right:5px;" id="delete_reply">삭제</a>
+                                </div><br>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- admin 답변달기 roleId : 1(ROLE_USER) 21(ROLE_ADMIN)  -->
+                    <!--<div sec:authorize= "hasRole('role_admin')">-->
+                    <div>
+                        <form th:action="@{/qna/insertReply}" method="GET">
+                            <div class="input_div">
+                                <input type="hidden" name="qnaNo" th:value="${qnaDetail.qnaNo}">
+                                <input type="hidden" name="username" th:value="${#authentication.name}" >
+                                <textarea cols="90" rows="10" name="content" style="resize:none; border: 1px solid #ced4da;"></textarea>
+                            </div>
+                            <div class="input_div clearfix">
+                                <button type="submit" class="bl_btn" style="float: right;">등록</button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- admin 댓글 보여주기 -->
-                    <div id="comment_content" th:text="${reply.content}" style="width:85%;"></div><br>
                 </div>
 
-                <!-- admin 답변달기 roleId : 1(ROLE_USER) 21(ROLE_ADMIN)  -->
-                <!--<div sec:authorize= "hasRole('role_admin')">-->
-                <div>
-                    <form th:action="@{/qna/insertReply}" method="GET">
-                        <div class="input_div">
-                            <input type="hidden" name="qnaNo" th:value="${qnaDetail.qnaNo}" >
-                            <input type="hidden" name="username" th:value="${#authentication.name}" >
-                            <textarea cols="90" rows="10" name="content" style="resize:none; border: 1px solid #ced4da;"></textarea>
-                        </div>
-                        <div class="input_div clearfix">
-                            <button type="submit" class="bl_btn" style="float: right;">등록</button>
-                        </div>
-                    </form>
-                </div>
+            </div>
+
+            <!-- btn -->
+            <div class="panel_btn">
+                <button class="nm_btn" style="float:right;" type="button" th:onclick="javascript:history.back();">목록</button>
+                <button class="nm_btn" id="delete_btn" style="float:right; margin-right:5px;" type="button">삭제</button>
+                <button class="nm_btn" id="modify_btn" style="float:right; margin-right:5px;" type="button">수정</button>
             </div>
 
         </div>
-
-        <!-- btn -->
-        <div class="panel_btn">
-            <button class="nm_btn" style="float:right;" type="button" th:onclick="javascript:history.back();">목록</button>
-            <button class="nm_btn" style="float:right; margin-right:5px;" type="button">삭제</button>
-            <button class="nm_btn" style="float:right; margin-right:5px;" type="button" th:onclick="|location.href='@{/qna/qnaEnrollForm}'|">수정</button>
-        </div>
-
         <!-- footer -->
         <footer th:replace="common/footer :: footer"></footer>
 
     </div>
 </div>
+<script>
+delRp = function(obj){
+
+        var replyNo = $(obj).prev().val();
+        location.href="/qna/replyDelete/" + replyNo;
+
+};
+
+$(function() {
+    let qnaNo = $('input[name=qnaNo]').val();
+    $("#modify_btn").click(function(){
+        location.href="/qna/qnaModifyForm?nno=" + qnaNo;
+    });
+
+    $("#delete_btn").click(function(){
+        location.href="/qna/qnaDelete/" + qnaNo;
+    });
+
+
+
+
+});
+
+</script>
 
 </body>
 </html>

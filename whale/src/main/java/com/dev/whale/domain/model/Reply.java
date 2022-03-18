@@ -3,6 +3,8 @@ package com.dev.whale.domain.model;
 import com.dev.whale.BaseTimeEntity;
 import com.sun.istack.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,6 +19,8 @@ import java.util.Date;
         initialValue = 1,
         allocationSize = 1
 )
+@SQLDelete(sql = "UPDATE TB_REPLY R SET R.STATUS = 'D' WHERE R.REPLY_NO=?")
+@Where(clause = "status != 'D'")
 public class Reply extends BaseTimeEntity {
 
     @Id
@@ -41,4 +45,5 @@ public class Reply extends BaseTimeEntity {
     @Column(name = "STATUS")
     @NotNull
     private String status = "I";
+
 }

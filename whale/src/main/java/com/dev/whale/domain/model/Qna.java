@@ -3,6 +3,9 @@ package com.dev.whale.domain.model;
 import com.dev.whale.BaseTimeEntity;
 import com.sun.istack.NotNull;
 import lombok.Data;
+import lombok.ToString;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -16,6 +19,8 @@ import javax.validation.constraints.NotBlank;
         initialValue = 1,
         allocationSize = 1
 )
+@SQLDelete(sql = "UPDATE TB_QNA Q SET Q.STATUS = 'D' WHERE Q.QNA_NO=?")
+@Where(clause = "status != 'D'")
 public class Qna extends BaseTimeEntity {
 
     @Id
@@ -31,7 +36,7 @@ public class Qna extends BaseTimeEntity {
     @Column(name = "CATEGORY_NO")
     @NotNull
     private int categoryNo;
-    
+
     @Column(name = "TITLE", length = 500)
     @NotNull
     @NotBlank(message = "제목을 입력해주세요.")
@@ -50,7 +55,9 @@ public class Qna extends BaseTimeEntity {
     @NotNull
     private String status = "I";
 
-    @Transient
-    private String categoryName;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "CATEGORY_NO" , insertable = false, updatable = false) // 읽기 전용
+    @ToString.Exclude
+    private Category category;
 
 }

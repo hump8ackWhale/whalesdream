@@ -10,29 +10,33 @@
     <!-- body-->
     <div class="body_wrap">
 
-        <!-- content start-->
-        <div id="list_wrap">
-            <div>
-                <input type="hidden" id="id" th:value="${myInfo.id}"> <br>
-            </div>
-            <div class="input_div">
-                <img th:src="@{/assets/images/id_font.png}" alt="">
-                <input class="input_row inline_div middle_row" type="text" name="username" placeholder="아이디" th:value="${myInfo.username}" disabled> <br>
-            </div>
-            <div class="input_div">
-                <img th:src="@{/assets/images/nick_font.png}" alt="">
-                <input class="input_row inline_div middle_row" type="text" name="nickname" placeholder="닉네임" th:value="${myInfo.nickname}" disabled>
-                <button class="nm_btn" id="editForm">수정</button>
-            </div>
-            <div class="input_div">
-                <img th:src="@{/assets/images/email_font.png}" alt="">
-                <input class="input_row inline_div middle_row" type="text" name="email" placeholder="이메일" th:value="${myInfo.email}" disabled> <br>
-            </div>
-        </div>
+        <div id="content_wrap">
 
-        <div style="text-align: center;">
-            <button class="nm_btn" id="editInfo">수정완료</button>
-            <button class="bl_btn center_btn" id="leaveAccount" th:onclick="|location.href='@{/myInfo/leaveAccount(id=${myInfo.id})}'|">회원탈퇴</button>
+            <!-- content start-->
+            <div id="list_wrap">
+                <div>
+                    <input type="hidden" id="id" th:value="${myInfo.id}"> <br>
+                </div>
+                <div class="input_div">
+                    <img th:src="@{/assets/images/id_font.png}" alt="">
+                    <input class="input_row inline_div middle_row" type="text" name="username" placeholder="아이디" th:value="${myInfo.username}" disabled> <br>
+                </div>
+                <div class="input_div">
+                    <img th:src="@{/assets/images/nick_font.png}" alt="">
+                    <input class="input_row inline_div middle_row" type="text" name="nickname" placeholder="닉네임" th:value="${myInfo.nickname}" disabled>
+                    <button class="nm_btn" id="editForm">수정</button>
+                </div>
+                <div class="input_div">
+                    <img th:src="@{/assets/images/email_font.png}" alt="">
+                    <input class="input_row inline_div middle_row" type="text" name="email" placeholder="이메일" th:value="${myInfo.email}" disabled> <br>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="nm_btn" id="editInfo">수정완료</button>
+                <button class="bl_btn center_btn" id="leaveAccount" th:onclick="|location.href='@{/myInfo/leaveAccount(id=${myInfo.id})}'|">회원탈퇴</button>
+            </div>
+
         </div>
 
     <!-- footer -->

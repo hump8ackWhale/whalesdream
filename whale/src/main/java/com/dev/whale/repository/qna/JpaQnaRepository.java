@@ -36,17 +36,9 @@ public class JpaQnaRepository implements QnaRepository {
 
     @Override
     public List<Qna> selectMyQnaList() {
-//
-//        String query = "select q, c.category_name, " +
-//                       "       decode((select count(*) from Reply r where q.qna_no = r.qna_no), 0, 'N', 'Y') as reply_yn " +
-//                       "from   Qna q, Category c"             +
-//                       "where  q.username = :usernameParam"  +
-//                       "and    q.category_no = c.category_no" +
-//                       "and    q.status = 'I'"                +
-//                       "order  by q.createdDate desc"; 스칼라서브쿼리... 안 되네 다른 방식으로^^..
 
-        String query = "select q from Qna q "   +
-                       "join   fetch q.category "   +
+        String query = "select q from Qna q "        +
+                       "left join fetch q.category " +
                        "order  by q.createdDate desc";
 
         List<Qna> qnaList = em.createQuery(query)

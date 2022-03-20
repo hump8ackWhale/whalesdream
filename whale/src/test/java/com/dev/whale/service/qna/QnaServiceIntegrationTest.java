@@ -1,5 +1,6 @@
 package com.dev.whale.service.qna;
 
+import com.dev.whale.domain.model.Category;
 import com.dev.whale.domain.model.Qna;
 import com.dev.whale.repository.qna.QnaRepository;
 import com.dev.whale.service.QnaService;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -37,6 +39,15 @@ public class QnaServiceIntegrationTest {
 
     @Test
     public void modifyQna(){
+
+    }
+
+    @Test
+    public void findByAll(){
+
+        List<Qna> qnaList = qnaService.selectMyQnaList();
+
+        System.out.println(qnaList);
 
     }
 

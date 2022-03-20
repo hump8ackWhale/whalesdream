@@ -16,11 +16,12 @@
                     <h2 th:text="${qnaDetail.title}"></h2>
                 </div>
                 <div class="input_div">
+                    <span th:text="${qnaDetail.username}" id="writeUser"></span>
                     <span th:each="category : ${qnaDetail.category}" th:text="${category.categoryName}"></span>
                     <span th:text="${#temporals.format(qnaDetail.createdDate, 'yyyy-MM-dd')}"></span>
                 </div>
                 <div class="content input_div">
-                    <p name="content" th:with="content=${qnaDetail.content}" th:text="${#strings.replace(content, T(System).getProperty('line.separator'), '&lt;br /&gt;')}" placeholder="내용" required />
+                    <p name="content" th:with="content=${qnaDetail.content}" th:utext="${content}" placeholder="내용" required />
                 </div>
 
                 <div class="qnaComment">
@@ -45,10 +46,8 @@
                             </div>
                         </li>
                     </ul>
-
                     <!-- admin 답변달기 roleId : 1(ROLE_USER) 21(ROLE_ADMIN)  -->
-                    <!--<div sec:authorize= "hasRole('role_admin')">-->
-                    <div>
+                    <div sec:authorize= "hasRole('ROLE_ADMIN')">
                         <form th:action="@{/qna/insertReply}" method="GET">
                             <div class="input_div">
                                 <input type="hidden" name="qnaNo" th:value="${qnaDetail.qnaNo}">
@@ -67,8 +66,8 @@
             <!-- btn -->
             <div class="panel_btn">
                 <button class="nm_btn" style="float:right;" type="button" th:onclick="javascript:history.back();">목록</button>
-                <button class="nm_btn" id="delete_btn" style="float:right; margin-right:5px;" type="button">삭제</button>
-                <button class="nm_btn" id="modify_btn" style="float:right; margin-right:5px;" type="button">수정</button>
+                <button class="nm_btn user_equal" id="delete_btn" style="float:right; margin-right:5px;" type="button">삭제</button>
+                <button class="nm_btn user_equal" id="modify_btn" style="float:right; margin-right:5px;" type="button">수정</button>
             </div>
 
         </div>
@@ -86,6 +85,11 @@ delRp = function(obj){
 };
 
 $(function() {
+
+    let writeUser = $("#writeUser").text();
+    console.log(writeUser);
+    equalUsername(writeUser);
+
     let qnaNo = $('input[name=qnaNo]').val();
     $("#modify_btn").click(function(){
         location.href="/qna/qnaModifyForm?nno=" + qnaNo;
@@ -94,8 +98,6 @@ $(function() {
     $("#delete_btn").click(function(){
         location.href="/qna/qnaDelete/" + qnaNo;
     });
-
-
 
 
 });

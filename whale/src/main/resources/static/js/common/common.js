@@ -32,3 +32,11 @@ $("#logout_nav").click(function(){
     });
 
 });
+
+function equalUsername(param) {
+
+ if(username != param) {
+    $(".user_equal").css("display", "none");
+ }
+
+}

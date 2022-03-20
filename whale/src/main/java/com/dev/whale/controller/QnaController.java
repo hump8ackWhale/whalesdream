@@ -42,8 +42,11 @@ public class QnaController {
     public String qnaListView(@PathVariable("qnaNo") int qnaNo, Model model){
 
         Qna qnaDetail = QnaService.findById(qnaNo);
-
         List<Reply> replyList = QnaService.selectQnaReply(qnaNo);
+
+        /* 내용을 개행한다. */
+        String content = qnaDetail.getContent().replaceAll("(\r\n|\r|\n|\n\r)", "<br/>");
+        qnaDetail.setContent(content);
 
         model.addAttribute("replyList", replyList);
         model.addAttribute("qnaDetail", qnaDetail);

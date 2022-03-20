@@ -54,7 +54,13 @@ p>span{
     min-height: 300px;
 }
 
-.login_wrap, .register_wrap, .find_wrap {
+.find_wrap {
+    width: 553px;
+    min-height: 500px;
+    margin: 0 80px;
+}
+
+.login_wrap, .register_wrap {
     width: 553px;
     min-height: 580px;
     margin: 0 80px;
@@ -144,6 +150,10 @@ p>span{
     background-color : #661BD1;
     border-radius:5px;
     font-size: 1.5rem;
+}
+
+.label_span {
+    margin:10px 0px;
 }
 
 ul {

@@ -14,7 +14,7 @@
 
       <!-- btn div -->
       <div class="panel_btn">
-        <button class="nm_btn" style="float:right;" th:onclick="|location.href='@{/post/postForm}'|">작성하기</button>
+        <button class="bl_btn" style="float:right;" th:onclick="|location.href='@{/post/postForm}'|">작성하기</button>
       </div>
 
       <!-- content start-->
@@ -22,12 +22,13 @@
 
         <div class="Accordion_wrap"  th:each="myPost : ${myPostList}" th:if="${not #strings.isEmpty(myPostList)}">
           <div style="float:left; width:15%; border-right: 1px solid #dddddd; margin:0px 15px;">
+            <span id="postNo" th:text="${myPost.postNo}" style="width:5%; padding-right:10px;"></span>
             <span th:text="${#temporals.format(myPost.createdDate, 'yyyy-MM-dd')}"></span>
           </div>
-          <div class="que">
+          <div class="que on">
             <span th:text="${myPost.title}"></span>
           </div>
-          <div class="detail_wrap">
+          <div class="detail_wrap_on">
             <span th:text="${myPost.content}"></span>
           </div>
         </div>
@@ -46,29 +47,65 @@
   <footer th:replace="common/footer :: footer"></footer>
 </div>
 
+</body>
+</html>
 <script>
 $(function(){
-
   /*
-  * 제목 클릭 시, 본문 내용이 보여진다.
-  * 다른 본문 내용을 클릭하는 경우 이미 열린 본문 내용을 닫는다.
+  * 스크롤 하는 경우에 페이징처리 한다.
+  * 맨 마지막 lastPostId를 전달한다.
   */
-  $(".que").click(function() {
+  $(window).scroll(function(){
 
-    if ($(this).hasClass('on')) {
-        slideUp();
-    } else {
-        slideUp();
-        $(this).addClass('on').next().slideDown();
-    }
+      if (Math.round( $(window).scrollTop()) == $(document).height() - $(window).height()) {
 
-    function slideUp() {
-        $(".que").removeClass('on').next().slideUp();
-    };
+        moreList();
 
+      };
   });
+
+  function moreList() {
+
+      const defaultArticlePaginationSize = 5;
+      const postArr = document.querySelectorAll('#postNo');
+      const userId =  $("#userid_nav").text();
+
+      // 현재 DOM에 그려진 게시물 중 가장 작은 id 값을 추려낸다.
+      const lastArticleId = Array.from(postArr).map(function (post) {
+                              return parseInt(post.innerHTML, 10);
+                            }).reduce(function (previous, current) {
+                              return previous > current ? current : previous;
+                            });
+
+      fetchPostPages(lastArticleId, defaultArticlePaginationSize, userId);
+
+  };
+
+  function fetchPostPages(lastArticleId, defaultArticlePaginationSize, userId) {
+
+    var search_var;
+
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/post/myPostList",
+      data: {
+          "lastPostId": lastArticleId,
+          "size" : defaultArticlePaginationSize,
+          "userId" : userId
+      },
+      success: function (data) {
+        search_var = data.dataList; // data로 받아온 List를 변수에 담기
+        console.log("search_var " + search_var);
+
+      },
+      error: function () {
+
+      }
+    });
+
+
+  }
 
 });
 </script>
-</body>
-</html>

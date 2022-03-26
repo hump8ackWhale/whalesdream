@@ -71,10 +71,12 @@
             </div>
 
         </div>
-        <!-- footer -->
-        <footer th:replace="common/footer :: footer"></footer>
 
     </div>
+
+    <!-- footer -->
+    <footer th:replace="common/footer :: footer"></footer>
+
 </div>
 <script>
 delRp = function(obj){
@@ -87,7 +89,6 @@ delRp = function(obj){
 $(function() {
 
     let writeUser = $("#writeUser").text();
-    console.log(writeUser);
     equalUsername(writeUser);
 
     let qnaNo = $('input[name=qnaNo]').val();

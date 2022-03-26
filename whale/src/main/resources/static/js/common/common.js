@@ -15,7 +15,13 @@ $("#myInfo_nav").click(function(){
 });
 
 $("#myPost_nav").click(function(){
-    location.href="/post/myPostList?username=" +username;
+
+    const defaultArticlePaginationSize = 5;
+    const userId =  $("#userid_nav").text();
+    const lastPostId = parseInt(Number.MAX_SAFE_INTEGER, 10);
+
+    location.href="/post/myPostList?lastPostId=" +lastPostId + "&size=" +defaultArticlePaginationSize+ "&userId=" +userId;
+
 });
 
 $("#logout_nav").click(function(){

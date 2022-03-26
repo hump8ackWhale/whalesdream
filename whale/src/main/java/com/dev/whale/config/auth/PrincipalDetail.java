@@ -56,8 +56,10 @@ public class PrincipalDetail implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         Collection<GrantedAuthority> collectors = new ArrayList<>();
+
         collectors.add(() -> {
-            return "ROLE_USER";
+            /* 계정권한 : 21(ADMIN), 1(USER) */
+            return this.user.getRole().getRole();
         });
         return collectors;
     }

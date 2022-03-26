@@ -31,7 +31,7 @@
                         <p>Invalid username and password.</p>
                         <p>${securityexceptionmsg}</p>
                     </div>-->
-                    <div class="input_div"><button class="login-button" id="naver_login" type="button" style="background-color : #19ce60;">네이버로하기</button></div>
+                    <div class="input_div"><button class="login-button" id="naver_login" th:onclick="|location.href='@{/oauth2/authorization/naver}'|" type="button" style="background-color : #19ce60;">네이버로하기</button></div>
                     <input type="hidden" name="loginRedirect" value="#{loginRedirect}">
                 </form>
             </div>
@@ -42,7 +42,7 @@
                 </li>
                 <li>
                     <div>
-                        <a th:href="@{/account/register}">회원가입</a>
+                        <a th:href="@{/account/goRegister}">회원가입</a>
                     </div>
                 </li>
             </ul>

@@ -27,7 +27,7 @@ public class PostService {
     }
 
     // 나의 올해다짐 리스트 조회
-    public List<Post> selectMyPostList(int lastPostId, int size, Long userId) {
+    public List<Post> selectMyPostList(Long lastPostId, int size, Long userId) {
         PageRequest pageRequest = PageRequest.of(0, size);
         User user = accountRepository.findById(userId);
         List<Post> posts = postRepository.selectMyPostList(lastPostId, pageRequest, user);
@@ -36,7 +36,7 @@ public class PostService {
     }
 
     // 모두 올해다짐 리스트 조회
-    public List<Post> selectAllPostList(int lastPostId, int size) {
+    public List<Post> selectAllPostList(Long lastPostId, int size) {
         PageRequest pageRequest = PageRequest.of(0, size);
         List<Post> posts = postRepository.selectAllPostList(lastPostId, pageRequest);
 

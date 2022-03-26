@@ -29,7 +29,7 @@ public class Post extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POST_NO", updatable = false)
-    private int postNo;
+    private Long postNo;
 
     @Column(name = "USERNAME")
     @Nullable

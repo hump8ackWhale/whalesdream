@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @Controller
 @RequestMapping("/account")
 public class AccountController {
@@ -31,8 +30,8 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/register")
-    public String register() {
+    @GetMapping("/goRegister")
+    public String goRegister() {
         return "account/register";
     }
 
@@ -128,5 +127,6 @@ public class AccountController {
 
         return "index";
     }
+
 
 }

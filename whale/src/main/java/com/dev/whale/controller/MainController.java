@@ -37,7 +37,7 @@ public class MainController {
 
         if (userDetails != null) {
 
-            int lastPostId = 41;
+            Long lastPostId = 41L;
             int size = 2;
             List<Post> myPostList = postService.selectMyPostList(lastPostId, size, 41L);
 

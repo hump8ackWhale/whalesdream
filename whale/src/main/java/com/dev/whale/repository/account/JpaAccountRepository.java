@@ -16,7 +16,7 @@ public class JpaAccountRepository implements AccountRepository {
 
     @Override
     public Optional<User> findByName(String username) {
-        List<User> query = em.createQuery("select u from User u where u.username = :username and u.enabled = true", User.class)
+        List<User> query = em.createQuery("select u from User u where u.username = :username", User.class)
                 .setParameter("username", username)
                 .getResultList();
 
@@ -25,7 +25,7 @@ public class JpaAccountRepository implements AccountRepository {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        List<User> query = em.createQuery("select u from User u where u.email = :email and u.enabled = true")
+        List<User> query = em.createQuery("select u from User u where u.email = :email")
                 .setParameter("email", email)
                 .getResultList();
 

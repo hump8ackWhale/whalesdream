@@ -12,10 +12,10 @@ public interface PostRepository {
     void save(Post post);
 
     // 나의 올해다짐 리스트 조회
-    List<Post> selectMyPostList(int lastPostId, PageRequest pageRequest, User user);
+    List<Post> selectMyPostList(Long lastPostId, PageRequest pageRequest, User user);
 
     // 모두 올해다짐 리스트 조회
-    List<Post> selectAllPostList(int lastPostId, PageRequest pageRequest);
+    List<Post> selectAllPostList(Long lastPostId, PageRequest pageRequest);
 
     // 올해다짐 find
     Post findById(int postNo);

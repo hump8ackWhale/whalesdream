@@ -36,7 +36,7 @@ public class PostController {
     }
 
     @GetMapping("/myPostList")
-    public String myPostPagingList(Model model, @RequestParam int lastPostId, @RequestParam int size, @RequestParam Long userId) {
+    public String myPostPagingList(Model model, @RequestParam Long lastPostId, @RequestParam int size, @RequestParam Long userId) {
 
         List<Post> myPostList = postService.selectMyPostList(lastPostId, size, userId);
 
@@ -48,7 +48,7 @@ public class PostController {
     }
 
     @GetMapping("/allPostList")
-    public String allPostList(Model model, @RequestParam int lastPostId, @RequestParam int size) {
+    public String allPostList(Model model, @RequestParam Long lastPostId, @RequestParam int size) {
 
         List<Post> allPostList = postService.selectAllPostList(lastPostId, size);
 

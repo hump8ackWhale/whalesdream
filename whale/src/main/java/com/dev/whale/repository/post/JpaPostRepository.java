@@ -22,7 +22,7 @@ public class JpaPostRepository implements PostRepository {
     }
 
     @Override
-    public List<Post> selectMyPostList(int lastPostId, PageRequest pageRequest, User user) {
+    public List<Post> selectMyPostList(Long lastPostId, PageRequest pageRequest, User user) {
         LocalDateTime date = LocalDateTime.now();
         String query = "select p from Post p where (p.createdDate <= :date and :date < p.endDate) " +
                            "or YEAR(p.createdDate) < YEAR(:date) " +
@@ -42,7 +42,7 @@ public class JpaPostRepository implements PostRepository {
     }
 
     @Override
-    public List<Post> selectAllPostList(int lastPostId, PageRequest pageRequest) {
+    public List<Post> selectAllPostList(Long lastPostId, PageRequest pageRequest) {
         LocalDateTime date = LocalDateTime.now();
         String query = "select p from Post p join User u " +
                         "on u.username = p.username " +

@@ -18,19 +18,15 @@
                 <form th:action="@{/}" method="post">
                     <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
                     <div class="input_div">
-                        <input class="input_row large_row" type="text" name="username" placeholder="아이디"> <br>
+                        <input class="input_row lm_row" type="text" name="username" placeholder="아이디"> <br>
                     </div>
                     <div class="input_div">
-                        <input class="input_row large_row" type="password" name="password" placeholder="패스워드">
+                        <input class="input_row lm_row" type="password" name="password" placeholder="패스워드">
                     </div><br>
                     <div id="errorMsg" class="input_div errorMsg">
                         <span th:if="${errorMessage}">Invalid username and password.</span>
                     </div>
                     <div class="input_div"><button class="login-button" id="nm_login" type="submit">로그인하기</button></div>
-<!--                    <div th:if="${not #strings.isEmpty(securityexceptionmsg)}" style="color: #c21d17">
-                        <p>Invalid username and password.</p>
-                        <p>${securityexceptionmsg}</p>
-                    </div>-->
                     <div class="input_div"><button class="login-button" id="naver_login" th:onclick="|location.href='@{/oauth2/authorization/naver}'|" type="button" style="background-color : #19ce60;">네이버로하기</button></div>
                     <input type="hidden" name="loginRedirect" value="#{loginRedirect}">
                 </form>
@@ -49,7 +45,7 @@
 
         </div>
 
-    <footer th:replace="common/footer :: footer"></footer>
+    <footer th:replace="common/mainFooter :: footer"></footer>
 
     </div>
     <!-- footer -->

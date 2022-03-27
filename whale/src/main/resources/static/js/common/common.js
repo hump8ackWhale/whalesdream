@@ -19,8 +19,9 @@ $("#myPost_nav").click(function(){
     const defaultArticlePaginationSize = 5;
     const userId =  $("#userid_nav").text();
     const lastPostId = parseInt(Number.MAX_SAFE_INTEGER, 10);
+    let   flag = "my";
 
-    location.href="/post/myPostList?lastPostId=" +lastPostId + "&size=" +defaultArticlePaginationSize+ "&userId=" +userId;
+    location.href="/post/myPostList?lastPostId=" +lastPostId + "&size=" +defaultArticlePaginationSize+ "&userId=" +userId + "&flag=" + flag;
 
 });
 
@@ -45,4 +46,8 @@ function equalUsername(param) {
     $(".user_equal").css("display", "none");
  }
 
+}
+
+function toggleAnimationPlayState() {
+  document.querySelector("#walking_turtle").classList.toggle("paused");
 }

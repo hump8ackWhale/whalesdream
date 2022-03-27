@@ -16,7 +16,7 @@
             <input type="hidden" name="qnaNo" th:value="${not #strings.isEmpty(qnaDetail)} ? ${qnaDetail.qnaNo} : 0">
             <input type="hidden" id="id" name="username" th:value="${#authentication.name}" >
             <div class="input_div">
-              <input class="input_row large_row" id="qna_title" type="text" name="title" placeholder="제목" th:value="${not #strings.isEmpty(qnaDetail)} ? ${qnaDetail.title} : ''" required> <br>
+              <input class="input_row lm_row" id="qna_title" type="text" name="title" placeholder="제목" th:value="${not #strings.isEmpty(qnaDetail)} ? ${qnaDetail.title} : ''" required> <br>
             </div>
             <div class="input_div">
               <select th:name="categoryNo">
@@ -27,7 +27,7 @@
             <div class="input_div">
               <textarea name="content" cols="82" rows="20" id="qna_content" th:text="${not #strings.isEmpty(qnaDetail)} ? ${qnaDetail.content} : ''" placeholder="10자 이상 작성해주세요." style="resize:none; border: 1px solid #ced4da; border-radius:0.25rem;" required></textarea>
             </div><br>
-            <div class="input_div"><button class="login-button" type="button" id="postBtn">등록</button></div>
+            <div class="input_div"><button class="submit-button" type="button" id="postBtn">등록</button></div>
           </form>
         </div>
       </div>

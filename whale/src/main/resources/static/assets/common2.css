@@ -116,8 +116,23 @@ p>span{
     width: 70%;
 }
 
-.large_row {
+.submit-button{
+    display: block;
+    width: 99%;
+    padding: 12px 0 15px;
+    border: solid 1px #ced4da;
+    color: #fff;
+    background-color: #661BD1;
+    border-radius: 5px;
+    font-size: 1.5rem;
+}
+
+.lm_row {
     width: 91%;
+}
+
+.ll_row {
+    width: 96%;
 }
 
 .input_row {
@@ -310,3 +325,40 @@ ul {
 }
 
 /*subindex 끝*/
+
+#walking_turtle.paused {
+  animation-play-state: paused;
+}
+
+/* walking turtle*/
+#walking_turtle {
+
+    background:url("images/walkingTurtle.png") repeat-x;
+    /* 단일 walking sheet 크기 */
+    width:50px;
+    height:50px;
+
+    /* 캐릭터를 지정된 위치로 한 번만 foward함 */
+    animation: walk 1.8s steps(8),
+    forward 5s linear;
+    animation-iteration-count: 1;
+    -webkit-animation-fill-mode:both
+
+}
+
+@keyframes walk{
+    0%{
+        background-position: 0px;
+    }
+    100%{
+        background-position: -400px;
+    }
+}
+@keyframes forward{
+    0%{
+        transform: translateX(0px);
+    }
+    100%{
+        transform: translateX(320px);
+    }
+}

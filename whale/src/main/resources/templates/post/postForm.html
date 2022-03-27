@@ -13,13 +13,17 @@
         <div class="panel_inner">
           <form th:action="@{/post/savePost}" method="GET">
             <div class="input_div">
-              <input class="input_row large_row" id="ptitle" type="text" name="title" placeholder="제목" required> <br>
+              <span>비밀글</span>
+              <input id="pCheck" type="checkbox" name="lockYn"> <br>
+            </div>
+            <div class="input_div">
+              <input class="input_row ll_row" id="ptitle" type="text" name="title" placeholder="제목" required> <br>
             </div>
             <div class="input_div">
               <textarea name="content" id="pcontent" cols="82" rows="20" placeholder="내용" style="resize:none; border: 1px solid #ced4da; border-radius:0.25rem;" required></textarea>
             </div><br>
             <input type="hidden" name="username" th:value="${#authentication.name}" >
-            <div class="input_div"><button class="login-button"type="submit" id="postBtn">작성 완료!</button></div>
+            <div class="input_div"><button class="submit-button" type="submit" id="postBtn">작성 완료!</button></div>
           </form>
         </div>
       </div>

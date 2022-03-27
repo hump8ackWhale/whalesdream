@@ -28,7 +28,7 @@ public class PostController {
     }
 
     @GetMapping("/savePost")
-    public String save(Post post) {
+    public String save(@RequestParam Post post) {
         postService.save(post);
         return "redirect:/post/myPostList";
     }

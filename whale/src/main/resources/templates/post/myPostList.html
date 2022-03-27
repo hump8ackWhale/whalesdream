@@ -20,20 +20,20 @@
       <!-- content start-->
       <div id="list_wrap">
 
-        <div class="Accordion_wrap"  th:each="myPost : ${myPostList}" th:if="${not #strings.isEmpty(myPostList)}">
+        <div class="Accordion_wrap"  th:each="post : ${posts}" th:if="${not #strings.isEmpty(posts)}">
           <div style="float:left; width:15%; border-right: 1px solid #dddddd; margin:0px 15px;">
-            <span id="postNo" th:text="${myPost.postNo}" style="width:5%; padding-right:10px;"></span>
-            <span th:text="${#temporals.format(myPost.createdDate, 'yyyy-MM-dd')}"></span>
+            <span id="postNo" th:text="${post.postNo}" style="width:5%; padding-right:10px;"></span>
+            <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd')}"></span>
           </div>
           <div class="que on">
-            <span th:text="${myPost.title}"></span>
+            <span th:text="${post.title}"></span>
           </div>
           <div class="detail_wrap_on">
-            <span th:text="${myPost.content}"></span>
+            <span th:text="${post.content}"></span>
           </div>
         </div>
 
-        <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(myPostList)}">
+        <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(posts)}">
           <span style="text-align:center;">조회된 데이터가 없습니다.</span>
         </div>
       <!-- content end-->
@@ -92,7 +92,8 @@ $(function(){
       data: {
           "lastPostId": lastArticleId,
           "size" : defaultArticlePaginationSize,
-          "userId" : userId
+          "userId" : userId,
+          "flag" : "my"
       },
       success: function (data) {
         search_var = data.dataList; // data로 받아온 List를 변수에 담기

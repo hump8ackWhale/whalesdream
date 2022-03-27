@@ -8,7 +8,6 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
@@ -39,12 +38,10 @@ public class Qna extends BaseTimeEntity {
 
     @Column(name = "TITLE", length = 500)
     @NotNull
-    @NotBlank(message = "제목을 입력해주세요.")
     private String title;
 
     @Column(name = "CONTENT", length = 50000)
     @NotNull
-    @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
     @Column(name = "LOCK_YN")

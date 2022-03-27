@@ -18,6 +18,8 @@ public class JpaPostRepository implements PostRepository {
         this.em = em;
     }
 
+    private static int firstResult = 0;
+
     @Override
     public void save(Post post) {
         em.persist(post);
@@ -26,21 +28,30 @@ public class JpaPostRepository implements PostRepository {
     @Override
     public Page<Post> selectMyPostList(Long lastPostId, User user, PageRequest pageRequest) {
         LocalDateTime date = LocalDateTime.now();
-        String query = "select p from Post p where (p.createdDate <= :date and :date < p.endDate) " +
-                           "or YEAR(p.createdDate) < YEAR(:date) " +
-                        "and p.postNo < :lastPostId " +
-                        "and p.username = :username " +
-                    "order by p.createdDate desc";
+        String username = user.getUsername();
 
-        Page<Post> posts = (Page<Post>) new PageImpl(
-                em.createQuery(query)
-                        .setFirstResult(pageRequest.getPageNumber() * pageRequest.getPageSize())
-                        .setMaxResults(pageRequest.getPageSize())
-                        .setParameter("lastPostId", lastPostId)
-                        .setParameter("username", user.getUsername())
-                        .setParameter("date", date)
-                        .getResultList()
-        );
+        if (lastPostId == 9007199254740991l) {
+            firstResult = 0;
+        } else {
+            firstResult++;
+        }
+
+        String query = "select p " +
+                         "from Post p " +
+                        "where p.username = :username and (p.createdDate <= :date and :date < p.endDate) " +
+                           "or YEAR(p.createdDate) < YEAR(:date) " +
+                          "and p.postNo < :lastPostId " +
+                     "order by p.createdDate desc";
+
+        List<Post> post = em.createQuery(query)
+                .setParameter("lastPostId", lastPostId)
+                .setParameter("username", username)
+                .setParameter("date", date)
+                .setFirstResult(firstResult * pageRequest.getPageSize())
+                .setMaxResults(pageRequest.getPageSize())
+                .getResultList();
+
+        Page<Post> posts = (Page<Post>) new PageImpl(post);
 
         return posts;
     }
@@ -48,20 +59,28 @@ public class JpaPostRepository implements PostRepository {
     @Override
     public Page<Post> selectAllPostList(Long lastPostId, PageRequest pageRequest) {
         LocalDateTime date = LocalDateTime.now();
-        String query = "select p from Post p where (p.createdDate <= :date and :date < p.endDate) " +
+
+        if (lastPostId == 9007199254740991l) {
+            firstResult = 0;
+        } else {
+            firstResult++;
+        }
+
+        String query = "select p " +
+                "from Post p " +
+                "where (p.createdDate <= :date and :date < p.endDate) " +
                 "or YEAR(p.createdDate) < YEAR(:date) " +
                 "and p.postNo < :lastPostId " +
-                "and p.lockYn = 'N' " +
                 "order by p.createdDate desc";
 
-        Page<Post> posts = (Page<Post>) new PageImpl(
-                em.createQuery(query)
-                        .setFirstResult(pageRequest.getPageNumber() * pageRequest.getPageSize())
-                        .setMaxResults(pageRequest.getPageSize())
-                        .setParameter("lastPostId", lastPostId)
-                        .setParameter("date", date)
-                        .getResultList()
-        );
+        List<Post> post = em.createQuery(query)
+                .setParameter("lastPostId", lastPostId)
+                .setParameter("date", date)
+                .setFirstResult(firstResult * pageRequest.getPageSize())
+                .setMaxResults(pageRequest.getPageSize())
+                .getResultList();
+
+        Page<Post> posts = (Page<Post>) new PageImpl(post);
 
         return posts;
     }

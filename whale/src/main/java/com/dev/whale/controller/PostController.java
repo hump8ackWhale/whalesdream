@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,7 +29,10 @@ public class PostController {
     }
 
     @GetMapping("/savePost")
-    public String save(@RequestParam Post post) {
+    public String save(@ModelAttribute Post post) { // @RequestParam 사용 시 폼 파라미터 한 번에 받지 못함
+        if (post.getLockYn() == null) {
+            post.setLockYn("N");
+        }
         postService.save(post);
         return "redirect:/post/myPostList";
     }

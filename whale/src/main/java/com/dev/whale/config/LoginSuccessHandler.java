@@ -28,7 +28,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     public LoginSuccessHandler() {
         targetUrlParameter = "";
-        defaultUrl = "/main/main";
+        defaultUrl = "";
         useReferer = false;
 
     }
@@ -161,7 +161,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         if (((PrincipalDetail) (authentication).getPrincipal()).getUser().getIssueYn().equals("Y")) {
             defaultUrl = "/account/goChangePw?id=" + ((PrincipalDetail) (authentication).getPrincipal()).getUser().getId();
         } else {
-            defaultUrl = "/main/main";
+            defaultUrl = "/main/goMainPage";
         }
         redirectStrategy.sendRedirect(request, response, defaultUrl);
     }

@@ -1,7 +1,7 @@
 package com.dev.whale.domain.model;
 
 import com.dev.whale.BaseTimeEntity;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -9,10 +9,13 @@ import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.Where;
 
-@Data
 @Entity
 @Table(name = "TB_USER")
+@Where(clause = "enabled = true")
+@Data
+@AllArgsConstructor
 public class User extends BaseTimeEntity {
 
     @Id
@@ -49,17 +52,28 @@ public class User extends BaseTimeEntity {
     @JoinColumn(name = "ROLE_ID")
     private Role role;
 
-/*    @ManyToMany
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles = new ArrayList<>();*/
-
     @Override
     public String toString() {
         return ToStringBuilder
                 .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
+    private User() {
+
+    }
+
+    @Builder
+    public User(String username, String email, String nickname, Role role) {
+        this.username = username;
+        this.email = email;
+        this.nickname = nickname;
+        this.role = role;
+    }
+
+    public User update(String username, String nickname) {
+        this.username = username;
+        this.nickname = nickname;
+
+        return this;
+    }
 }

@@ -3,17 +3,18 @@ package com.dev.whale.domain.model;
 import com.dev.whale.BaseTimeEntity;
 import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
-@Data
+@NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "TB_POST")
 @SequenceGenerator(
@@ -37,17 +38,15 @@ public class Post extends BaseTimeEntity {
 
     @Column(name = "TITLE", length = 500)
     @NotNull
-    @NotBlank(message = "제목을 입력해주세요.")
     private String title;
 
     @Column(name = "CONTENT", length = 50000)
     @NotNull
-    @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
     @Column(name = "LOCK_YN")
     @Nullable
-    private String lockYn = "Y";
+    private String lockYn;
 
     @Column(name = "STATUS")
     @NotNull
@@ -56,6 +55,22 @@ public class Post extends BaseTimeEntity {
     @Column(name = "END_DATE", updatable = false)
     @NotNull
     private LocalDateTime endDate;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setLockYn(String lockYn) {
+        this.lockYn = lockYn;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @PrePersist
     public void endDateSetting() {

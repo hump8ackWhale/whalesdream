@@ -2,7 +2,10 @@ package com.dev.whale.controller;
 
 import com.dev.whale.domain.model.Post;
 import com.dev.whale.service.PostService;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,38 +32,23 @@ public class PostController {
     }
 
     @GetMapping("/savePost")
-    public String save(@RequestParam Post post) {
+    public String save(Post post) {
         postService.save(post);
-
-        return "redirect:/post/myPostList";
-    }
-
-    @GetMapping("/myPostList")
-    public String myPostPagingList(Model model, @RequestParam Long lastPostId, @RequestParam int size, @RequestParam Long userId) {
-
-        List<Post> myPostList = postService.selectMyPostList(lastPostId, size, userId);
-
-        if (myPostList.size() > 0) {
-            model.addAttribute("myPostList", myPostList);
-        }
 
         return "post/myPostList";
     }
 
-    @GetMapping("/allPostList")
-    public String allPostList(Model model, @RequestParam Long lastPostId, @RequestParam int size) {
+    @GetMapping("/myPostList")
+    public String getPostList(@RequestParam Long lastPostId, @RequestParam int size, @RequestParam Long userId, Model model) {
+        String flag = "my";
+        List<Post> posts = postService.fetchPostPagesBy(lastPostId, size, userId, flag);
 
-        List<Post> allPostList = postService.selectAllPostList(lastPostId, size);
-
-        if (allPostList.size() > 0) {
-            model.addAttribute("allPostList", allPostList);
-        }
-
-        return "post/allPostList";
+        model.addAttribute("posts", posts);
+        return "post/myPostList";
     }
 
     @GetMapping("/editPost/{pno}")
-    public String edit(@PathVariable("pno") int postNo, Model model) {
+    public String edit(@RequestParam int postNo, Model model) {
 
         Post editPost = postService.findById(postNo);
 
@@ -73,13 +61,13 @@ public class PostController {
     public String update(Post post) {
         postService.update(post);
 
-        return "redirect:/post/myPostList";
+        return "redirect:/post/postList";
     }
 
     @GetMapping("/deletePost/{pno}")
-    public String delete(@PathVariable("pno") int postNo) {
+    public String delete(@RequestParam int postNo) {
         postService.deleteById(postNo);
 
-        return "redirect:/post/myPostList";
+        return "redirect:/post/postList";
     }
 }

@@ -4,6 +4,7 @@ import com.dev.whale.domain.model.Post;
 import com.dev.whale.domain.model.User;
 import com.dev.whale.repository.account.AccountRepository;
 import com.dev.whale.repository.post.PostRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import javax.transaction.Transactional;
@@ -27,20 +28,11 @@ public class PostService {
     }
 
     // 나의 올해다짐 리스트 조회
-    public List<Post> selectMyPostList(Long lastPostId, int size, Long userId) {
-        PageRequest pageRequest = PageRequest.of(0, size);
+    public List<Post> fetchPostPagesBy(Long lastPostId, int size, Long userId, String flag) {
         User user = accountRepository.findById(userId);
-        List<Post> posts = postRepository.selectMyPostList(lastPostId, pageRequest, user);
+        Page<Post> posts = fetchPages(lastPostId, size, user, flag);
 
-        return posts;
-    }
-
-    // 모두 올해다짐 리스트 조회
-    public List<Post> selectAllPostList(Long lastPostId, int size) {
-        PageRequest pageRequest = PageRequest.of(0, size);
-        List<Post> posts = postRepository.selectAllPostList(lastPostId, pageRequest);
-
-        return posts;
+        return posts.getContent();
     }
 
     // 나의 올해다짐 수정
@@ -56,4 +48,12 @@ public class PostService {
     // 나의 올해다짐 삭제
     public void deleteById(int postNo) { postRepository.deleteById(postNo); }
 
+    private Page<Post> fetchPages(Long lastPostId, int size, User user, String flag) {
+        PageRequest pageRequest = PageRequest.of(0, size);
+        if (flag.equals("my")) {
+            return postRepository.selectMyPostList(lastPostId, user, pageRequest);
+        } else {
+            return postRepository.selectAllPostList(lastPostId, pageRequest);
+        }
+    }
 }

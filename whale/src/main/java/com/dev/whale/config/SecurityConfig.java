@@ -1,6 +1,7 @@
 package com.dev.whale.config;
 
 import com.dev.whale.config.auth.PrincipalDetailService;
+import com.dev.whale.service.CustomOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,13 +18,16 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity  // spring security 설정 활성화
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     private PrincipalDetailService principalDetailService;
 
     @Autowired
-    public SecurityConfig(PrincipalDetailService principalDetailService) {
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, PrincipalDetailService principalDetailService) {
+        this.customOAuth2UserService = customOAuth2UserService;
         this.principalDetailService = principalDetailService;
     }
 
@@ -69,7 +73,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소
                     .invalidateHttpSession(true)  // 세션 날리기
                     .deleteCookies("JSESSIONID")
-                    .permitAll();
+                    .permitAll()
+                .and()
+                    .oauth2Login()
+                    .userInfoEndpoint()
+                    .userService(customOAuth2UserService);
     }
 
     @Autowired

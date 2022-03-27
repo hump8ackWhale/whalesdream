@@ -2,6 +2,8 @@ package com.dev.whale.repository.post;
 
 import com.dev.whale.domain.model.Post;
 import com.dev.whale.domain.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import javax.persistence.EntityManager;
@@ -22,44 +24,46 @@ public class JpaPostRepository implements PostRepository {
     }
 
     @Override
-    public List<Post> selectMyPostList(Long lastPostId, PageRequest pageRequest, User user) {
+    public Page<Post> selectMyPostList(Long lastPostId, User user, PageRequest pageRequest) {
         LocalDateTime date = LocalDateTime.now();
         String query = "select p from Post p where (p.createdDate <= :date and :date < p.endDate) " +
                            "or YEAR(p.createdDate) < YEAR(:date) " +
-                        "and p.postNo = :lastPostId " +
+                        "and p.postNo < :lastPostId " +
                         "and p.username = :username " +
                     "order by p.createdDate desc";
 
-        List<Post> postList = em.createQuery(query)
-                .setFirstResult(pageRequest.getPageNumber())
-                .setMaxResults(pageRequest.getPageSize())
-                .setParameter("lastPostId", lastPostId)
-                .setParameter("username", user.getUsername())
-                .setParameter("date", date)
-                .getResultList();
+        Page<Post> posts = (Page<Post>) new PageImpl(
+                em.createQuery(query)
+                        .setFirstResult(pageRequest.getPageNumber() * pageRequest.getPageSize())
+                        .setMaxResults(pageRequest.getPageSize())
+                        .setParameter("lastPostId", lastPostId)
+                        .setParameter("username", user.getUsername())
+                        .setParameter("date", date)
+                        .getResultList()
+        );
 
-        return postList;
+        return posts;
     }
 
     @Override
-    public List<Post> selectAllPostList(Long lastPostId, PageRequest pageRequest) {
+    public Page<Post> selectAllPostList(Long lastPostId, PageRequest pageRequest) {
         LocalDateTime date = LocalDateTime.now();
-        String query = "select p from Post p join User u " +
-                        "on u.username = p.username " +
-                        "where u.enabled = true " +
-                        "and (p.createdDate <= :date and :date < p.endDate) " +
-                          "and (p.lockYn = 'N') " +
-                           "or (YEAR(p.createdDate) < YEAR(:date)) " +
-                     "order by p.createdDate desc";
+        String query = "select p from Post p where (p.createdDate <= :date and :date < p.endDate) " +
+                "or YEAR(p.createdDate) < YEAR(:date) " +
+                "and p.postNo < :lastPostId " +
+                "and p.lockYn = 'N' " +
+                "order by p.createdDate desc";
 
-        List<Post> allPostList = em.createQuery(query)
-                .setFirstResult(pageRequest.getPageNumber())
-                .setMaxResults(pageRequest.getPageSize())
-                .setParameter("lastPostId", lastPostId)
-                .setParameter("date", date)
-                .getResultList();
+        Page<Post> posts = (Page<Post>) new PageImpl(
+                em.createQuery(query)
+                        .setFirstResult(pageRequest.getPageNumber() * pageRequest.getPageSize())
+                        .setMaxResults(pageRequest.getPageSize())
+                        .setParameter("lastPostId", lastPostId)
+                        .setParameter("date", date)
+                        .getResultList()
+        );
 
-        return allPostList;
+        return posts;
     }
 
     @Override

@@ -56,6 +56,10 @@ public class Post extends BaseTimeEntity {
     @NotNull
     private LocalDateTime endDate;
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }

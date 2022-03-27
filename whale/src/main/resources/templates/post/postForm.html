@@ -22,7 +22,7 @@
             <div class="input_div">
               <textarea name="content" id="pcontent" cols="82" rows="20" placeholder="내용" style="resize:none; border: 1px solid #ced4da; border-radius:0.25rem;" required></textarea>
             </div><br>
-            <input type="hidden" name="username" th:value="${#authentication.name}" >
+            <input type="text" name="username" th:value="${#authentication.name}" >
             <div class="input_div"><button class="submit-button" type="submit" id="postBtn">작성 완료!</button></div>
           </form>
         </div>

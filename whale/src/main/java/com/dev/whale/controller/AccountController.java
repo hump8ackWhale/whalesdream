@@ -35,7 +35,7 @@ public class AccountController {
     @PostMapping("/register")
     public String register(User user, Model model) {
         String result = accountService.join(user);
-        model.addAttribute("result", result);   // 화면에 넘기기
+        model.addAttribute("result", result);// 화면에 넘기기
         return "index";
     }
 

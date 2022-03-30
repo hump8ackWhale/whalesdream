@@ -3,6 +3,7 @@ package com.dev.whale.repository.account;
 import com.dev.whale.domain.model.User;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,8 +65,10 @@ public class JpaAccountRepository implements AccountRepository {
     @Override
     public void updateTerm(Long id) {
         User user = em.find(User.class, id);
+        LocalDateTime date = LocalDateTime.now();
 
-        user.setTermYn("Y");
+        user.setTermDate(date);
+        //user.setTermYn("Y");
         user.setEnabled(false);
 
         em.persist(user);

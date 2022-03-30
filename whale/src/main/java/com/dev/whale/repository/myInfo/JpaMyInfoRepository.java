@@ -1,6 +1,5 @@
-package com.dev.whale.repository.myPage;
+package com.dev.whale.repository.myInfo;
 
-import com.dev.whale.domain.model.Post;
 import com.dev.whale.domain.model.User;
 
 import javax.persistence.EntityManager;

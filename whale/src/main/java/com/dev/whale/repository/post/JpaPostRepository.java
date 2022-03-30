@@ -26,7 +26,7 @@ public class JpaPostRepository implements PostRepository {
     }
 
     @Override
-    public Page<Post> selectMyPostList(Long lastPostId, User user, PageRequest pageRequest) {
+    public List<Post> selectMyPostList(Long lastPostId, User user, PageRequest pageRequest) {
         LocalDateTime date = LocalDateTime.now();
         String username = user.getUsername();
 
@@ -43,7 +43,7 @@ public class JpaPostRepository implements PostRepository {
                           "and p.postNo < :lastPostId " +
                      "order by p.createdDate desc";
 
-        List<Post> post = em.createQuery(query)
+        List<Post> posts = em.createQuery(query)
                 .setParameter("lastPostId", lastPostId)
                 .setParameter("username", username)
                 .setParameter("date", date)
@@ -51,13 +51,13 @@ public class JpaPostRepository implements PostRepository {
                 .setMaxResults(pageRequest.getPageSize())
                 .getResultList();
 
-        Page<Post> posts = (Page<Post>) new PageImpl(post);
+//        Page<Post> posts = (Page<Post>) new PageImpl(post);
 
         return posts;
     }
 
     @Override
-    public Page<Post> selectAllPostList(Long lastPostId, PageRequest pageRequest) {
+    public List<Post> selectAllPostList(Long lastPostId, PageRequest pageRequest) {
         LocalDateTime date = LocalDateTime.now();
 
         if (lastPostId == 9007199254740991l) {
@@ -73,14 +73,14 @@ public class JpaPostRepository implements PostRepository {
                 "and p.postNo < :lastPostId " +
                 "order by p.createdDate desc";
 
-        List<Post> post = em.createQuery(query)
+        List<Post> posts = em.createQuery(query)
                 .setParameter("lastPostId", lastPostId)
                 .setParameter("date", date)
                 .setFirstResult(firstResult * pageRequest.getPageSize())
                 .setMaxResults(pageRequest.getPageSize())
                 .getResultList();
 
-        Page<Post> posts = (Page<Post>) new PageImpl(post);
+//        Page<Post> posts = (Page<Post>) new PageImpl(post);
 
         return posts;
     }

@@ -30,9 +30,9 @@ public class PostService {
     // 나의 올해다짐 리스트 조회
     public List<Post> fetchPostPagesBy(Long lastPostId, int size, Long userId, String flag) {
         User user = accountRepository.findById(userId);
-        Page<Post> posts = fetchPages(lastPostId, size, user, flag);
+        List<Post> posts = fetchPages(lastPostId, size, user, flag);
 
-        return posts.getContent();
+        return posts;
     }
 
     // 나의 올해다짐 수정
@@ -48,7 +48,7 @@ public class PostService {
     // 나의 올해다짐 삭제
     public void deleteById(int postNo) { postRepository.deleteById(postNo); }
 
-    private Page<Post> fetchPages(Long lastPostId, int size, User user, String flag) {
+    private List<Post> fetchPages(Long lastPostId, int size, User user, String flag) {
         PageRequest pageRequest = PageRequest.of(0, size);
         if (flag.equals("my")) {
             return postRepository.selectMyPostList(lastPostId, user, pageRequest);

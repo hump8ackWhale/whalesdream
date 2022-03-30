@@ -1,7 +1,7 @@
 package com.dev.whale.service;
 
 import com.dev.whale.domain.model.User;
-import com.dev.whale.repository.myPage.MyInfoRepository;
+import com.dev.whale.repository.myInfo.MyInfoRepository;
 
 import javax.transaction.Transactional;
 

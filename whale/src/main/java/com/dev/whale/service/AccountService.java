@@ -29,27 +29,34 @@ public class AccountService {
     private JavaMailSender mailSender;
 
     // 회원 가입
-    public void join(User user) {
+    public String join(User user) {
         // 아이디 중복 x
-        validateDuplicateUser(user);
+        String result = validateDuplicateUser(user);
+        String msg = "";
 
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        if (result.equals("pos")) {
+            msg = "가입 가능한 아이디입니다.";
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
 
-        /*Role role = new Role();
-        role.setId(1L);
-        user.getRoles().add(role);
-*/
-
-        accountRepository.join(user);
+            accountRepository.join(user);
+        } else {
+            msg = "중복된 아이디입니다.";
+        }
+        return msg;
     }
 
     // 아이디 중복 검증
-    private void validateDuplicateUser(User user) {
-        accountRepository.findByName(user.getUsername())
-                .ifPresent(m -> {
-                    throw new IllegalStateException("중복된 아이디입니다.");
-                });
+    private String validateDuplicateUser(User user) {
+        String result = "";
+
+        Optional<User> idCheck = accountRepository.findByName(user.getUsername());
+        if (idCheck.isPresent()) {
+            result = "dup";
+        } else {
+            result = "pos";
+        }
+        return result;
     }
 
     // 해당 userEmail의 사용자가 있는지 CHECK

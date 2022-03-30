@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -40,10 +42,7 @@ public class User extends BaseTimeEntity {
     private String email;
 
     @Column(name = "TERM_DATE", insertable = false)
-    private Date termDate;
-
-    @Column(name = "TERM_YN")
-    private String termYn = "N";
+    private LocalDateTime termDate;
 
     @Column(name = "ISSUE_YN")
     private String issueYn = "N";

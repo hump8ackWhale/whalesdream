@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,7 +36,7 @@ public class myInfoController {
     }
 
     @GetMapping("/update")
-    public String update(Model model, String newVal, Long id) {
+    public String update(Model model, @RequestParam String newVal, @RequestParam Long id) {
 
         User myInfo = myInfoService.updateUserInfo(newVal, id);
 

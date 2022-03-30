@@ -8,10 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,9 +33,9 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String register(User user) {
-        accountService.join(user);
-
+    public String register(User user, Model model) {
+        String result = accountService.join(user);
+        model.addAttribute("result", result);   // 화면에 넘기기
         return "index";
     }
 
@@ -56,7 +53,7 @@ public class AccountController {
     }
 
     @GetMapping("/check/findUsername")
-    public @ResponseBody Map<String, Boolean> findByEmail(String userEmail) {
+    public @ResponseBody Map<String, Boolean> findByEmail(@RequestParam String userEmail) {
         Map<String, Boolean> map = new HashMap<>();
 
         boolean findName = accountService.findByEmail(userEmail);
@@ -66,7 +63,7 @@ public class AccountController {
     }
 
     @GetMapping("/check/findPw")
-    public @ResponseBody Map<String, Boolean> findPw(String userEmail, String userName) {
+    public @ResponseBody Map<String, Boolean> findPw(@RequestParam String userEmail, @RequestParam String userName) {
         Map<String, Boolean> map = new HashMap<>();
 
         boolean findPw = accountService.usernameCheck(userEmail, userName);
@@ -76,7 +73,7 @@ public class AccountController {
     }
 
     @PostMapping("/check/findPw/sendEmail")
-    public @ResponseBody String sendEmail(String userEmail, String userName) {
+    public @ResponseBody String sendEmail(@RequestParam String userEmail, @RequestParam String userName) {
         MailVO mail = accountService.changePasswordMail(userEmail, userName);
         accountService.mailSend(mail);
 
@@ -90,7 +87,7 @@ public class AccountController {
     }
 
     @GetMapping("/changePw")
-    public String changePw(HttpServletRequest request, Long id, String orgPw, String newPw) {
+    public String changePw(HttpServletRequest request, @RequestParam Long id, @RequestParam String orgPw, @RequestParam String newPw) {
         boolean result = accountService.changePw(id, orgPw, newPw);
 
         // 비밀번호 수정 후 다시 로그인하게 할 경우 세션 비워줘야함
@@ -113,7 +110,7 @@ public class AccountController {
     }
 
     @GetMapping("/leaveAcnt")
-    public String updateTerm(HttpServletRequest request, String password, Long id) {
+    public String updateTerm(HttpServletRequest request, @RequestParam String password, @RequestParam Long id) {
         boolean result = accountService.checkPw(password, id);
 
         if (result) {

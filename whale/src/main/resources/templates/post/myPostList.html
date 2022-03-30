@@ -87,7 +87,6 @@ $(function(){
 
     $.ajax({
       type: "GET",
-      dataType: "json",
       url: "/post/myPostList",
       data: {
           "lastPostId": lastArticleId,
@@ -95,9 +94,19 @@ $(function(){
           "userId" : userId,
           "flag" : "my"
       },
-      success: function (data) {
-        search_var = data.dataList; // data로 받아온 List를 변수에 담기
-        console.log("search_var " + search_var);
+      success: function (list) {
+
+        console.log(list); // data를 console.log로 확인한다.
+        console.log(typeof(list)); // 가져온 data의 type 확인한다.
+
+     //   const postArr = list.querySelectorAll('.Accordion_wrap');
+
+
+
+        $('.Accordion_wrap').append(replyDiv);
+
+//        document.documentElement.innerHTML = list;
+
 
       },
       error: function () {

@@ -338,11 +338,17 @@ ul {
     width:50px;
     height:50px;
 
-    /* 캐릭터를 지정된 위치로 한 번만 foward함 */
-    animation: walk 1.8s steps(8),
-    forward 5s linear;
+    /* 키프레임을 지정하여 캐릭터를 걷게한다. */
+    animation: walk 1.8s steps(8), 5s linear;
+    animation-iteration-count: infinite;
+}
+
+#forward_turtle {
+
+    /* 캐릭터를 지정된 위치로 한 번만 foward한다. */
+    animation: forward 5s;
     animation-iteration-count: 1;
-    -webkit-animation-fill-mode:both
+    -webkit-animation-fill-mode:both;
 
 }
 
@@ -359,6 +365,6 @@ ul {
         transform: translateX(0px);
     }
     100%{
-        transform: translateX(320px);
+        transform: translateX(50%);
     }
 }

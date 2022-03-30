@@ -47,7 +47,3 @@ function equalUsername(param) {
  }
 
 }
-
-function toggleAnimationPlayState() {
-  document.querySelector("#walking_turtle").classList.toggle("paused");
-}

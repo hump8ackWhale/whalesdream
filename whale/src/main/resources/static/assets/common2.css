@@ -363,7 +363,7 @@ ul {
 #forward_turtle {
 
     /* 캐릭터를 지정된 위치로 한 번만 foward한다. */
-    animation: forward 5s;
+    animation: forward 10s;
     animation-iteration-count: 1;
     -webkit-animation-fill-mode:both;
 

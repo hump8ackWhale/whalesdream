@@ -13,11 +13,12 @@
                 <img th:src="@{/assets/images/whale_flow.png}" alt="" width="50px" height="50px">
             </div>
             <div class="panel_inner">
-              <form id="registerForm"th:action="@{/account/register}" method="POST">
+              <form id="registerForm"th:action="@{/account/register}" method="GET">
                 <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
                   <div class="register_div">
                       <input class="input_row lm_row registerData" type="text" name="username" placeholder="아이디" th:value="${username}"> <br>
-                      <span class="errorMsg" id="idMsg"></span>
+                      <button type="button" id="btn_id_check" onclick="accountCheck(this.id);" class="login-button center_btn">아이디 체크</button> <!--민진 추가-->
+                      <span class="errorMsg" id="idMsg"> <!--민진 추가-->
                   </div>
                   <div class="register_div">
                       <input class="input_row lm_row registerData" type="text" name="nickname" placeholder="닉네임" th:value="${nickname}"> <br>
@@ -33,10 +34,11 @@
                   </div>
                   <div class="register_div">
                       <input class="input_row lm_row registerData" type="email" name="email" placeholder="이메일" th:value="${email}"><br>
+                      <button type="button" id="btn_email_check" onclick="accountCheck(this.id);" class="login-button center_btn">메일 체크</button> <!--민진 추가-->
                       <span class="errorMsg" id="emailMsg"></span>
                   </div>
                   <div style="text-align: center;">
-                      <button id="btn_register" class="login-button center_btn"type="submit">회원가입</button>
+                      <button id="btn_register" class="login-button center_btn" type="submit">회원가입</button>
                   </div>
               </form>
             </div>
@@ -130,8 +132,56 @@ $(function(){
 
     });
 
-
 });
+// 민진 추가
+function accountCheck(clicked_id) {
+    let url = "/account/dupCheck";
+
+    if (clicked_id == 'btn_id_check') {
+        let username = $('input[name=username]').val();
+
+        if (username.length <= 0) {
+            $("#idMsg").text("아이디를 입력하세요");
+            return;
+        }
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            async: false,
+            data: {
+                "username": username,
+                "flag": "U"
+            },
+            success: function (data) {
+                $("#idMsg").text(data);
+            }
+        });
+
+    } else {
+
+        let email = $('input[name=email]').val();
+
+        if (email.length <= 0) {
+            $("#emailMsg").text("이메일을 입력하세요");
+            return;
+        }
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            async: false,
+            data: {
+                "email": email,
+                "flag": "E"
+            },
+            success: function () {
+                $("#emailMsg").text(data);
+            }
+        });
+
+    }
+}
 </script>
 </body>
 </html>

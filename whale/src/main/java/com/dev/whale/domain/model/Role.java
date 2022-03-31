@@ -2,8 +2,11 @@ package com.dev.whale.domain.model;
 
 import com.sun.istack.NotNull;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -11,14 +14,10 @@ import javax.persistence.*;
 public class Role {
 
     @Id
-    @Column(name = "ROLE_ID", updatable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ROLE_ID")
     private int roleId;
 
-    @Column(name = "ROLE", length = 50)
-    @NotNull
-    private String role;
+    @Column(name = "ROLE_NAME")
+    private String roleName;
 
-/*    @ManyToMany(mappedBy = "roles")
-    private List<User> users;*/
 }

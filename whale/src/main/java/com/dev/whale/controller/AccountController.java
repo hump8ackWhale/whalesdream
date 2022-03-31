@@ -32,10 +32,16 @@ public class AccountController {
         return "account/register";
     }
 
-    @PostMapping("/register")
-    public String register(User user, Model model) {
-        String result = accountService.join(user);
+    @GetMapping("/dupCheck")
+    public String idCheck(@RequestParam(required = false) String username, @RequestParam(required = false) String email, @RequestParam String flag, Model model) {
+        String result = accountService.validateDuplicateUser(username, email, flag);
         model.addAttribute("result", result);// 화면에 넘기기
+        return "redirect:/";
+    }
+
+    @GetMapping("/register")
+    public String register(User user, Model model) {
+        accountService.join(user);
         return "index";
     }
 

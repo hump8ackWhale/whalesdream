@@ -58,8 +58,8 @@ public class PrincipalDetail implements UserDetails {
         Collection<GrantedAuthority> collectors = new ArrayList<>();
 
         collectors.add(() -> {
-            /* 계정권한 : 21(ADMIN), 1(USER) */
-            return this.user.getRole().getRole();
+            /* 계정권한 : 2(ADMIN), 1(USER) */
+            return this.user.getRole().getRoleName();
         });
         return collectors;
     }

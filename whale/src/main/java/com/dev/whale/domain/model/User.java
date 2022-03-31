@@ -5,9 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -18,6 +16,7 @@ import org.hibernate.annotations.Where;
 @Where(clause = "enabled = true")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class User extends BaseTimeEntity {
 
     @Id
@@ -47,18 +46,22 @@ public class User extends BaseTimeEntity {
     @Column(name = "ISSUE_YN")
     private String issueYn = "N";
 
+    @Column(name = "NAVER_LOGIN_YN")
+    private String naverLoginYn;
+
     @ManyToOne
     @JoinColumn(name = "ROLE_ID")
     private Role role;
-
+/*
+    @ManyToOne
+    @JoinColumn(name = "ROLE_ID" , insertable = false, updatable = false)
+    @ToString.Exclude
+    private Role role;
+*/
     @Override
     public String toString() {
         return ToStringBuilder
                 .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
-
-    private User() {
-
     }
 
     @Builder
@@ -69,9 +72,10 @@ public class User extends BaseTimeEntity {
         this.role = role;
     }
 
-    public User update(String username, String nickname) {
+    public User update(String username, String nickname, String naverLoginYn) {
         this.username = username;
         this.nickname = nickname;
+        this.naverLoginYn = naverLoginYn;
 
         return this;
     }

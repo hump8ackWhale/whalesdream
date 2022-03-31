@@ -28,35 +28,37 @@ public class AccountService {
     @Autowired
     private JavaMailSender mailSender;
 
-    // 회원 가입
-    public String join(User user) {
-        // 아이디 중복 x
-        String result = validateDuplicateUser(user);
-        String msg = "";
-
-        if (result.equals("pos")) {
-            msg = "가입 가능한 아이디입니다.";
-            String encodedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(encodedPassword);
-
-            accountRepository.join(user);
-        } else {
-            msg = "중복된 아이디입니다.";
-        }
-        return msg;
-    }
-
     // 아이디 중복 검증
-    private String validateDuplicateUser(User user) {
+    public String validateDuplicateUser(String username, String email, String flag) {
         String result = "";
 
-        Optional<User> idCheck = accountRepository.findByName(user.getUsername());
-        if (idCheck.isPresent()) {
-            result = "dup";
+        if (flag.equals("E")) {
+            Optional<User> emailCheck = accountRepository.findByEmail(email);
+            if (emailCheck.isPresent()) {
+                result = "중복된 이메일입니다.";
+            } else {
+                result = "가입 가능한 이메일입니다.";
+            }
         } else {
-            result = "pos";
+            Optional<User> idCheck = accountRepository.findByName(username);
+            if (idCheck.isPresent()) {
+                result = "중복된 아이디입니다.";
+            } else {
+                result = "가입 가능한 아이디입니다.";
+            }
         }
+
         return result;
+    }
+
+    // 회원 가입
+    public void join(User user) {
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        user.setNaverLoginYn("N");
+//        user.setRoleId(1);
+
+        accountRepository.join(user);
     }
 
     // 해당 userEmail의 사용자가 있는지 CHECK

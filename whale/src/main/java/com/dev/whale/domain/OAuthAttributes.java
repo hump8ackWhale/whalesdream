@@ -46,8 +46,8 @@ public class OAuthAttributes {
     public static OAuthAttributes ofNaver(String userNameAttributeName,
                                           Map<String, Object> attributes) {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
-        return OAuthAttributes.builder() //네이버 Oauth 객체 생성
-                .name((String) response.get("name"))
+        return OAuthAttributes.builder() //네이버 Oauth 객체 생성 (네이버에서 전해주는 response에서 id, email, nickname 세팅)
+                .name((String) response.get("id"))
                 .email((String) response.get("email"))
                 .nickname((String) response.get("nickname"))
                 .attributes(response)

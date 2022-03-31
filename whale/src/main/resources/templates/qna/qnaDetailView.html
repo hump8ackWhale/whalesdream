@@ -46,7 +46,7 @@
                             </div>
                         </li>
                     </ul>
-                    <!-- admin 답변달기 roleId : 1(ROLE_USER) 21(ROLE_ADMIN)  -->
+                    <!-- admin 답변달기 roleId : ROLE_USER, ROLE_ADMIN  -->
                     <div sec:authorize= "hasRole('ROLE_ADMIN')">
                         <form th:action="@{/qna/insertReply}" method="GET">
                             <div class="input_div">

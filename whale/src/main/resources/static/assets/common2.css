@@ -161,6 +161,8 @@ p>span{
 
 .inline_div {
     display:inline-flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .panel_inner {
@@ -176,6 +178,21 @@ p>span{
     background-color : #661BD1;
     border-radius:5px;
     font-size: 1.5rem;
+}
+
+.regist_btn {
+    width: 20%;
+    padding: 9px 0px 13px;
+    border: 1px solid #ced4da;
+    color:#000;
+    background-color: #fff;
+    border-radius:5px;
+    font-size: 1.5rem;
+}
+
+.regist_btn:hover {
+    border: 1px solid #eee;
+    background-color: #e4e4e4;
 }
 
 .label_span {

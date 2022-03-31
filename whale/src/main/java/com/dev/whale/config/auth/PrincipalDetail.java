@@ -59,12 +59,8 @@ public class PrincipalDetail implements UserDetails {
 
         collectors.add(() -> {
             /* 계정권한 : 2(ADMIN), 1(USER) */
-            return this.user.getRole().getRoleName();
+            return String.valueOf(this.user.getRole());
         });
         return collectors;
-    }
-
-    public Role getRole() {
-        return user.getRole();
     }
 }

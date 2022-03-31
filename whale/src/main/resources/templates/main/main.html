@@ -25,8 +25,7 @@
         <span style="text-align:center;">조회된 데이터가 없습니다.</span>
     </div>
     <b>Authenticated user role:</b>
-    <!--<div sec:authentication="principal.role.roleId"></div>role_id-->
-    <!--<div sec:authentication="principal.role.role"></div>role_name-->
+    <div sec:authentication="principal.user.role"></div><--role_name-->
 
     <!-- footer -->
     <footer th:replace="common/footer :: footer"></footer>

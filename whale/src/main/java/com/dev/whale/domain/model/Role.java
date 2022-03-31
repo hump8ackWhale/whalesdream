@@ -1,23 +1,13 @@
 package com.dev.whale.domain.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
-import lombok.ToString;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@Entity
-@Table(name = "TB_ROLE")
-public class Role {
+@RequiredArgsConstructor
+public enum Role {
+    USER("ROLE_USER"),
+    ADMIN("ROLE_ADMIN");
 
-    @Id
-    @Column(name = "ROLE_ID")
-    private int roleId;
-
-    @Column(name = "ROLE_NAME")
-    private String roleName;
-
+    private final String value;
 }

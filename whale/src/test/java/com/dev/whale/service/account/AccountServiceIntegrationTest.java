@@ -33,6 +33,7 @@ public class AccountServiceIntegrationTest {
 
         String pass = "12345";
 
+        /*
         //Given
         User user = new User();
         user.setUsername("mjyeo");
@@ -46,6 +47,7 @@ public class AccountServiceIntegrationTest {
         //Then
         System.out.print("생성날짜 : " + user.getCreatedDate());
         System.out.print("생성날짜 : " + user.getModifiedDate());
+         */
     }
     @Test
     public void passwordEncoder() throws Exception {

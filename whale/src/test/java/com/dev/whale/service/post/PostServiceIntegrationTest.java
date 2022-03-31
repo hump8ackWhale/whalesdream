@@ -25,6 +25,7 @@ public class PostServiceIntegrationTest {
     public void save() {
 
         // Given
+        /*
         Post post = new Post();
 
         post.setUsername("mj-yeo");
@@ -44,7 +45,7 @@ public class PostServiceIntegrationTest {
         post.setContent("당해년도 이전 글 모두 조회 가능2");*/
 
         // When
-        postService.save(post);
+        //postService.save(post);
 
     }
 
@@ -69,11 +70,11 @@ public class PostServiceIntegrationTest {
     public void update() {
 
         // Given
-        Post post = new Post();
+       // Post post = new Post();
 
-        post.setPostNo(44);
+        //post.setPostNo(44);
         // when
-        postService.update(post);
+        //postService.update(post);
     }
 
 }

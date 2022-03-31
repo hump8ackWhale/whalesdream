@@ -1,7 +1,7 @@
 package com.dev.whale.service.myPage;
 
 import com.dev.whale.domain.model.User;
-import com.dev.whale.repository.myPage.MyInfoRepository;
+import com.dev.whale.repository.myInfo.MyInfoRepository;
 import com.dev.whale.service.MyInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

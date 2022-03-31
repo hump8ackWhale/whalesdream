@@ -49,15 +49,9 @@ public class User extends BaseTimeEntity {
     @Column(name = "NAVER_LOGIN_YN")
     private String naverLoginYn;
 
-    @ManyToOne
-    @JoinColumn(name = "ROLE_ID")
+    @Enumerated(EnumType.STRING)
     private Role role;
-/*
-    @ManyToOne
-    @JoinColumn(name = "ROLE_ID" , insertable = false, updatable = false)
-    @ToString.Exclude
-    private Role role;
-*/
+
     @Override
     public String toString() {
         return ToStringBuilder

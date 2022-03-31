@@ -154,7 +154,12 @@ function accountCheck(clicked_id) {
                 "flag": "U"
             },
             success: function (data) {
-                $("#idMsg").text(data);
+                $("#idMsg").text(data.result);
+                if (data.result.match("중복")) {
+                    $('#btn_register').prop('disabled', true);
+                } else {
+                    $('#btn_register').prop('disabled', false);
+                }
             }
         });
 
@@ -175,8 +180,13 @@ function accountCheck(clicked_id) {
                 "email": email,
                 "flag": "E"
             },
-            success: function () {
-                $("#emailMsg").text(data);
+            success: function (data) {
+                $("#emailMsg").text(data.result);
+                if (data.result.match("중복")) {
+                    $('#btn_register').prop('disabled', true);
+                } else {
+                    $('#btn_register').prop('disabled', false);
+                }
             }
         });
 

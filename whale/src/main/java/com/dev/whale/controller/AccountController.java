@@ -3,6 +3,7 @@ package com.dev.whale.controller;
 import com.dev.whale.domain.MailVO;
 import com.dev.whale.domain.model.User;
 import com.dev.whale.service.AccountService;
+import com.nimbusds.jose.shaded.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -33,14 +34,17 @@ public class AccountController {
     }
 
     @GetMapping("/dupCheck")
-    public String idCheck(@RequestParam(required = false) String username, @RequestParam(required = false) String email, @RequestParam String flag, Model model) {
+    @ResponseBody
+    public JSONObject idCheck(@RequestParam(required = false) String username, @RequestParam(required = false) String email, @RequestParam String flag) {
+        JSONObject json = new JSONObject();
         String result = accountService.validateDuplicateUser(username, email, flag);
-        model.addAttribute("result", result);// 화면에 넘기기
-        return "redirect:/";
+
+        json.put("result", result);
+        return json;
     }
 
     @GetMapping("/register")
-    public String register(User user, Model model) {
+    public String register(User user) {
         accountService.join(user);
         return "index";
     }

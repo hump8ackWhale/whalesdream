@@ -59,10 +59,11 @@ public class User extends BaseTimeEntity {
     }
 
     @Builder
-    public User(String username, String email, String nickname, Role role) {
+    public User(String username, String email, String nickname, String naverLoginYn, Role role) {
         this.username = username;
         this.email = email;
         this.nickname = nickname;
+        this.naverLoginYn = naverLoginYn;
         this.role = role;
     }
 
@@ -72,5 +73,9 @@ public class User extends BaseTimeEntity {
         this.naverLoginYn = naverLoginYn;
 
         return this;
+    }
+
+    public String getRoleKey(){
+        return this.role.getValue();
     }
 }

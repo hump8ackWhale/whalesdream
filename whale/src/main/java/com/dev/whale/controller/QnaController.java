@@ -108,7 +108,6 @@ public class QnaController {
     public String delete (@PathVariable("qnaNo") int qnaNo){
 
         Qna qna = new Qna();
-        qna.setQnaNo(qnaNo);
 
         QnaService.deleteById(qna);
         return "redirect:/qna/qnaListView";

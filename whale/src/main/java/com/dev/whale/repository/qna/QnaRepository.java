@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface QnaRepository {
 
-    Qna insertQna(Qna qna);
+    void insertQna(Qna qna);
 
     void update(Qna qna);
 

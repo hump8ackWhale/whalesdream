@@ -14,9 +14,7 @@ public class JpaQnaRepository implements QnaRepository {
     public JpaQnaRepository(EntityManager em) {this.em = em;}
 
     @Override
-    public Qna insertQna(Qna qna) { em.persist(qna);
-        return qna;
-    }
+    public void insertQna(Qna qna) { em.persist(qna);}
 
     @Override
     public void update(Qna qna) {

@@ -41,7 +41,7 @@
 
       $("#postBtn").click(function(){
         let qnaNo = $('input[name=qnaNo]').val();
-        let categoryNo = $('input[name=categoryNo]').val();
+        let categoryNo = $('select[name=categoryNo]').val();
 
         if(categoryNo == '0') {
           alert("카테고리를 선택해주세요.");
@@ -49,9 +49,9 @@
         }
 
         if(qnaNo > 0){
-            $("#qna_form").attr("action","/qna/qnaUpdate").submit();
+          $("#qna_form").attr("action","/qna/qnaUpdate").submit();
         }else{
-            $("#qna_form").attr("action","/qna/insertQna").submit();
+          $("#qna_form").attr("action","/qna/insertQna").submit();
         }
       });
 

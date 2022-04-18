@@ -2,14 +2,16 @@ package com.dev.whale.domain.model;
 
 import com.dev.whale.BaseTimeEntity;
 import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
-@Data
+@NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "TB_QNA")
 @SequenceGenerator(
@@ -24,8 +26,7 @@ public class Qna extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "QNA_NO")
-    @NotNull
+    @Column(name = "QNA_NO", updatable = false)
     private int qnaNo;
 
     @Column(name = "USERNAME")
@@ -56,5 +57,27 @@ public class Qna extends BaseTimeEntity {
     @JoinColumn(name = "CATEGORY_NO" , insertable = false, updatable = false) // 읽기 전용
     @ToString.Exclude
     private Category category;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCategoryNo(int categoryNo) {this.categoryNo = categoryNo;}
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setLockYn(String lockYn) {
+        this.lockYn = lockYn;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
 }

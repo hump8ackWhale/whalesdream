@@ -61,7 +61,7 @@ public class OAuthAttributes {
                 .username(username)
                 .email(email)
                 .nickname(nickname)
-                .naverLoginYn("Y")
+                //.naverLoginYn("Y")
                 .role(Role.USER)
                 .build();
     }

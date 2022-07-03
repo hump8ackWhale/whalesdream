@@ -34,7 +34,7 @@ public class PostController {
             post.setLockYn("N");
         }
         postService.save(post);
-        return "redirect:/post/myPostList";
+        return "post/myPostList";
     }
 
     @GetMapping("/myPostList")

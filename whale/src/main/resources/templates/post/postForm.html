@@ -11,7 +11,7 @@
     <div id="content_wrap">
       <div id="list_wrap">
         <div class="panel_inner">
-          <form th:action="@{/post/savePost}" method="GET">
+          <form method="GET">
             <div class="input_div">
               <span>비밀글</span>
               <input type="checkbox" id="pCheck" name="lockYn" value="Y"> <br>
@@ -23,7 +23,7 @@
               <textarea name="content" id="pcontent" cols="82" rows="20" placeholder="내용" style="resize:none; border: 1px solid #ced4da; border-radius:0.25rem;" required></textarea>
             </div><br>
             <input type="hidden" name="username" th:value="${#authentication.name}" >
-            <div class="input_div"><button class="submit-button" type="submit" id="postBtn">작성 완료!</button></div>
+            <div class="input_div"><button class="submit-button" type="submit" id="postBtn" onclick="doubleSubmit(this.form)">작성 완료!</button></div>
           </form>
         </div>
       </div>
@@ -32,8 +32,8 @@
   <!-- footer -->
   <footer th:replace="common/footer :: footer"></footer>
 <script>
-$(function() {
 
+$(function() {
   /*
   * 나의 다짐 작성 전 validation을 체크한다.
   */
@@ -49,10 +49,22 @@ $(function() {
        alert("내용을 입력해주세요");
        return false;
     }
-
   });
-
 });
+
+var doubleSubmitFlag = false;
+
+function doubleSubmit(form) {
+  if (doubleSubmitFlag) {
+    alert("처리 중입니다.");
+    return;
+  } else {
+    doubleSubmitFlag = true;
+    form.action = "/post/savePost";
+    form.submit();
+  }
+}
+
 </script>
 </div>
 </body>

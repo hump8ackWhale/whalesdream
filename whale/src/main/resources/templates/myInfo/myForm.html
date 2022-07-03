@@ -23,8 +23,7 @@
                 </div>
                 <div class="input_div">
                     <img th:src="@{/assets/images/nick_font.png}" alt="">
-                    <input class="input_row inline_div middle_row" type="text" name="nickname" placeholder="닉네임" th:value="${myInfo.nickname}">
-                    <button class="nm_btn" id="editForm">수정</button>
+                    <input class="input_row inline_div middle_row" type="text" name="nickname" id="nickname" placeholder="닉네임" th:value="${myInfo.nickname}" disabled>
                 </div>
                 <div class="input_div">
                     <img th:src="@{/assets/images/email_font.png}" alt="">
@@ -33,7 +32,8 @@
             </div>
 
             <div style="text-align: center;">
-                <button class="nm_btn" id="editInfo">수정완료</button>
+                <button class="nm_btn" id="editInfo">수정하기</button>
+                <button class="nm_btn" id="updateInfo">수정완료!</button>
                 <button class="bl_btn center_btn" id="leaveAccount" th:onclick="|location.href='@{/myInfo/leaveAccount(id=${myInfo.id})}'|">회원탈퇴</button>
             </div>
 
@@ -46,28 +46,24 @@
     </div>
 
 </div>
-
+<!-- el.removeAttr("style");-->
 <script type="text/javascript">
 
 $(function() {
 
-    $(document).ready(function(){
-        $("#editInfo").hide();
-    });
+    $("#updateInfo").hide();
 
     let el = $("#nickname");
     let orgVal = el.val();
-
-    $("#editForm").click(function () {
-        el.removeAttr("style");
-        el.attr("disabled", false);
-
-        $("#editForm").hide();
-        $("#editInfo").show();
-    });
+    let id = $("#id").val();
 
     $("#editInfo").click(function () {
-        let id = $("#id").val();
+        $("#editInfo").hide();
+        $("#updateInfo").show();
+        el.attr("disabled", false);
+    });
+
+    $("#updateInfo").click(function () {
         let newVal = el.val();
 
         if (orgVal != newVal) {
@@ -75,28 +71,19 @@ $(function() {
                 type: "GET",
                 url: "/myInfo/update",
                 data: {
-                    "orgVal": orgVal,
                     "newVal": newVal,
                     "id": id
                 },
                 success: function () {
-                    el.attr({
-                        style: "border:0 solid black"
-                    });
+                    $("#editInfo").show();
+                    $("#updateInfo").hide();
                     el.attr("disabled", true);
-
-                    $("#editForm").show();
-                    $("#editInfo").hide();
                 }
             });
         } else {
-            el.attr({
-                style: "border:0 solid black"
-            });
+            $("#editInfo").show();
+            $("#updateInfo").hide();
             el.attr("disabled", true);
-
-            $("#editForm").show();
-            $("#editInfo").hide();
         }
     });
 });

@@ -16,30 +16,32 @@
 
       <!-- content start-->
       <div id="list_wrap">
-        <div class="Accordion_wrap"  th:each="allPost : ${allPostList}" th:if="${not #strings.isEmpty(allPostList)}">
+        <div class="Accordion_wrap"  th:each="post : ${posts}" th:if="${not #strings.isEmpty(posts)}">
 
           <div style="float:left; width:15%; border-right: 1px solid #dddddd; margin:0px 15px;">
-            <span th:text="${#temporals.format(allPost.createdDate, 'yyyy-MM-dd')}"></span>
+            <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd')}"></span>
           </div>
           <div class="que">
-            <span th:text="${allPost.title}"></span>
+            <span th:text="${post.title}"></span>
           </div>
           <div class="detail_wrap">
-            <span th:text="${allPost.content}"></span>
+            <span th:text="${post.content}"></span>
           </div>
         </div>
 
-        <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(allPostList)}">
+        <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(posts)}">
           <span style="text-align:center;">조회된 데이터가 없습니다.</span>
         </div>
 
      <!-- content end-->
      </div>
-   <div>
+   </div>
 
   <!-- footer -->
   <footer th:replace="common/footer :: footer"></footer>
+  </div>
 </div>
+</body>
 <script>
   $(function(){
     $("#datatable-default tbody tr").click(function(){
@@ -67,5 +69,5 @@
 
   });
 </script>
-</body>
 </html>
+

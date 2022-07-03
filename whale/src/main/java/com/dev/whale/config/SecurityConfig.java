@@ -21,13 +21,13 @@ import javax.sql.DataSource;
 @EnableWebSecurity  // spring security 설정 활성화
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final CustomOAuth2UserService customOAuth2UserService;
+    //private final CustomOAuth2UserService customOAuth2UserService;
 
     private PrincipalDetailService principalDetailService;
 
     @Autowired
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, PrincipalDetailService principalDetailService) {
-        this.customOAuth2UserService = customOAuth2UserService;
+    public SecurityConfig(PrincipalDetailService principalDetailService) {
+        //this.customOAuth2UserService = customOAuth2UserService;
         this.principalDetailService = principalDetailService;
     }
 
@@ -74,12 +74,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .invalidateHttpSession(true)  // 세션 날리기
                     .deleteCookies("JSESSIONID")
                     .permitAll()
-                .and()
+                /*.and()
                     .oauth2Login()
                     .userInfoEndpoint()
                     .userService(customOAuth2UserService)
                 .and()
-                    .defaultSuccessUrl("/main/goMainPage");
+                    .defaultSuccessUrl("/main/goMainPage")*/;
     }
 
     @Autowired

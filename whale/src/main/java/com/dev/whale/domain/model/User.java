@@ -46,8 +46,8 @@ public class User extends BaseTimeEntity {
     @Column(name = "ISSUE_YN")
     private String issueYn = "N";
 
-    @Column(name = "NAVER_LOGIN_YN")
-    private String naverLoginYn;
+    /*@Column(name = "NAVER_LOGIN_YN")
+    private String naverLoginYn;*/
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -59,18 +59,18 @@ public class User extends BaseTimeEntity {
     }
 
     @Builder
-    public User(String username, String email, String nickname, String naverLoginYn, Role role) {
+    public User(String username, String email, String nickname, Role role) {
         this.username = username;
         this.email = email;
         this.nickname = nickname;
-        this.naverLoginYn = naverLoginYn;
+        //this.naverLoginYn = naverLoginYn;
         this.role = role;
     }
 
-    public User update(String username, String nickname, String naverLoginYn) {
+    public User update(String username, String nickname) {
         this.username = username;
         this.nickname = nickname;
-        this.naverLoginYn = naverLoginYn;
+        //this.naverLoginYn = naverLoginYn;
 
         return this;
     }

@@ -55,7 +55,6 @@ public class AccountService {
     public void join(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        user.setNaverLoginYn("N");
         user.setRole(Role.USER);
         accountRepository.join(user);
     }

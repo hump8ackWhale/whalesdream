@@ -24,8 +24,8 @@
     <div class="Accordion_wrap" th:unless="${not #strings.isEmpty(myPostList)}">
         <span style="text-align:center;">조회된 데이터가 없습니다.</span>
     </div>
-    <b>Authenticated user role:</b>
-    <div sec:authentication="principal.user.role"></div><--role_name-->
+    <<!--<b>Authenticated user role:</b>
+    <div sec:authentication="principal.user.role"></div>-->
 
     <!-- footer -->
     <footer th:replace="common/footer :: footer"></footer>

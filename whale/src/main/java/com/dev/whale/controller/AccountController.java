@@ -5,7 +5,10 @@ import com.dev.whale.domain.model.User;
 import com.dev.whale.service.AccountService;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ResolvableType;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +29,7 @@ public class AccountController {
     @Autowired
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
+        //this.clientRegistrationRepository = clientRegistrationRepository;
     }
 
     @GetMapping("/goRegister")
@@ -46,7 +50,7 @@ public class AccountController {
     @GetMapping("/register")
     public String register(User user) {
         accountService.join(user);
-        return "index";
+        return "main/main";
     }
 
     @PostMapping("/logout")
@@ -135,5 +139,32 @@ public class AccountController {
         return "index";
     }
 
+    private static final String authorizationRequestBaseUri = "oauth2/authorization";
+    Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
 
+    /*
+    @Autowired
+    private final ClientRegistrationRepository clientRegistrationRepository;
+
+    // Lombok 아닌 경우 (@RequiredArgsConstructor 없는 경우)
+    // @Autowired private ClientRegistrationRepository clientRegistrationRepository;
+    @GetMapping("/login/naver")
+    public String getLoginPage(Model model) throws Exception {
+        Iterable<ClientRegistration> clientRegistrations = null;
+        ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
+                .as(Iterable.class);
+        if (type != ResolvableType.NONE &&
+                ClientRegistration.class.isAssignableFrom(type.resolveGenerics()[0])) {
+            clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
+        }
+        assert clientRegistrations != null;
+        clientRegistrations.forEach(registration ->
+                oauth2AuthenticationUrls.put(registration.getClientName(),
+                        authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
+        model.addAttribute("urls", oauth2AuthenticationUrls);
+
+        return "account/oauth-login";
+    }
+
+     */
 }

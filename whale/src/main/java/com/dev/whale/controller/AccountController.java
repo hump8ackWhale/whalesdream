@@ -3,12 +3,8 @@ package com.dev.whale.controller;
 import com.dev.whale.domain.MailVO;
 import com.dev.whale.domain.model.User;
 import com.dev.whale.service.AccountService;
-import com.nimbusds.jose.shaded.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ResolvableType;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,12 +35,12 @@ public class AccountController {
 
     @GetMapping("/dupCheck")
     @ResponseBody
-    public JSONObject idCheck(@RequestParam(required = false) String username, @RequestParam(required = false) String email, @RequestParam String flag) {
-        JSONObject json = new JSONObject();
+    public HashMap<String, Object> idCheck(@RequestParam(required = false) String username, @RequestParam(required = false) String email, @RequestParam String flag) {
         String result = accountService.validateDuplicateUser(username, email, flag);
 
-        json.put("result", result);
-        return json;
+        HashMap<String, Object> dupResult = new HashMap<>();
+        dupResult.put("result", result);
+        return dupResult;
     }
 
     @GetMapping("/register")

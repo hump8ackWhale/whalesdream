@@ -1,7 +1,6 @@
 package com.dev.whale.config;
 
 import com.dev.whale.config.auth.PrincipalDetailService;
-import com.dev.whale.service.CustomOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,13 +20,10 @@ import javax.sql.DataSource;
 @EnableWebSecurity  // spring security 설정 활성화
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //private final CustomOAuth2UserService customOAuth2UserService;
-
     private PrincipalDetailService principalDetailService;
 
     @Autowired
     public SecurityConfig(PrincipalDetailService principalDetailService) {
-        //this.customOAuth2UserService = customOAuth2UserService;
         this.principalDetailService = principalDetailService;
     }
 
